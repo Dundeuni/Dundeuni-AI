@@ -1,0 +1,79 @@
+{
+  "verified_at_utc": "2026-10-03T17:38:25.516238+00:00",
+  "requests": 6720,
+  "failures": 0,
+  "maps_revalidated": 4320,
+  "cohorts": {
+    "bfree:setting": {
+      "requests": 1200,
+      "failed": 0,
+      "prediction_sha256": "bf0c836208e9fbdedf71e3832c72684f1bfedbec11fc91ff948f5aa641bad2fe"
+    },
+    "bfree:validation": {
+      "requests": 1200,
+      "failed": 0,
+      "prediction_sha256": "aa058a8ce43f8cafbed9da8e71b53d270b9bba152e31749b2cc71fced5da771f"
+    },
+    "trufor:setting": {
+      "requests": 480,
+      "failed": 0,
+      "prediction_sha256": "82f87427574a994c480b7b21006782fe2546ec26da8a8947dcff87656548d92b"
+    },
+    "trufor:validation": {
+      "requests": 480,
+      "failed": 0,
+      "prediction_sha256": "8bbd74213b0f97d758c1f2479a9a2db4f86ddc72f37c1570ecffb38a19f06e59"
+    },
+    "trufor:comparison": {
+      "requests": 480,
+      "failed": 0,
+      "prediction_sha256": "2e0c7893d856be08278598e68016a4f39882bf31c656756d44cfb16e6dd7b162"
+    },
+    "mesorch:setting": {
+      "requests": 480,
+      "failed": 0,
+      "prediction_sha256": "a963b5e0ae6b056ac881d48ea6088b7f3d272eea86d00de5a0d58ea80abc316b"
+    },
+    "mesorch:validation": {
+      "requests": 480,
+      "failed": 0,
+      "prediction_sha256": "507eb534fbd2d4a0ebce45984e3289b6baf34619d1fb3781bb42742718b2c940"
+    },
+    "mesorch:comparison": {
+      "requests": 480,
+      "failed": 0,
+      "prediction_sha256": "b0a3b029741cd8d4f1585c9811131d7573edcdc40538ee13ecf60f4877dda4ff"
+    },
+    "mesorch_p:setting": {
+      "requests": 480,
+      "failed": 0,
+      "prediction_sha256": "f1e0c309b5e877fe2d568fc78e65fc778d75e67c30ccf890c8425aff6bbbad69"
+    },
+    "mesorch_p:validation": {
+      "requests": 480,
+      "failed": 0,
+      "prediction_sha256": "a82784a185aaa99051960c293a4527ea47d7acff9507501f6c40805c889b3687"
+    },
+    "mesorch_p:comparison": {
+      "requests": 480,
+      "failed": 0,
+      "prediction_sha256": "0e0de733660b0f93d5f1891dd0b8d10590cd0c652d7d9bb3653146f0804a2a13"
+    }
+  },
+  "frozen_v01_verified": {
+    "bfree": true,
+    "trufor": true
+  },
+  "protected_artifacts_sha256": {
+    "reports/BFREE_ORIGINAL_RESULTS_20261002.md": "ae341298c0f766db9fb20620fd467e4dff792df7c51de3b681386ae5dbea4287",
+    "reports/ROBUSTNESS_AND_CPU_RESULTS_20261001.md": "1564511e73337071e5822e937188beb90f02532df3f7569a967bca6ece13c9cd",
+    "scripts/evaluate.py": "f5305473c2238304b9efdde7abaa4ccbf9a683a8636662930138f91ee154cb01",
+    "scripts/freeze_protocol.py": "ebd01ee96d63d9b40e05468c8f0da42340c9da4b69a2a38d3d44cf6a2fa3082c",
+    "scripts/policies.py": "588c1f381105b583456d44063f0972d0d0cd7ffa0c0bcf33c90d4c3e28a47419",
+    "scripts/run_inference.py": "3ff7b856fda732a65079ba8de34d8247bfac0ee245d1de60ae882ac967bc715c"
+  },
+  "manifest_freeze_and_native_map_checks": true,
+  "artifacts_verified": true,
+  "report_sha256": "11985ca82dbcbee72622fd946430a97219e153704bb3648fcf0fa8b8121349bb",
+  "scope": "400 generation originals,240tampering originals,6conditions,4model executions;Columbia reference-only"
+}

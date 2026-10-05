@@ -1,0 +1,87 @@
+{
+  "version": "baseline-v0.2-20261004",
+  "recorded_at_utc": "2026-10-03T16:23:11.307815+00:00",
+  "authorization": "User explicitly selected full draft scope and draft targets in this conversation.",
+  "generation_originals": 400,
+  "generation_setting": 200,
+  "generation_validation": 200,
+  "tampering_originals": 240,
+  "tampering_setting": 120,
+  "tampering_validation": 120,
+  "generation_datasets": [
+    "SynthBuster+",
+    "SynthCLIC"
+  ],
+  "tampering_datasets": [
+    "Columbia",
+    "COVERAGE",
+    "CocoGlide"
+  ],
+  "conditions": [
+    "original",
+    "jpeg_q75",
+    "half_png",
+    "messenger_proxy_512_q80",
+    "screen_720x1280",
+    "screen_photo_crop"
+  ],
+  "scene_group_cv_folds": 5,
+  "seed": 20261004,
+  "targets": {
+    "false_positive_rate": 0.05,
+    "false_negative_rate": 0.1,
+    "abstain_rate": 0.2
+  },
+  "selection_rule": {
+    "gates": "Each of the six input conditions must meet all three targets using successful rows. No candidate is selected if either class is absent or an inference failed in the selection data.",
+    "ranking": [
+      "worst_condition_false_negative_rate",
+      "mean_condition_false_negative_rate",
+      "mean_condition_abstain_rate",
+      "mean_condition_false_positive_rate",
+      "canonical_candidate_order"
+    ],
+    "no_eligible_candidate": "Record selection failure; retain prespecified A/B validation comparisons, without inventing an improved service policy.",
+    "strata": "Report dataset/generator and mask-area strata separately; small strata are not additional selection gates."
+  },
+  "bfree_candidate_definitions": {
+    "A": "raw logit > 0",
+    "B": "p<.4 negative; .4<=p<=.6 abstain; p>.6 positive",
+    "binary": [
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7
+    ],
+    "binary_boundary": "p>t positive, otherwise negative",
+    "abstain_lower": [
+      0.2,
+      0.3,
+      0.4
+    ],
+    "abstain_upper": [
+      0.6,
+      0.7,
+      0.8
+    ],
+    "abstain_boundary": "inclusive lower/upper"
+  },
+  "trufor_reference": {
+    "A": "score >= .5",
+    "B": "score<.4 negative; inclusive .4..6 abstain; score>.6 positive"
+  },
+  "mesorch_score_aggregations": [
+    "mean",
+    "maximum",
+    "top_1_percent_mean"
+  ],
+  "map_threshold": 0.5,
+  "map_boundary": ">=.5",
+  "map_direction": "official positive forgery, never inverted",
+  "common_location_evaluation": "Original input coordinates; Mesorch 512 map restored by fixed bilinear interpolation, align_corners=False; ground truth never passed to model.",
+  "model_execution": "Official final weights, float32 for B-Free/TruFor/Mesorch; batch one, sequential single-GPU processes, no training.",
+  "fake_shield": "Official standard execution feasibility first; no automatic quantization, offload, paid resources or external upload.",
+  "actual_device_capture_and_human_explanation_review": "Requires real device/app metadata and human reviewers; never fabricate these results.",
+  "prior_score_access": "v0.1 prediction scores are excluded from candidate selection. Prior manifest identities/images are used only for exposure and scene audit."
+}

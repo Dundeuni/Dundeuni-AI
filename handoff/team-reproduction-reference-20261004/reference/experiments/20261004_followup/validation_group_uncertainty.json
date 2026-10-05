@@ -1,0 +1,1980 @@
+{
+  "created_at_utc": "2026-10-03T17:36:06.838321+00:00",
+  "method": "2000 fixed-seed bootstrap resamples of source groups, stratified within each dataset; percentile95%",
+  "paired_location_F1_difference_vs_TruFor": {
+    "mesorch": {
+      "original": {
+        "low": -0.002550628052634349,
+        "high": 0.27610093144634,
+        "usable_resamples": 2000
+      },
+      "jpeg_q75": {
+        "low": 0.04073202874003815,
+        "high": 0.32409981783193853,
+        "usable_resamples": 2000
+      },
+      "half_png": {
+        "low": 0.290761220324589,
+        "high": 0.5120369704912618,
+        "usable_resamples": 2000
+      },
+      "messenger_proxy_512_q80": {
+        "low": 0.06374546280183246,
+        "high": 0.32446859072089845,
+        "usable_resamples": 2000
+      },
+      "screen_720x1280": {
+        "low": -0.20546974092370743,
+        "high": 0.03775407426565553,
+        "usable_resamples": 2000
+      },
+      "screen_photo_crop": {
+        "low": 0.04128217651544997,
+        "high": 0.27435723268252077,
+        "usable_resamples": 2000
+      }
+    },
+    "mesorch_p": {
+      "original": {
+        "low": -0.029469342803880454,
+        "high": 0.18420241668412457,
+        "usable_resamples": 2000
+      },
+      "jpeg_q75": {
+        "low": -0.10930365308425341,
+        "high": 0.144607719722927,
+        "usable_resamples": 2000
+      },
+      "half_png": {
+        "low": 0.0945364722824842,
+        "high": 0.3243526655616765,
+        "usable_resamples": 2000
+      },
+      "messenger_proxy_512_q80": {
+        "low": 0.022659934812569327,
+        "high": 0.2804644315011911,
+        "usable_resamples": 2000
+      },
+      "screen_720x1280": {
+        "low": -0.18644593684140506,
+        "high": 0.08239740175779843,
+        "usable_resamples": 2000
+      },
+      "screen_photo_crop": {
+        "low": 0.026058158554102033,
+        "high": 0.2566356201613301,
+        "usable_resamples": 2000
+      }
+    }
+  },
+  "seed": 20261004,
+  "resampling_unit": "Source group includes its negative and all4generator results, or its real/edited pair",
+  "caution": "Conditional on chosen validation sources and visible group assumptions. Zero-observed-event intervals0..0 do not upper-bound unseen-error risk. Pretraining/event overlap uncertainty is not quantified.",
+  "zero_of40_independent_binary_one_sided95_upper": 0.0721575245055146,
+  "models": {
+    "bfree": {
+      "original": {
+        "A": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.4375,
+            "high": 0.5625,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.4375,
+            "high": 0.55,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.01,
+            "high": 0.055,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "jpeg_q75": {
+        "A": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.59984375,
+            "high": 0.7125,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.575,
+            "high": 0.6875,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.01,
+            "high": 0.07,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "half_png": {
+        "A": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.8875,
+            "high": 0.95625,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.86875,
+            "high": 0.9375,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.005,
+            "high": 0.05,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "messenger_proxy_512_q80": {
+        "A": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.075,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.85,
+            "high": 0.94375,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.075,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.83125,
+            "high": 0.93125,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.005,
+            "high": 0.055,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "screen_720x1280": {
+        "A": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.74375,
+            "high": 0.8375,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.71875,
+            "high": 0.81875,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.03,
+            "high": 0.085,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "screen_photo_crop": {
+        "A": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.775,
+            "high": 0.875,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.76875,
+            "high": 0.86875,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.005,
+            "high": 0.04,
+            "usable_resamples": 2000
+          }
+        }
+      }
+    },
+    "trufor": {
+      "original": {
+        "A": {
+          "FPR": {
+            "low": 0.025,
+            "high": 0.2,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.375,
+            "high": 0.675,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.075,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.275,
+            "high": 0.575,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0875,
+            "high": 0.2375,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.3229276700794521,
+            "high": 0.562692291471166,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.007723007884874836,
+            "high": 0.03430494800772303,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "jpeg_q75": {
+        "A": {
+          "FPR": {
+            "low": 0.075,
+            "high": 0.325,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.375,
+            "high": 0.675,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "B": {
+          "FPR": {
+            "low": 0.05,
+            "high": 0.275,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.35,
+            "high": 0.65,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.05,
+            "high": 0.175,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.18290858046094505,
+            "high": 0.3899144721310126,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.014770538485369869,
+            "high": 0.04391598883941976,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "half_png": {
+        "A": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.075,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.875,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.7,
+            "high": 0.925,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0375,
+            "high": 0.175,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.001890856869315462,
+            "high": 0.08673233789550913,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.0008898577734272274,
+            "high": 0.007269923533803564,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "messenger_proxy_512_q80": {
+        "A": {
+          "FPR": {
+            "low": 0.125,
+            "high": 0.425,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.35,
+            "high": 0.65,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.175,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.275,
+            "high": 0.575,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.1375,
+            "high": 0.325,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.15981218456170299,
+            "high": 0.37387025437260846,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.012072480253151986,
+            "high": 0.033468509050861565,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "screen_720x1280": {
+        "A": {
+          "FPR": {
+            "low": 0.8,
+            "high": 0.975,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.0,
+            "high": 0.1506249999999966,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "B": {
+          "FPR": {
+            "low": 0.775,
+            "high": 0.95,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.0,
+            "high": 0.1506249999999966,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.125,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.29370595956280704,
+            "high": 0.4242396321204977,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.37043936496310753,
+            "high": 0.42918278266059023,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "screen_photo_crop": {
+        "A": {
+          "FPR": {
+            "low": 0.05,
+            "high": 0.275,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.574375,
+            "high": 0.825,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.15,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.375,
+            "high": 0.675,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0875,
+            "high": 0.28781249999999825,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.25205664675866424,
+            "high": 0.4478524241581743,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.04435250660741399,
+            "high": 0.15866246159801084,
+            "usable_resamples": 2000
+          }
+        }
+      }
+    },
+    "mesorch": {
+      "original": {
+        "mean_B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.8,
+            "high": 0.975,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.1,
+            "usable_resamples": 2000
+          }
+        },
+        "mean_binary_0.5": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.075,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.849375,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "max_B": {
+          "FPR": {
+            "low": 0.425,
+            "high": 0.725,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.0,
+            "high": 0.125,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0625,
+            "high": 0.225,
+            "usable_resamples": 2000
+          }
+        },
+        "max_binary_0.5": {
+          "FPR": {
+            "low": 0.575,
+            "high": 0.825,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.0,
+            "high": 0.15,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_B": {
+          "FPR": {
+            "low": 0.225,
+            "high": 0.525,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.025,
+            "high": 0.25,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.025,
+            "high": 0.125,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_binary_0.5": {
+          "FPR": {
+            "low": 0.25,
+            "high": 0.55,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.05,
+            "high": 0.275,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.45401951677455504,
+            "high": 0.7100861237888842,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.011363150072437345,
+            "high": 0.06465367289876492,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "jpeg_q75": {
+        "mean_B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.85,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0125,
+            "high": 0.125,
+            "usable_resamples": 2000
+          }
+        },
+        "mean_binary_0.5": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.925,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "max_B": {
+          "FPR": {
+            "low": 0.5,
+            "high": 0.775,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.0,
+            "high": 0.075,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.05,
+            "high": 0.2125,
+            "usable_resamples": 2000
+          }
+        },
+        "max_binary_0.5": {
+          "FPR": {
+            "low": 0.625,
+            "high": 0.875,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.0,
+            "high": 0.125,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_B": {
+          "FPR": {
+            "low": 0.35,
+            "high": 0.65,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.025,
+            "high": 0.225,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0625,
+            "high": 0.2,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_binary_0.5": {
+          "FPR": {
+            "low": 0.4,
+            "high": 0.7,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.1,
+            "high": 0.35,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.3492694323827965,
+            "high": 0.5786607138746468,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.026717041418458983,
+            "high": 0.10826850858961083,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "half_png": {
+        "mean_B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.875,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0375,
+            "usable_resamples": 2000
+          }
+        },
+        "mean_binary_0.5": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.075,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.875,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "max_B": {
+          "FPR": {
+            "low": 0.8,
+            "high": 0.975,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.0,
+            "high": 0.075,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.125,
+            "usable_resamples": 2000
+          }
+        },
+        "max_binary_0.5": {
+          "FPR": {
+            "low": 0.875,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.0,
+            "high": 0.075,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_B": {
+          "FPR": {
+            "low": 0.45,
+            "high": 0.75,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.025,
+            "high": 0.25,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.1,
+            "high": 0.3,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_binary_0.5": {
+          "FPR": {
+            "low": 0.575,
+            "high": 0.85,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.075,
+            "high": 0.3,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.326790868716597,
+            "high": 0.5568441013377602,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.07015053674460353,
+            "high": 0.17012386976674213,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "messenger_proxy_512_q80": {
+        "mean_B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.875,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.1,
+            "usable_resamples": 2000
+          }
+        },
+        "mean_binary_0.5": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.925,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "max_B": {
+          "FPR": {
+            "low": 0.55,
+            "high": 0.825,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.0,
+            "high": 0.125,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.05,
+            "high": 0.1875,
+            "usable_resamples": 2000
+          }
+        },
+        "max_binary_0.5": {
+          "FPR": {
+            "low": 0.675,
+            "high": 0.925,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.0,
+            "high": 0.175,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_B": {
+          "FPR": {
+            "low": 0.275,
+            "high": 0.575,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.05,
+            "high": 0.275,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0875,
+            "high": 0.2375,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_binary_0.5": {
+          "FPR": {
+            "low": 0.35,
+            "high": 0.65,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.1,
+            "high": 0.325,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.3397275055539133,
+            "high": 0.5893299152534974,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.015483061677200113,
+            "high": 0.07106317413905668,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "screen_720x1280": {
+        "mean_B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 1.0,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "mean_binary_0.5": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 1.0,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "max_B": {
+          "FPR": {
+            "low": 0.175,
+            "high": 0.475,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.075,
+            "high": 0.3,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.075,
+            "high": 0.2375,
+            "usable_resamples": 2000
+          }
+        },
+        "max_binary_0.5": {
+          "FPR": {
+            "low": 0.25,
+            "high": 0.55,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.15,
+            "high": 0.4,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_B": {
+          "FPR": {
+            "low": 0.075,
+            "high": 0.3,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.25,
+            "high": 0.55,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.05,
+            "high": 0.2,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_binary_0.5": {
+          "FPR": {
+            "low": 0.1,
+            "high": 0.325,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.325,
+            "high": 0.625,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.17378106323019996,
+            "high": 0.3811774146256965,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.0019446519639756946,
+            "high": 0.014489835611979163,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "screen_photo_crop": {
+        "mean_B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.875,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0875,
+            "usable_resamples": 2000
+          }
+        },
+        "mean_binary_0.5": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.925,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "max_B": {
+          "FPR": {
+            "low": 0.45,
+            "high": 0.75,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.0,
+            "high": 0.125,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0625,
+            "high": 0.2,
+            "usable_resamples": 2000
+          }
+        },
+        "max_binary_0.5": {
+          "FPR": {
+            "low": 0.525,
+            "high": 0.8,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.0,
+            "high": 0.15,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_B": {
+          "FPR": {
+            "low": 0.2,
+            "high": 0.5,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.025,
+            "high": 0.2,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0625,
+            "high": 0.2,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_binary_0.5": {
+          "FPR": {
+            "low": 0.25,
+            "high": 0.55,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.05,
+            "high": 0.275,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.36816203618942045,
+            "high": 0.6305359522715505,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.009693048500323398,
+            "high": 0.06151176987210411,
+            "usable_resamples": 2000
+          }
+        }
+      }
+    },
+    "mesorch_p": {
+      "original": {
+        "mean_B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.925,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0625,
+            "usable_resamples": 2000
+          }
+        },
+        "mean_binary_0.5": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.925,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "max_B": {
+          "FPR": {
+            "low": 0.4,
+            "high": 0.7,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.025,
+            "high": 0.2,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0125,
+            "high": 0.1625,
+            "usable_resamples": 2000
+          }
+        },
+        "max_binary_0.5": {
+          "FPR": {
+            "low": 0.475,
+            "high": 0.775,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.05,
+            "high": 0.225,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_B": {
+          "FPR": {
+            "low": 0.125,
+            "high": 0.375,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.075,
+            "high": 0.325,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.05,
+            "high": 0.1875,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_binary_0.5": {
+          "FPR": {
+            "low": 0.175,
+            "high": 0.45,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.125,
+            "high": 0.375,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.4027223968276064,
+            "high": 0.6293329122888401,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.005401205868709431,
+            "high": 0.06261457331715845,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "jpeg_q75": {
+        "mean_B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 1.0,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "mean_binary_0.5": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 1.0,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "max_B": {
+          "FPR": {
+            "low": 0.575,
+            "high": 0.825,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.025,
+            "high": 0.225,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0625,
+            "high": 0.2,
+            "usable_resamples": 2000
+          }
+        },
+        "max_binary_0.5": {
+          "FPR": {
+            "low": 0.6,
+            "high": 0.85,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.075,
+            "high": 0.275,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_B": {
+          "FPR": {
+            "low": 0.3,
+            "high": 0.6,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.15,
+            "high": 0.4,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0625,
+            "high": 0.2,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_binary_0.5": {
+          "FPR": {
+            "low": 0.4,
+            "high": 0.7,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.175,
+            "high": 0.425,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.20455402775965636,
+            "high": 0.4024868709716696,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.016910768610098523,
+            "high": 0.07328090285433306,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "half_png": {
+        "mean_B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 1.0,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0375,
+            "usable_resamples": 2000
+          }
+        },
+        "mean_binary_0.5": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.075,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 1.0,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "max_B": {
+          "FPR": {
+            "low": 0.375,
+            "high": 0.675,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.05,
+            "high": 0.275,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0875,
+            "high": 0.2625,
+            "usable_resamples": 2000
+          }
+        },
+        "max_binary_0.5": {
+          "FPR": {
+            "low": 0.45,
+            "high": 0.75,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.1,
+            "high": 0.35,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_B": {
+          "FPR": {
+            "low": 0.125,
+            "high": 0.4,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.2,
+            "high": 0.5,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.075,
+            "high": 0.2875,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_binary_0.5": {
+          "FPR": {
+            "low": 0.175,
+            "high": 0.475,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.275,
+            "high": 0.6,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.13357878012331162,
+            "high": 0.35643006413334083,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.007064639169960532,
+            "high": 0.09014435648469492,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "messenger_proxy_512_q80": {
+        "mean_B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.925,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.075,
+            "usable_resamples": 2000
+          }
+        },
+        "mean_binary_0.5": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 1.0,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "max_B": {
+          "FPR": {
+            "low": 0.5,
+            "high": 0.7756249999999966,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.025,
+            "high": 0.2,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0125,
+            "high": 0.175,
+            "usable_resamples": 2000
+          }
+        },
+        "max_binary_0.5": {
+          "FPR": {
+            "low": 0.55,
+            "high": 0.825,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.025,
+            "high": 0.2,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_B": {
+          "FPR": {
+            "low": 0.275,
+            "high": 0.525,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.15,
+            "high": 0.4,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0625,
+            "high": 0.1875,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_binary_0.5": {
+          "FPR": {
+            "low": 0.35,
+            "high": 0.65,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.2,
+            "high": 0.45,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.3062441652880431,
+            "high": 0.5236229781258797,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.012021605382062097,
+            "high": 0.06600985453779835,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "screen_720x1280": {
+        "mean_B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 1.0,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "mean_binary_0.5": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 1.0,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "max_B": {
+          "FPR": {
+            "low": 0.175,
+            "high": 0.475,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.05,
+            "high": 0.275,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.125,
+            "high": 0.2875,
+            "usable_resamples": 2000
+          }
+        },
+        "max_binary_0.5": {
+          "FPR": {
+            "low": 0.25,
+            "high": 0.55,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.175,
+            "high": 0.45,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_B": {
+          "FPR": {
+            "low": 0.1,
+            "high": 0.35,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.275,
+            "high": 0.575,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0375,
+            "high": 0.15,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_binary_0.5": {
+          "FPR": {
+            "low": 0.1,
+            "high": 0.35,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.35,
+            "high": 0.65,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.19421395546068726,
+            "high": 0.4235723914212954,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.0027537156846788196,
+            "high": 0.015318492974175342,
+            "usable_resamples": 2000
+          }
+        }
+      },
+      "screen_photo_crop": {
+        "mean_B": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 1.0,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "mean_binary_0.5": {
+          "FPR": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 1.0,
+            "high": 1.0,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "max_B": {
+          "FPR": {
+            "low": 0.275,
+            "high": 0.575,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.075,
+            "high": 0.3,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.05,
+            "high": 0.1625,
+            "usable_resamples": 2000
+          }
+        },
+        "max_binary_0.5": {
+          "FPR": {
+            "low": 0.325,
+            "high": 0.625,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.075,
+            "high": 0.3,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_B": {
+          "FPR": {
+            "low": 0.05,
+            "high": 0.275,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.15,
+            "high": 0.4,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0375,
+            "high": 0.1625,
+            "usable_resamples": 2000
+          }
+        },
+        "top1_binary_0.5": {
+          "FPR": {
+            "low": 0.125,
+            "high": 0.375,
+            "usable_resamples": 2000
+          },
+          "FNR": {
+            "low": 0.175,
+            "high": 0.45,
+            "usable_resamples": 2000
+          },
+          "abstain_rate": {
+            "low": 0.0,
+            "high": 0.0,
+            "usable_resamples": 2000
+          }
+        },
+        "localization": {
+          "mean_positive_F1": {
+            "low": 0.37036361828080133,
+            "high": 0.5963098180535282,
+            "usable_resamples": 2000
+          },
+          "mean_negative_false_area": {
+            "low": 0.0025950902544839287,
+            "high": 0.027874634593151076,
+            "usable_resamples": 2000
+          }
+        }
+      }
+    }
+  }
+}

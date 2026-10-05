@@ -1,0 +1,167 @@
+{
+  "revision": "33454cb6d595267033ce1109b62ad373110678db",
+  "files": [
+    {
+      "path": "third_party\\Mesorch\\.gitignore",
+      "bytes": 84,
+      "sha256": "97679eb06f6d5c545d66f3020ef10c32fc8f3312e93b153cac1a0420da9afc7d",
+      "reused": false,
+      "git_blob_sha1": "1b0b1fee015c74611fde5a1aa56b3d5bba94ca4b"
+    },
+    {
+      "path": "third_party\\Mesorch\\LICENSE",
+      "bytes": 1064,
+      "sha256": "e63a366fa3a228da2a22b4b5f9c4e1aa98ed37f2ee93487170413ea6675387a2",
+      "reused": false,
+      "git_blob_sha1": "4648692e8614ca452fd3d8afe0feac3215457bda"
+    },
+    {
+      "path": "third_party\\Mesorch\\README.md",
+      "bytes": 6489,
+      "sha256": "b5d7c0399b97f50b1adafdff1f24d31a710f92c44a85d3f59b10689611768cd2",
+      "reused": false,
+      "git_blob_sha1": "8b0ca8862304abdc230450e372489db66b61ea0b"
+    },
+    {
+      "path": "third_party\\Mesorch\\balanced_dataset.json",
+      "bytes": 716,
+      "sha256": "60b00dcd741a691471d074fa54bee1067611161674ba538d8e9d388a6d367cb0",
+      "reused": false,
+      "git_blob_sha1": "fb0801042c47d1078ac9218a0e02803a88694a16"
+    },
+    {
+      "path": "third_party\\Mesorch\\extractor\\__init__.py",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "reused": false,
+      "git_blob_sha1": "8b137891791fe96927ad78e64b0aad7bded08bdc"
+    },
+    {
+      "path": "third_party\\Mesorch\\extractor\\high_frequency_feature_extraction.py",
+      "bytes": 2292,
+      "sha256": "ce9a9b7f0515a650631a71303cdf113d915d45a1a1b0614c311f1703eca25e5b",
+      "reused": false,
+      "git_blob_sha1": "c6e808d4eeefdfd70a6f1e7d9cbbb385f8b88eb9"
+    },
+    {
+      "path": "third_party\\Mesorch\\extractor\\low_frequency_feature_extraction.py",
+      "bytes": 2292,
+      "sha256": "b2aaf318af4ce6bbb1caef24256bd3ae86949e449557bbd6c9990e989df34a04",
+      "reused": false,
+      "git_blob_sha1": "3499d7fae5158ab00c62cad2f8b0e4a0b5d46d52"
+    },
+    {
+      "path": "third_party\\Mesorch\\mesorch.py",
+      "bytes": 21200,
+      "sha256": "b301b28faf0cc44ced9845a99400cafe00b33d3e07109d18ebbf0087ef0b915a",
+      "reused": false,
+      "git_blob_sha1": "ceb867af9e53d78c99622674a3c295fe5c73bf6c"
+    },
+    {
+      "path": "third_party\\Mesorch\\mesorch_p.py",
+      "bytes": 21276,
+      "sha256": "e5c40a3ccfeb764752901a3124d91a35064041f68bec4e731494ebed3212c115",
+      "reused": false,
+      "git_blob_sha1": "6d8b65a9fb9f73aaaa09a87c765e90eb0601a243"
+    },
+    {
+      "path": "third_party\\Mesorch\\test.py",
+      "bytes": 11767,
+      "sha256": "5b0551bd18641b4179e4b3ee96097c99f4df1433048d4dbe744c0c80ec59f244",
+      "reused": false,
+      "git_blob_sha1": "8e2acc12e6d573a4699756b80a961a0133bd4b7b"
+    },
+    {
+      "path": "third_party\\Mesorch\\test_datasets.json",
+      "bytes": 253,
+      "sha256": "6b72f70b31be582f9f9b69d846394502c7bcc6749033b23883bc49b8504e9fbd",
+      "reused": false,
+      "git_blob_sha1": "ed087063dff35ece8bf95d4c2931463a23da995f"
+    },
+    {
+      "path": "third_party\\Mesorch\\test_flops.py",
+      "bytes": 313,
+      "sha256": "2e5849bf0a3f2b4de640f7a583137aa6e9dbcf86534f61818d84e8a85d45722e",
+      "reused": false,
+      "git_blob_sha1": "ccd8cd73c537f30bccd01d4e5ace8bf07a230b81"
+    },
+    {
+      "path": "third_party\\Mesorch\\test_mesorch_f1.sh",
+      "bytes": 486,
+      "sha256": "78fa9e52a2017766463604d7ee776ce6844b0fa3dbadcdce5e3b15694ed8a620",
+      "reused": false,
+      "git_blob_sha1": "23deb82ebccfc00dbd315bec03f86157ec8494fc"
+    },
+    {
+      "path": "third_party\\Mesorch\\test_mesorch_p_f1.sh",
+      "bytes": 491,
+      "sha256": "a5cefce9d991c91e13821130d33171e3d2ae64aad3201f767dc3b7be13038e01",
+      "reused": false,
+      "git_blob_sha1": "371257531cb343ff8116b7953c3309b16dacf86c"
+    },
+    {
+      "path": "third_party\\Mesorch\\test_mesorch_p_permute_f1.sh",
+      "bytes": 507,
+      "sha256": "db2d1363b1b047126cd1ed3a14fc98134db057a02e06f6218757d38dd73c5a12",
+      "reused": false,
+      "git_blob_sha1": "74aa4b3785132b1d673c38ba2e03da40041679af"
+    },
+    {
+      "path": "third_party\\Mesorch\\test_mesorch_permute_f1.sh",
+      "bytes": 502,
+      "sha256": "ca120731f33a5851555a2a4b8aabe8c9667286750ad96ecbe0ec3e05900fcfab",
+      "reused": false,
+      "git_blob_sha1": "0a8534272ef3d221a46a42efb0f05f180dc81ee0"
+    },
+    {
+      "path": "third_party\\Mesorch\\test_permute.py",
+      "bytes": 11767,
+      "sha256": "3af657281bfcaadc1a6ef8785ed5dcf4ab9cd66cd8e44ced48be6915d8f4185d",
+      "reused": false,
+      "git_blob_sha1": "c94e466eefa322855c6b11af5725539ffebdb110"
+    },
+    {
+      "path": "third_party\\Mesorch\\test_robust.py",
+      "bytes": 12249,
+      "sha256": "c245a2d76b78e058b0eccd6795d9eeef5a292881330d53c465179e1d62087426",
+      "reused": false,
+      "git_blob_sha1": "7be707da15e0414e5f2e152061649f6151115a0c"
+    },
+    {
+      "path": "third_party\\Mesorch\\test_robust_mesorch.sh",
+      "bytes": 581,
+      "sha256": "6aa1f0fd1621568f15b709f04f6c453f6edf775f4d68f656448feab0855abcbf",
+      "reused": false,
+      "git_blob_sha1": "fb0b180883551416ee4a569c464cca53ecc9d050"
+    },
+    {
+      "path": "third_party\\Mesorch\\test_robust_mesorch_p.sh",
+      "bytes": 590,
+      "sha256": "80e3fd51889a4b1211de58fba4a905b41e903527b3828aee4e781bd05c0b5a3e",
+      "reused": false,
+      "git_blob_sha1": "81b7d20295249566fd9a95d88bebfa04f58f0cff"
+    },
+    {
+      "path": "third_party\\Mesorch\\train.py",
+      "bytes": 16994,
+      "sha256": "771a89cced9a782e336dd9aae6de79eb80e831f22b49461e69b28ba91b105464",
+      "reused": false,
+      "git_blob_sha1": "8a8279646de9ec0ee61a95ab9c168ae323414fcc"
+    },
+    {
+      "path": "third_party\\Mesorch\\train_mesorch.sh",
+      "bytes": 862,
+      "sha256": "fee15374c92e750ad6aba93754d8de43eb6328545c22df3e27c821934cbd84eb",
+      "reused": false,
+      "git_blob_sha1": "06a6553896611712705654fb0ea6889c9e95a74a"
+    },
+    {
+      "path": "third_party\\Mesorch\\train_mesorch_p.sh",
+      "bytes": 863,
+      "sha256": "81611bfab72fde9e385d898f597eb1df606e7837eb0626ef35364ba68396f6a6",
+      "reused": false,
+      "git_blob_sha1": "87bfc2a1475679250652a89674f6e77f34e155cd"
+    }
+  ],
+  "created_at_utc": "2026-10-03T16:31:32.328631+00:00"
+}

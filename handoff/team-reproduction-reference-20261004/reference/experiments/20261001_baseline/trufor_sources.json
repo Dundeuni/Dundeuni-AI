@@ -1,0 +1,640 @@
+{
+  "model": "trufor",
+  "repository": "https://github.com/grip-unina/TruFor",
+  "commit": "ae54475df6f41a491d7615100feb19263dec13f7",
+  "date": "2026-10-01",
+  "files": [
+    {
+      "path": "README.md",
+      "md5": "5ae0725b606740ce6f04fe16d946bbd5",
+      "sha256": "6b33d900b96b38182c312d7a7c2eada0731227d3bfc690769b2a158e387d58e8",
+      "bytes": 4590
+    },
+    {
+      "path": "TruFor_train_test/LICENSE.txt",
+      "md5": "7346ad6656b30bc03ca032784a63088c",
+      "sha256": "07201e07e3d2c1ac55480037a87734fcccacbb0cd0e25a31e3b89ac7ffadf8b4",
+      "bytes": 1837
+    },
+    {
+      "path": "TruFor_train_test/LICENSE_CMX.txt",
+      "md5": "b82d2b7ab870bce6e476e75e4916a06f",
+      "sha256": "687ff4d0ea13200541df7359799a08c2db626094ecacbb8a3fe63ffad177f2a1",
+      "bytes": 1086
+    },
+    {
+      "path": "TruFor_train_test/README.md",
+      "md5": "a135e4840907b44071c9585d117982aa",
+      "sha256": "fec5c50db45959b8de8e29fafd17892c226b391daaeaaf0f6ef376a4b2a59449",
+      "bytes": 5449
+    },
+    {
+      "path": "TruFor_train_test/__init__.py",
+      "md5": "d41d8cd98f00b204e9800998ecf8427e",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "TruFor_train_test/dataset/AbstractDataset.py",
+      "md5": "e38716f3743e760eefcb286cc13a0185",
+      "sha256": "099f756850e4d92636d50006456cada3a98929e156d061332fae8a82a2aec42c",
+      "bytes": 5288
+    },
+    {
+      "path": "TruFor_train_test/dataset/__init__.py",
+      "md5": "d41d8cd98f00b204e9800998ecf8427e",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/CASIA_v2_auth_train_list.txt",
+      "md5": "98db7b7feaf352e47b1fa7b0d07484ef",
+      "sha256": "166ec7d0abe360c5130c662d21c150ece1b04fefd8e3f3f44f7ba7cdcede7578",
+      "bytes": 177275
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/CASIA_v2_auth_valid_list.txt",
+      "md5": "41ee22b17ee0dd3d141227bcb418200e",
+      "sha256": "555a69a15b8b4209ebcd3a52c09a2d4f1db091cb6e6311884bb11c84831344c3",
+      "bytes": 2500
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/CASIA_v2_train_list.txt",
+      "md5": "80ff8ddb3961d2e6a2328395df8721da",
+      "sha256": "6ddc56a18e3ccd9d78c1f66a9ea911bf6502f4c4a88c2e3ebaa469ca44d274cf",
+      "bytes": 470500
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/CASIA_v2_valid_list.txt",
+      "md5": "2bc4934989becd10234390ee6e01dbbc",
+      "sha256": "ec41aafeb11327f6ab47f4a184f1ecfb20fd12393ae1c7af6a8a881c138e182c",
+      "bytes": 10000
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/FR_auth_train_list.txt",
+      "md5": "8a45c5d956e113bf70a5e9f999e1b0ab",
+      "sha256": "f2571af47f0bf119fb838afcecc52102f48da0df7a97f8e8d4752c8cb83ea52f",
+      "bytes": 244672
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/FR_auth_valid_list.txt",
+      "md5": "1c0eaf6bb438181812f2e14abb6acf66",
+      "sha256": "af90c288edd64ec038526e58693ae12439c365ebc56fa0551457db9c8b7d351f",
+      "bytes": 1600
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/FR_train_list.txt",
+      "md5": "57c8d7e6d1fb6aa092440199456b772c",
+      "sha256": "3c14143e9e5c54c2297d5c95173640fb8dd1f7df9e7254c8ffb1b2c6f084a546",
+      "bytes": 503944
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/FR_valid_list.txt",
+      "md5": "d84194b59a4d6f9602684fdc65c5ba74",
+      "sha256": "6308be9b979c45206661ddaf5d0ece95433896d04bf5dc818b9f4c0f4d4299aa",
+      "bytes": 2800
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/IMD_train_list.txt",
+      "md5": "4a741897e390e31e6b774f9305ed638d",
+      "sha256": "1adb2be4ed1608e507f77992053730346853841163578c935a61e07a55d72d9e",
+      "bytes": 87646
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/IMD_valid_list.txt",
+      "md5": "229cb2d034dd36966734676a5915c364",
+      "sha256": "fa8f5fcc8e38501db6bf275d5eaf8b71d5c9af909a65f408da259f013dddd82d",
+      "bytes": 6619
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/bcm_COCO_train_list.txt",
+      "md5": "b006abc1fa4201142d6f58f361948b0f",
+      "sha256": "8ac7f3ed3bb35e2779f593303277a16c8cb67d67a0ffeb3c7cb0ceacbb91b5e9",
+      "bytes": 22497982
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/bcm_COCO_valid_list.txt",
+      "md5": "559cf4f9a6187a6057c160669f597680",
+      "sha256": "c9545793299ca697f63006f72b743d5332bb4de4c734eaf92147521187daf2af",
+      "bytes": 8362
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/bcmc_COCO_train_list.txt",
+      "md5": "d3d5ff90a619d4a37553dc042bc7279c",
+      "sha256": "01ac4446c3ef5b151cccfb227f528c270a840269a61a993dd0ca4e242f892281",
+      "bytes": 29843312
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/bcmc_COCO_valid_list.txt",
+      "md5": "e5edd3a72772e81a07cd660ba635e40d",
+      "sha256": "e372e3870d9d29a3172ff7af0441adf5b0d68fa22ec286fc79d618269cd958ed",
+      "bytes": 7476
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/cm_COCO_train_list.txt",
+      "md5": "49efaa5ba2580014939e82c236c6976e",
+      "sha256": "c5a719c999c5c9405f3ad3cfe78cdebdbfc5352a8ab72170c76ae302670022ce",
+      "bytes": 22100660
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/cm_COCO_valid_list.txt",
+      "md5": "ce9e403f57b26a8b5ebe17d0511fadd4",
+      "sha256": "2c2385a98a872db2e3226f7b060f3b339fa75374102fbe063c5f49feb8b0055f",
+      "bytes": 8448
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/compRAISE_train.txt",
+      "md5": "7559b0d8a821925448efceacceeeb14e",
+      "sha256": "e9389fbdf2cb0af51a3ecdad2499a88c72a6529ffc47570b52a6fafc401529f6",
+      "bytes": 708246
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/compRAISE_valid.txt",
+      "md5": "364cb3cae8d7d1da47c9968736676ffd",
+      "sha256": "c191fd190b90cd664b05f2adc3422c309729824d8339976c0eaf24e31e950b3a",
+      "bytes": 2147
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/sp_COCO_train_list.txt",
+      "md5": "716b0b5101b3207223b7b8adbf8bb206",
+      "sha256": "148cd2354e927e2f2b37fc7827238d8da724d8480c90555fdab0982cb5b5ca43",
+      "bytes": 22102484
+    },
+    {
+      "path": "TruFor_train_test/dataset/data/sp_COCO_valid_list.txt",
+      "md5": "d53b96e24067c5e7dcc134c75cef7e49",
+      "sha256": "453d1df98aca8b970d3b8c5e75ab56ccfa0b5e808aa44a254b93df8946f708b2",
+      "bytes": 8234
+    },
+    {
+      "path": "TruFor_train_test/dataset/data_core.py",
+      "md5": "192dc8ef493f48152bb710129bc2c78e",
+      "sha256": "61130cf74316059d751b2c3d2562b5cfaf8c2b326981ebe0fe52aa22201543be",
+      "bytes": 6149
+    },
+    {
+      "path": "TruFor_train_test/dataset/dataset_CASIA.py",
+      "md5": "a5f2f9e2485c5923ac94e9f8ae92ac25",
+      "sha256": "b8776856b1d11e60b0d76eaebcd0e423e56820727e46bed4a3dc27f9dff0c079",
+      "bytes": 1392
+    },
+    {
+      "path": "TruFor_train_test/dataset/dataset_CompRAISE.py",
+      "md5": "4d1c633f6cd2e1046291087f3b122ca3",
+      "sha256": "22a3a59f4124b96c6f17365de1c8f9f5992ce8a640dec01758f055a3dba4a927",
+      "bytes": 1137
+    },
+    {
+      "path": "TruFor_train_test/dataset/dataset_FantasticReality.py",
+      "md5": "727ef443dbe526dce3d6d0e71edfe33c",
+      "sha256": "11659262772990d3ee6f3276d2adaf531466d6cbf363ab1f63e7caeac856806f",
+      "bytes": 1845
+    },
+    {
+      "path": "TruFor_train_test/dataset/dataset_IMD2020.py",
+      "md5": "6e67474151c015fa51004a65a0040277",
+      "sha256": "0a9b2ac5b3dd1b9b548bd5c19b489dc2f891122a78dcaa4d1877eac6b957fece",
+      "bytes": 1440
+    },
+    {
+      "path": "TruFor_train_test/dataset/dataset_TampCOCO.py",
+      "md5": "4f10bb734ebc11c506608ee46c22e9fc",
+      "sha256": "4115d2a18f23adfd111ca583318cb29cfd732123c349287bd87762a105f95614",
+      "bytes": 1348
+    },
+    {
+      "path": "TruFor_train_test/dataset/dataset_test.py",
+      "md5": "cd2ac7c0e4c42ddc4ff7e7919081e592",
+      "sha256": "53de9aeb6a13727ada9b9d43cf7a0d85595e655951f48445ffa54802d875f72a",
+      "bytes": 1457
+    },
+    {
+      "path": "TruFor_train_test/lib/__init__.py",
+      "md5": "d41d8cd98f00b204e9800998ecf8427e",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "TruFor_train_test/lib/config/__init__.py",
+      "md5": "e5002178316ea2e6f2d55cc946d83a05",
+      "sha256": "81a4b734c2f951313dc863aa859e7cbce05460fe0f26ebcab2d175ebe3e4e65e",
+      "bytes": 69
+    },
+    {
+      "path": "TruFor_train_test/lib/config/aug_res_comp.yaml",
+      "md5": "99d30e556502efd82f9793842d28b77d",
+      "sha256": "f94a8acb39babc8963f1c5110b5c1c4a1c0798088cf6e938035627fba24da49d",
+      "bytes": 276
+    },
+    {
+      "path": "TruFor_train_test/lib/config/default.py",
+      "md5": "28bc57e140896716d1e16c7c5b31aa13",
+      "sha256": "885d9c09fea7686ca347c05cc3a7cdf85d45e7494f058068fd9b7e3af6f3ff75",
+      "bytes": 3317
+    },
+    {
+      "path": "TruFor_train_test/lib/config/trufor_ph2.yaml",
+      "md5": "e590467d1ee619d2012f5fa1081866f9",
+      "sha256": "6a9854a221f3781b9818406afd241b687a6ecdac1793a9a023642cdd27966a9f",
+      "bytes": 1038
+    },
+    {
+      "path": "TruFor_train_test/lib/config/trufor_ph3.yaml",
+      "md5": "22e18962d3a86e9b53bdcf8b003d4cc2",
+      "sha256": "a87108eb0df40d9bab6a303eb91419564b7c106d5105bbd5d8ecaec1567b5b8b",
+      "bytes": 1124
+    },
+    {
+      "path": "TruFor_train_test/lib/core/__init__.py",
+      "md5": "d41d8cd98f00b204e9800998ecf8427e",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "TruFor_train_test/lib/core/criterion.py",
+      "md5": "ac161ed4dd1887db04513be2e0b34efe",
+      "sha256": "1c11afdda85bff27020ed4c9c69010220b0ac6c6537363a6887ba4de39dd2e7f",
+      "bytes": 7514
+    },
+    {
+      "path": "TruFor_train_test/lib/core/criterion_conf.py",
+      "md5": "f6c19e6e8615ef9c67dfb41ad5d991d7",
+      "sha256": "c8c5d2476578cd42c492c4920bc750cab6174fadf517b9d97c8addaeb7fef995",
+      "bytes": 2300
+    },
+    {
+      "path": "TruFor_train_test/lib/core/criterion_det.py",
+      "md5": "36d5e91bdd6dd4d1758875454edc8228",
+      "sha256": "e58fc424492fe0f39b9b64ba0614f92d4864486b4077b43a8a0c3d6c6a861de0",
+      "bytes": 1102
+    },
+    {
+      "path": "TruFor_train_test/lib/core/function.py",
+      "md5": "6df8cc1f874583c95b177dab0bf8ae8d",
+      "sha256": "349570e153abf160e5ff7712d995ed00d0119e46f0caf529fab660b11c1c0ecc",
+      "bytes": 10110
+    },
+    {
+      "path": "TruFor_train_test/lib/models/DnCNN.py",
+      "md5": "3964a3e49866c28ead181d86539c8939",
+      "sha256": "3736b7c625d03b85accea77c26a41ea2da956dae07d70182532e7df9b74ae882",
+      "bytes": 5442
+    },
+    {
+      "path": "TruFor_train_test/lib/models/__init__.py",
+      "md5": "d41d8cd98f00b204e9800998ecf8427e",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "TruFor_train_test/lib/models/cmx/LICENSE_CMX.txt",
+      "md5": "b82d2b7ab870bce6e476e75e4916a06f",
+      "sha256": "687ff4d0ea13200541df7359799a08c2db626094ecacbb8a3fe63ffad177f2a1",
+      "bytes": 1086
+    },
+    {
+      "path": "TruFor_train_test/lib/models/cmx/__init__.py",
+      "md5": "d41d8cd98f00b204e9800998ecf8427e",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "TruFor_train_test/lib/models/cmx/builder_np_conf.py",
+      "md5": "a106c1ef3a69437293c52b3ee4e85a05",
+      "sha256": "b31b02a96417b424228f0301ac653a44d257e522c3ddede414d3c95209d80ded",
+      "bytes": 10608
+    },
+    {
+      "path": "TruFor_train_test/lib/models/cmx/decoders/MLPDecoder.py",
+      "md5": "07ee837edda3638cf506b070c5eb8bd2",
+      "sha256": "172efeeb155591f9857f888263c513b9f8d03bb41c4ebf64a74eb15e8b250a91",
+      "bytes": 3060
+    },
+    {
+      "path": "TruFor_train_test/lib/models/cmx/encoders/dual_segformer.py",
+      "md5": "00f5df8ee1625967cc11a085cd94e427",
+      "sha256": "faf1d8483a559d25d151c58fbf171e52b504c88ba4c05235d15dc96467a7ac60",
+      "bytes": 24910
+    },
+    {
+      "path": "TruFor_train_test/lib/models/cmx/init_func.py",
+      "md5": "84b0cb3ffc6dd1706c9b92301ac4e364",
+      "sha256": "20dad47877caaf5ee485d49b6618c5c3de68261ef0090c586eb409e605f976a4",
+      "bytes": 2273
+    },
+    {
+      "path": "TruFor_train_test/lib/models/cmx/layer_utils.py",
+      "md5": "23c2daf411ca3e0b5d20640b734e2048",
+      "sha256": "4d75874f1c793b6db0893f734853cd074d8efa1cafc3c33519360c8357005a2e",
+      "bytes": 1388
+    },
+    {
+      "path": "TruFor_train_test/lib/models/cmx/net_utils.py",
+      "md5": "c67e41bcb259cf0ae985a197220ba85f",
+      "sha256": "171239507b49f00026ca46db88cbb101f8c24f47dd7a93b1b5a7f919deb8ed21",
+      "bytes": 8089
+    },
+    {
+      "path": "TruFor_train_test/lib/utils.py",
+      "md5": "48b70762650ec1cfa3f1832f91dfa84c",
+      "sha256": "6f2dcecb50d457f3116e30878c969d9f68e51f028f61cfe92bd606a121796b8e",
+      "bytes": 10375
+    },
+    {
+      "path": "TruFor_train_test/metrics.py",
+      "md5": "2ab01374598b668506503fc0a02e7240",
+      "sha256": "7d2a7ce6f706c888cb73e9d5eb7d0652928beb69e4e59ce2d66e1ecb94e94ddd",
+      "bytes": 5264
+    },
+    {
+      "path": "TruFor_train_test/project_config.py",
+      "md5": "f6a9889835ef8be232d169f2b85e9750",
+      "sha256": "1909570e29e7b9bfc185b16b77a6d3b64b6176f9fba7c68d62593c05800a648b",
+      "bytes": 303
+    },
+    {
+      "path": "TruFor_train_test/test.py",
+      "md5": "d9645c6274309e740010d4c6a402b42a",
+      "sha256": "403c554f96fe7923572543cc62cf9d50792fe1ef57e2b6eb8418baaa8577b18e",
+      "bytes": 5262
+    },
+    {
+      "path": "TruFor_train_test/train.py",
+      "md5": "b580907da135c815558b76804722bc34",
+      "sha256": "57c66d013ed44a2ae6ec760ead53a99be632f0d7d6a080bbe3d5c9d3c2d908c6",
+      "bytes": 8305
+    },
+    {
+      "path": "TruFor_train_test/trufor_conda.yaml",
+      "md5": "b2b1756d5de7acb5c0a4ae3a3dc2f10b",
+      "sha256": "ab75bba450e5c5a4150721cdf783ee8a4d24ce5553fa6d885db0c87d09329acd",
+      "bytes": 6097
+    },
+    {
+      "path": "TruFor_train_test/visualize.py",
+      "md5": "239da89252ac8b976a3106c7eb9aafe9",
+      "sha256": "745817b1bf5cb58d89b3087a25ffb517bc79585f3e7d1d55c617dd0063b20b71",
+      "bytes": 1733
+    },
+    {
+      "path": "docs/_config.yml",
+      "md5": "2912b49a627c68d62350a650f50f2f00",
+      "sha256": "a3475a01988db2423d51ce64eaec734d30b8ec142b88f044b973c0c9a7b2d606",
+      "bytes": 76
+    },
+    {
+      "path": "docs/index.md",
+      "md5": "90ae3e3da52cd42a969927af1a0e5f9a",
+      "sha256": "e0cbe5258759d6e2a8e28537b2ced2a0b4d218cba16430245901ff9b81378442",
+      "bytes": 5416
+    },
+    {
+      "path": "test_docker/LICENSE.txt",
+      "md5": "7346ad6656b30bc03ca032784a63088c",
+      "sha256": "07201e07e3d2c1ac55480037a87734fcccacbb0cd0e25a31e3b89ac7ffadf8b4",
+      "bytes": 1837
+    },
+    {
+      "path": "test_docker/LICENSE_CMX.txt",
+      "md5": "b82d2b7ab870bce6e476e75e4916a06f",
+      "sha256": "687ff4d0ea13200541df7359799a08c2db626094ecacbb8a3fe63ffad177f2a1",
+      "bytes": 1086
+    },
+    {
+      "path": "test_docker/README.md",
+      "md5": "053dc38d7f587395f6ec1a8f5fc3ac92",
+      "sha256": "b29cae235960ea0f805c48b9acf22a39bee6f53ed2f7b7de71a364e99d823d04",
+      "bytes": 1991
+    },
+    {
+      "path": "test_docker/data_test/CASIA1corel_fake.txt",
+      "md5": "db7fd4f8075cc4fa7e690b410a698707",
+      "sha256": "48e98884401eb859aa9a6fb1760ee43be75eadc07591977ec013d68f5810deca",
+      "bytes": 82890
+    },
+    {
+      "path": "test_docker/data_test/CASIA1corel_real.txt",
+      "md5": "c372bf5e82e07a8d38a5b0ac6bb0f479",
+      "sha256": "59f681c6d444e3d8bd57cf5bf4c39cc237a1135fad3731f7dbcd1a01cc7a9d0d",
+      "bytes": 13650
+    },
+    {
+      "path": "test_docker/data_test/CocoGlide_fake.txt",
+      "md5": "ebe24bee580b0cf5f6d59af2d244d03b",
+      "sha256": "4c2fe620152ddd2e45e4f4e386a9c3e3649632032f15490303339e5b270ce8d7",
+      "bytes": 36989
+    },
+    {
+      "path": "test_docker/data_test/CocoGlide_real.txt",
+      "md5": "b5ade27d69f176d0c963f969418554a9",
+      "sha256": "da22508268c8d42ca500136812810d6f63e901a0338dcf7d112ad1330136d497",
+      "bytes": 12001
+    },
+    {
+      "path": "test_docker/data_test/DSO-1_fake.txt",
+      "md5": "3eb2e8c729e4fc2a95015eb4213888c1",
+      "sha256": "a206514572a6c76e6019dbed988cb0a42944ae10d389ccadc26784b918f2320a",
+      "bytes": 3202
+    },
+    {
+      "path": "test_docker/data_test/DSO-1_real.txt",
+      "md5": "857ac2182aecc29dbf77c8a0bfdeb8e6",
+      "sha256": "afc1def6bba4292d664a5e4cc3c4715cf1c930eaa81accb83029b77e58b9a1d7",
+      "bytes": 1401
+    },
+    {
+      "path": "test_docker/data_test/NIST16_fake.txt",
+      "md5": "f7b35a61d7af274c4a85e35ea2c301e9",
+      "sha256": "8e214f5bfcbdf344cde1d317fbd25853ef0de37c1638525241f17e09ac353f9b",
+      "bytes": 9840
+    },
+    {
+      "path": "test_docker/data_test/NIST16_real.txt",
+      "md5": "9b93fa3aa511429443486ab52b144341",
+      "sha256": "9cd54375ee1507a17504795fe5af2587f3ea31dc718d8ed230dce7ba273a22b6",
+      "bytes": 3520
+    },
+    {
+      "path": "test_docker/data_test/OpenForensics_fake.txt",
+      "md5": "41853374a8aa123549f99a64c2c824f3",
+      "sha256": "829f71d952e9865a629073d15cdda8a8b61704eae201feac68c3d8dc85b0d251",
+      "bytes": 140000
+    },
+    {
+      "path": "test_docker/data_test/VIPP_fake.txt",
+      "md5": "8b122d006d856a2fe67b0c9fa95dba56",
+      "sha256": "1ba0dd03184535860cb292e6ee51e763dc777a5a1337417c1c380c123724c7db",
+      "bytes": 4026
+    },
+    {
+      "path": "test_docker/data_test/VIPP_real.txt",
+      "md5": "bf4391e1319d85a7fe3f0c56bfb4a8de",
+      "sha256": "f2d9b61ceb532df85f5e103d7997e2d677842b0b75e4f92ab09c53e9579f95de",
+      "bytes": 2285
+    },
+    {
+      "path": "test_docker/data_test/columbia_fake.txt",
+      "md5": "e03df4d84f43e12df8abe32f0fd591a0",
+      "sha256": "e79edeb5da5027541e528b25db6bda1a5a0789e103fabd73ccae60c03e2b11ec",
+      "bytes": 17460
+    },
+    {
+      "path": "test_docker/data_test/columbia_real.txt",
+      "md5": "e7dd076416638ff9820f822e9cf1b788",
+      "sha256": "e7eee5284bcde614c1aef1ff085c696fbf054fc33c088d7d5acb39c2a7a11396",
+      "bytes": 5904
+    },
+    {
+      "path": "test_docker/data_test/coverage_fake.txt",
+      "md5": "5107da78957c872e08498321ac9fb243",
+      "sha256": "b17c0f30f37c50e1795cc3aebc8bcb70bcf28fd9a53d11039109987e5e77e5c3",
+      "bytes": 3184
+    },
+    {
+      "path": "test_docker/data_test/coverage_real.txt",
+      "md5": "bde5f5d61292f648341b0aa983be8846",
+      "sha256": "baaea45649e0fe670f4f71150029c9055cd56a508cacaabdedec56fae51bb1da",
+      "bytes": 1292
+    },
+    {
+      "path": "test_docker/images/pristine1.jpg",
+      "md5": "80d9f1ae332d04e4b160743c5a2b4fe8",
+      "sha256": "b09e0a4600f7e7bf0caedb1bc42454b4b7ebbc2d1af7dcdf1ab219c9a33c250c",
+      "bytes": 35319
+    },
+    {
+      "path": "test_docker/images/pristine2.jpg",
+      "md5": "39161a5f95fd19a913be9cd7707f6070",
+      "sha256": "fa17cc498c5557536c20a91ab6788fbd70a85a38fe963cbe24299891f687adcd",
+      "bytes": 382750
+    },
+    {
+      "path": "test_docker/images/tampered1.png",
+      "md5": "8b93083cc24d9bcfb62e6d268aea4978",
+      "sha256": "7a03e3bf871ba63d10a5d625f563ece4ed51f7dae7b578cb5c1caacf6c6466fe",
+      "bytes": 3491019
+    },
+    {
+      "path": "test_docker/images/tampered2.png",
+      "md5": "7855ca2cad5f74e9b2fd94c246690610",
+      "sha256": "893e4a9079b82d4d657b1e1b47fa69ab79345c30074637aa8c77b7e604f7f3b2",
+      "bytes": 123170
+    },
+    {
+      "path": "test_docker/metrics.py",
+      "md5": "2ab01374598b668506503fc0a02e7240",
+      "sha256": "7d2a7ce6f706c888cb73e9d5eb7d0652928beb69e4e59ce2d66e1ecb94e94ddd",
+      "bytes": 5264
+    },
+    {
+      "path": "test_docker/src/config.py",
+      "md5": "83fec3aecaa374c4fbf361725bad0905",
+      "sha256": "189408c7a59012dfff1a7ea04abb8b3b7f6eeffb22c777936285eee790dcb028",
+      "bytes": 1378
+    },
+    {
+      "path": "test_docker/src/data_core.py",
+      "md5": "d9122564c905527aa746beba3c6d159b",
+      "sha256": "e4ab8c07d85ae40d20f2ecfbba0cd3ca12e20cbdb438c4b53e141840aaf7bc88",
+      "bytes": 1419
+    },
+    {
+      "path": "test_docker/src/models/DnCNN.py",
+      "md5": "3964a3e49866c28ead181d86539c8939",
+      "sha256": "3736b7c625d03b85accea77c26a41ea2da956dae07d70182532e7df9b74ae882",
+      "bytes": 5442
+    },
+    {
+      "path": "test_docker/src/models/__init__.py",
+      "md5": "7c78a4f912f227da2dd86b5e5264c3b4",
+      "sha256": "e8bba2be4a95dbbe0e3a0fe6701ebfc72518206b9a6ed3b4f5e349cb8f98a578",
+      "bytes": 515
+    },
+    {
+      "path": "test_docker/src/models/cmx/LICENSE_CMX.txt",
+      "md5": "b82d2b7ab870bce6e476e75e4916a06f",
+      "sha256": "687ff4d0ea13200541df7359799a08c2db626094ecacbb8a3fe63ffad177f2a1",
+      "bytes": 1086
+    },
+    {
+      "path": "test_docker/src/models/cmx/__init__.py",
+      "md5": "d41d8cd98f00b204e9800998ecf8427e",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "test_docker/src/models/cmx/builder_np_conf.py",
+      "md5": "b8c4aeda25f883b2e24146cb4c24dab7",
+      "sha256": "4c89614d242df222810f2f172886b403eb808289fd75dfa78e59728ae9537eb9",
+      "bytes": 6246
+    },
+    {
+      "path": "test_docker/src/models/cmx/decoders/MLPDecoder.py",
+      "md5": "491ea36744a5a29d8e2cecc3de9a753a",
+      "sha256": "745b3fba29f0a3e52cb7e40080ac8bb2c53891399015ff32bbf2e86cc116fbe5",
+      "bytes": 3033
+    },
+    {
+      "path": "test_docker/src/models/cmx/encoders/dual_segformer.py",
+      "md5": "d6d602fbd53dc0cd42553817672465d7",
+      "sha256": "e34671a3e8bb5e031a36a6ea9739531616ad4b35d9d5367746bdbf49c98520e8",
+      "bytes": 21730
+    },
+    {
+      "path": "test_docker/src/models/cmx/layer_utils.py",
+      "md5": "6a452a7068a751aefa39080e35aa2be2",
+      "sha256": "f24723cec04bf5b9296deaaa163bdc0dd1e3d7599fe1e2ba1450c4f06a98fc95",
+      "bytes": 1395
+    },
+    {
+      "path": "test_docker/src/models/cmx/net_utils.py",
+      "md5": "c67e41bcb259cf0ae985a197220ba85f",
+      "sha256": "171239507b49f00026ca46db88cbb101f8c24f47dd7a93b1b5a7f919deb8ed21",
+      "bytes": 8089
+    },
+    {
+      "path": "test_docker/src/models/cmx/utils/__init__.py",
+      "md5": "d41d8cd98f00b204e9800998ecf8427e",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "test_docker/src/models/cmx/utils/init_func.py",
+      "md5": "2b5c6892f9c04161f89f070e4537bdff",
+      "sha256": "2a3a1c7da372079b8592612261cc9865127c292aea15d16eae957545a8585881",
+      "bytes": 2285
+    },
+    {
+      "path": "test_docker/src/trufor.yaml",
+      "md5": "895fce2bc61b1067d613d19fc9b85f15",
+      "sha256": "48e851ecd57fe9a4aca7962592f54b75cefd1f990c76d47fedcca1521db1c073",
+      "bytes": 401
+    },
+    {
+      "path": "test_docker/src/trufor_test.py",
+      "md5": "f9ad273bc8847f240c96b0d56e43d3aa",
+      "sha256": "eb20f3ad039567ca47ed4b922c4cee014ab336427100b39bbd18929962aeda1e",
+      "bytes": 5484
+    },
+    {
+      "path": "test_docker/visualize.py",
+      "md5": "239da89252ac8b976a3106c7eb9aafe9",
+      "sha256": "745817b1bf5cb58d89b3087a25ffb517bc79585f3e7d1d55c617dd0063b20b71",
+      "bytes": 1733
+    }
+  ],
+  "weight_archive": {
+    "url": "https://www.grip.unina.it/download/prog/TruFor/TruFor_weights.zip",
+    "md5": "7bee48f3476c75616c3c5721ab256ff8",
+    "sha256": "953f1f7eda0dd2c5ece322ae9c185ba1079c1265aa5fdf319ef5a20604d206d8",
+    "bytes": 260878690
+  },
+  "weights": [
+    {
+      "path": "third_party\\TruFor\\TruFor_train_test\\pretrained_models\\weights\\trufor.pth.tar",
+      "md5": "55d7075dd1ff945e9c0f9437c5df9495",
+      "sha256": "ac1d90e329a72e0d66e8665e123a19e94bfae3209c3ef8a4f9ca3b91578c7844",
+      "bytes": 281496429
+    }
+  ]
+}

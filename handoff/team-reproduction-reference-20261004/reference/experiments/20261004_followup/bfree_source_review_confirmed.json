@@ -1,0 +1,363 @@
+{
+  "original_count": 80,
+  "prior_real_count": 40,
+  "pairs_checked": 6360,
+  "closest": [
+    {
+      "left": "synthbuster-plus:r19fe3107t",
+      "right": "synthclic:IMG_20151218_072926729",
+      "left_role": "validation",
+      "right_role": "setting",
+      "hamming": 16,
+      "rgb_rmse": 0.26753428697489207
+    },
+    {
+      "left": "synthbuster-plus:r1b547547t",
+      "right": "synthclic:IMG_20160208_072955",
+      "left_role": "setting",
+      "right_role": "setting",
+      "hamming": 18,
+      "rgb_rmse": 0.2894161609940284
+    },
+    {
+      "left": "synthbuster-plus:r145221d9t",
+      "right": "synthclic:IMG_0925",
+      "left_role": "setting",
+      "right_role": "setting",
+      "hamming": 20,
+      "rgb_rmse": 0.20924641315608045
+    },
+    {
+      "left": "synthclic:4aec41b3f871a80e3a1e6af01160ce8c",
+      "right": "bfree_RAISE-1k_r02508493t",
+      "left_role": "validation",
+      "right_role": "prior_exposed",
+      "hamming": 20,
+      "rgb_rmse": 0.21674881254126735
+    },
+    {
+      "left": "synthclic:IMG_20160128_105730",
+      "right": "synthclic:988bba76cd470c3c2b10884c6c0a841c",
+      "left_role": "setting",
+      "right_role": "validation",
+      "hamming": 20,
+      "rgb_rmse": 0.23926142851263651
+    },
+    {
+      "left": "synthbuster-plus:r0d8d62edt",
+      "right": "synthclic:IMG_20160629_233820",
+      "left_role": "setting",
+      "right_role": "setting",
+      "hamming": 20,
+      "rgb_rmse": 0.24724108039043285
+    },
+    {
+      "left": "synthclic:3791ad4816a63dce7b6514b15d314b68",
+      "right": "synthclic:920e1085a30117a8ffc41ab80dd5d956",
+      "left_role": "validation",
+      "right_role": "validation",
+      "hamming": 20,
+      "rgb_rmse": 0.26258908370434386
+    },
+    {
+      "left": "synthbuster-plus:r1800ab47t",
+      "right": "synthclic:920e1085a30117a8ffc41ab80dd5d956",
+      "left_role": "setting",
+      "right_role": "validation",
+      "hamming": 20,
+      "rgb_rmse": 0.26686832322619514
+    },
+    {
+      "left": "synthclic:0040",
+      "right": "bfree_RAISE-1k_r02354285t",
+      "left_role": "setting",
+      "right_role": "prior_exposed",
+      "hamming": 20,
+      "rgb_rmse": 0.26835974477253305
+    },
+    {
+      "left": "synthbuster-plus:r19fe3107t",
+      "right": "synthclic:IMG_20151008_204005448",
+      "left_role": "validation",
+      "right_role": "setting",
+      "hamming": 20,
+      "rgb_rmse": 0.28655447995013983
+    },
+    {
+      "left": "synthbuster-plus:r13a9002bt",
+      "right": "synthclic:ccb73561248a2d0f4b92d5061926ab58",
+      "left_role": "validation",
+      "right_role": "validation",
+      "hamming": 20,
+      "rgb_rmse": 0.30872161535518955
+    },
+    {
+      "left": "synthclic:21950943ce77f421f03a52ada741d1d9",
+      "right": "bfree_RAISE-1k_r0287344at",
+      "left_role": "validation",
+      "right_role": "prior_exposed",
+      "hamming": 20,
+      "rgb_rmse": 0.31130689837157166
+    },
+    {
+      "left": "synthbuster-plus:r0f6250d2t",
+      "right": "bfree_RAISE-1k_r0250eb80t",
+      "left_role": "validation",
+      "right_role": "prior_exposed",
+      "hamming": 20,
+      "rgb_rmse": 0.3125208246297292
+    },
+    {
+      "left": "synthclic:20170929_112554",
+      "right": "bfree_RAISE-1k_r0225b88bt",
+      "left_role": "setting",
+      "right_role": "prior_exposed",
+      "hamming": 20,
+      "rgb_rmse": 0.32194610969200377
+    },
+    {
+      "left": "synthclic:b8e1f555b6fc24eeff1c2a433ff1a797",
+      "right": "bfree_RAISE-1k_r01cf60c7t",
+      "left_role": "validation",
+      "right_role": "prior_exposed",
+      "hamming": 20,
+      "rgb_rmse": 0.32928724692985695
+    },
+    {
+      "left": "synthclic:IMG_20151008_204005448",
+      "right": "synthclic:460cf103189b9443656887053b79ff52",
+      "left_role": "setting",
+      "right_role": "validation",
+      "hamming": 20,
+      "rgb_rmse": 0.3328704494651494
+    },
+    {
+      "left": "synthclic:4662188f30900f0e242df98632adae4e",
+      "right": "bfree_RAISE-1k_r0287344at",
+      "left_role": "validation",
+      "right_role": "prior_exposed",
+      "hamming": 20,
+      "rgb_rmse": 0.33841557665785715
+    },
+    {
+      "left": "synthbuster-plus:r1800ab47t",
+      "right": "synthbuster-plus:r182ed662t",
+      "left_role": "setting",
+      "right_role": "validation",
+      "hamming": 20,
+      "rgb_rmse": 0.35007113642441
+    },
+    {
+      "left": "synthbuster-plus:r1a9de6e9t",
+      "right": "synthclic:IMG_20151218_072926729",
+      "left_role": "validation",
+      "right_role": "setting",
+      "hamming": 20,
+      "rgb_rmse": 0.3741684145340984
+    },
+    {
+      "left": "synthclic:2017-09-25 14.01.14",
+      "right": "synthclic:aaec75d88bc62818237cdf29a64eee9d",
+      "left_role": "setting",
+      "right_role": "validation",
+      "hamming": 20,
+      "rgb_rmse": 0.41443749620530873
+    },
+    {
+      "left": "synthbuster-plus:r1c4d4720t",
+      "right": "bfree_RAISE-1k_r0284aa1at",
+      "left_role": "setting",
+      "right_role": "prior_exposed",
+      "hamming": 20,
+      "rgb_rmse": 0.42057995101306966
+    },
+    {
+      "left": "synthclic:lee-miller-48144",
+      "right": "synthbuster-plus:r1554cfadt",
+      "left_role": "setting",
+      "right_role": "validation",
+      "hamming": 20,
+      "rgb_rmse": 0.4512848414670004
+    },
+    {
+      "left": "synthbuster-plus:r0d0ff43at",
+      "right": "bfree_RAISE-1k_r02897203t",
+      "left_role": "setting",
+      "right_role": "prior_exposed",
+      "hamming": 20,
+      "rgb_rmse": 0.48968114293695814
+    },
+    {
+      "left": "synthbuster-plus:r182ed662t",
+      "right": "bfree_RAISE-1k_r0282ca06t",
+      "left_role": "validation",
+      "right_role": "prior_exposed",
+      "hamming": 20,
+      "rgb_rmse": 0.5473592387067348
+    },
+    {
+      "left": "synthbuster-plus:r1f4a44a7t",
+      "right": "synthclic:2017-09-25 14.01.14",
+      "left_role": "validation",
+      "right_role": "setting",
+      "hamming": 20,
+      "rgb_rmse": 0.5536353119729039
+    },
+    {
+      "left": "synthbuster-plus:r0f5475b5t",
+      "right": "synthclic:2017-09-25 14.01.14",
+      "left_role": "setting",
+      "right_role": "setting",
+      "hamming": 20,
+      "rgb_rmse": 0.5956208805168789
+    },
+    {
+      "left": "synthclic:IMG_20170617_070921",
+      "right": "synthclic:29ef058b5008b035ab00522fe840549b",
+      "left_role": "setting",
+      "right_role": "validation",
+      "hamming": 20,
+      "rgb_rmse": 0.6653352748577303
+    },
+    {
+      "left": "synthclic:e903c4f4684100a6dbac1f0b9b4de760",
+      "right": "bfree_RAISE-1k_r02354285t",
+      "left_role": "validation",
+      "right_role": "prior_exposed",
+      "hamming": 22,
+      "rgb_rmse": 0.17515240475571073
+    },
+    {
+      "left": "synthclic:IMG_20160128_105730",
+      "right": "synthclic:IMG_20170824_083403",
+      "left_role": "setting",
+      "right_role": "setting",
+      "hamming": 22,
+      "rgb_rmse": 0.18450337248207693
+    },
+    {
+      "left": "synthclic:29ef058b5008b035ab00522fe840549b",
+      "right": "bfree_RAISE-1k_r02210c2at",
+      "left_role": "validation",
+      "right_role": "prior_exposed",
+      "hamming": 22,
+      "rgb_rmse": 0.18529498218839013
+    },
+    {
+      "left": "synthclic:4aec41b3f871a80e3a1e6af01160ce8c",
+      "right": "bfree_RAISE-1k_r0279b17bt",
+      "left_role": "validation",
+      "right_role": "prior_exposed",
+      "hamming": 22,
+      "rgb_rmse": 0.18849351246649904
+    },
+    {
+      "left": "synthclic:4b1593698a8cad4f69d6d37b33d8f5f1",
+      "right": "bfree_RAISE-1k_r018e74fet",
+      "left_role": "validation",
+      "right_role": "prior_exposed",
+      "hamming": 22,
+      "rgb_rmse": 0.22151263282563735
+    }
+  ],
+  "scores_used": false,
+  "visual_review_completed": true,
+  "limitations": "Known exact exposed IDs and visible suspicious scene families excluded from validation. Full event/location/pretraining independence is not proved.",
+  "reviewer": "Codex image inspection, source-only; not human explanation assessment",
+  "reviewed_at_utc": "2026-10-03T16:53:21.337306+00:00",
+  "source_provenance_sha256": "00429a6c6bdfecec4c1ab6f5abb1e30604ce4f8545ebc4cbd09678888d0d6d1b",
+  "group_overrides": {
+    "synthbuster-plus:r123c6433t": "synthbuster-plus:possible_alpine_lakes",
+    "synthbuster-plus:r15919202t": "synthbuster-plus:possible_alpine_lakes",
+    "synthbuster-plus:r1800ab47t": "synthbuster-plus:possible_alpine_lakes",
+    "synthbuster-plus:r197770adt": "synthbuster-plus:possible_alpine_lakes",
+    "synthclic:IMG_20160208_072955": "synthclic:possible_black_cat_household",
+    "synthclic:IMG_20160730_092958": "synthclic:possible_black_cat_household",
+    "synthbuster-plus:r07cfb432t": "synthbuster-plus:possible_tulip_garden",
+    "synthbuster-plus:r0b7b1156t": "synthbuster-plus:possible_tulip_garden",
+    "synthbuster-plus:r19be5c05t": "synthbuster-plus:possible_tulip_garden"
+  },
+  "fold_overrides": {
+    "synthbuster-plus:r123c6433t": 4,
+    "synthbuster-plus:r15919202t": 4,
+    "synthbuster-plus:r1800ab47t": 4,
+    "synthbuster-plus:r197770adt": 4,
+    "synthclic:IMG_20160208_072955": 2,
+    "synthclic:IMG_20160730_092958": 2,
+    "synthbuster-plus:r07cfb432t": 2,
+    "synthbuster-plus:r0b7b1156t": 2,
+    "synthbuster-plus:r19be5c05t": 2
+  },
+  "conservative_scene_families": [
+    {
+      "group": "synthbuster-plus:possible_alpine_lakes",
+      "members": [
+        "synthbuster-plus:r123c6433t",
+        "synthbuster-plus:r15919202t",
+        "synthbuster-plus:r1800ab47t",
+        "synthbuster-plus:r197770adt"
+      ],
+      "fold": 4,
+      "reason": "Conservative possible shared alpine lake/location family; not asserted as identical photo"
+    },
+    {
+      "group": "synthclic:possible_black_cat_household",
+      "members": [
+        "synthclic:IMG_20160208_072955",
+        "synthclic:IMG_20160730_092958"
+      ],
+      "fold": 2,
+      "reason": "Black cat of similar appearance/household; retain together in setting CV"
+    },
+    {
+      "group": "synthbuster-plus:possible_tulip_garden",
+      "members": [
+        "synthbuster-plus:r07cfb432t",
+        "synthbuster-plus:r0b7b1156t",
+        "synthbuster-plus:r19be5c05t"
+      ],
+      "fold": 2,
+      "reason": "Possible same garden session; grouping is conservative, location not proven"
+    }
+  ],
+  "content_review_exclusions": {
+    "r1e9c8a5dt": "Same cow-costume parade/location as v0.1 review",
+    "r1ca5a385t": "Same ornate clock object as previously exposed museum image",
+    "r06d3ac60t": "Clock/instrument gallery possibly same museum family as prior clock",
+    "r0f2c63d2t": "Possible shared autumn lake location with setting r1800ab47t",
+    "r0a10fe29t": "Ornate gallery ceiling possibly same prior museum/gallery family",
+    "r182ed662t": "Possible same snowy lake shoreline as previous r0282ac06t; excluded before scores"
+  },
+  "reviewed_panels_sha256": {
+    "runs\\20261004_followup\\bfree_source_review\\closest_0.jpg": "477ebb30d58f0a9a306ac09ce6abc65b48351e6c6daeb7fd6fcf8463509247ae",
+    "runs\\20261004_followup\\bfree_source_review\\closest_1.jpg": "55da13c71d524b8769c2f9c89fdc7f959f3c35585cabce2369ebf10a9e6bf831",
+    "runs\\20261004_followup\\bfree_source_review\\closest_2.jpg": "8821c66dd0b7af532d198ccbaf662bb20f9269679399d233da18a0338e2f39bb",
+    "runs\\20261004_followup\\bfree_source_review\\closest_3.jpg": "d78499f1ef267a600896d40b50d077b43e3734f51cb08e4b88908fc248f86774",
+    "runs\\20261004_followup\\bfree_source_review\\synthbuster-plus_real_0.jpg": "7b673ac9c55ea4ea36fec24518287e7e90f30733b40ad70d8f9680eebdd59e40",
+    "runs\\20261004_followup\\bfree_source_review\\synthbuster-plus_real_1.jpg": "35815111081d5f039bd7d4fb1467b1c9fa5817e0d437c4898f43fd5f4f679c63",
+    "runs\\20261004_followup\\bfree_source_review\\synthbuster-plus_real_2.jpg": "6c97a1e14cde6be12c5d21e41472af9e6b2cfa300728bb49ec0656062c4b7bf0",
+    "runs\\20261004_followup\\bfree_source_review\\synthbuster-plus_real_3.jpg": "2d5ce5d6aa9021013ef214b17af8b1b500023688fcdab74ccd381aadc3f9148d",
+    "runs\\20261004_followup\\bfree_source_review\\synthbuster-plus_real_4.jpg": "ae81e1707a772e310f9f61dbd5b1b49b29845fe1d183aab5488a1ae468fa9426",
+    "runs\\20261004_followup\\bfree_source_review\\synthclic_real_0.jpg": "4812bbb9768485f99ea040a276775152d385abf202ab867ecd2ddca8365fb542",
+    "runs\\20261004_followup\\bfree_source_review\\synthclic_real_1.jpg": "6eaee63b4468ca4b82f80a45443cc7478a1a323fe4565d3d52a4a9496e3f9cda",
+    "runs\\20261004_followup\\bfree_source_review\\synthclic_real_2.jpg": "13d990c55708d0f30393bc576759dc6b8204db332df5b8a4f246b45cbc752a78",
+    "runs\\20261004_followup\\bfree_source_review\\synthclic_real_3.jpg": "4ebed080c94575fc8ac5b6001b6e25ba15afe503f4bbbed42ef6f1d8d1e30a9a",
+    "runs\\20261004_followup\\bfree_source_review\\synthclic_real_4.jpg": "5d2551cd5bd8131cfe1bdbbc6660ed2bce7cebe5c3942782d79814f8cdf24b0d",
+    "runs\\20261004_followup\\bfree_source_review_v2\\closest_0.jpg": "d366ec25cde54e620dfe7fef2140b86e2d991c0b7f6e3127486654f61208f690",
+    "runs\\20261004_followup\\bfree_source_review_v2\\closest_1.jpg": "79fbdf8677923e9a0741838544699dddd6353065a56179a94fbb20a7691ea9b0",
+    "runs\\20261004_followup\\bfree_source_review_v2\\closest_2.jpg": "d535252eb828b1a47c054ef2bc2640e19669f7c92593494e41fa1ad18503cebe",
+    "runs\\20261004_followup\\bfree_source_review_v2\\closest_3.jpg": "6c6a83ee4d18abd68fa3137b44e93d5ed24938d05515e5443aa88165e0644012",
+    "runs\\20261004_followup\\bfree_source_review_v2\\synthbuster-plus_real_0.jpg": "7b673ac9c55ea4ea36fec24518287e7e90f30733b40ad70d8f9680eebdd59e40",
+    "runs\\20261004_followup\\bfree_source_review_v2\\synthbuster-plus_real_1.jpg": "35815111081d5f039bd7d4fb1467b1c9fa5817e0d437c4898f43fd5f4f679c63",
+    "runs\\20261004_followup\\bfree_source_review_v2\\synthbuster-plus_real_2.jpg": "bdad8c85db22b52baddb06dd532bb3d06d3e92b15684617b319929143052c070",
+    "runs\\20261004_followup\\bfree_source_review_v2\\synthbuster-plus_real_3.jpg": "85597fe0b4a8a8a5e012b5b1325b2a3178a6cf7a4fccdacc37eda9bd404b2c0b",
+    "runs\\20261004_followup\\bfree_source_review_v2\\synthbuster-plus_real_4.jpg": "2c5dfbb8cd1554266f54f7891824b4d296648ec39f9110292bd9e1e29666eb4a",
+    "runs\\20261004_followup\\bfree_source_review_v2\\synthclic_real_0.jpg": "4812bbb9768485f99ea040a276775152d385abf202ab867ecd2ddca8365fb542",
+    "runs\\20261004_followup\\bfree_source_review_v2\\synthclic_real_1.jpg": "6eaee63b4468ca4b82f80a45443cc7478a1a323fe4565d3d52a4a9496e3f9cda",
+    "runs\\20261004_followup\\bfree_source_review_v2\\synthclic_real_2.jpg": "13d990c55708d0f30393bc576759dc6b8204db332df5b8a4f246b45cbc752a78",
+    "runs\\20261004_followup\\bfree_source_review_v2\\synthclic_real_3.jpg": "4ebed080c94575fc8ac5b6001b6e25ba15afe503f4bbbed42ef6f1d8d1e30a9a",
+    "runs\\20261004_followup\\bfree_source_review_v2\\synthclic_real_4.jpg": "5d2551cd5bd8131cfe1bdbbc6660ed2bce7cebe5c3942782d79814f8cdf24b0d"
+  },
+  "last_replacement_panel_sha256": "fa39c3e1fac754818bf38aaa50e4e7feddd060c2234335b13747c6cc8588dd65",
+  "notes": "80real source photographs inspected, nearest32 source pairs reviewed; six ambiguous/exposed validation scenes replaced before scores; last replacement chocolate display reviewed with4generator outputs"
+}
