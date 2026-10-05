@@ -1,0 +1,49 @@
+# Python environments and caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Credentials and local settings
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.codex/
+.vscode/
+.idea/
+
+# Downloaded model code, weights, and datasets
+third_party/
+weights/
+checkpoints/
+pretrained_models/
+data/
+datasets/
+*.pth
+*.pth.tar
+*.pt
+*.ckpt
+*.safetensors
+*.onnx
+
+# Raw inference outputs and transfer archives
+runs/
+results/
+outputs/
+*.npz
+*.npy
+*.log
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# Filesystem metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
