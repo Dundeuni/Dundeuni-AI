@@ -67,8 +67,6 @@ experiment/*: 모델 비교·검증 작업, dev를 대상으로 PR
 - 모델·전처리·판정 기준 변경은 테스트 결과와 함께 기록합니다.
 - AI 입력·출력이 바뀌면 FE·BE 담당자와 공유합니다.
 
-- 관련 저장소: [Dundeuni-BE](https://github.com/Dundeuni/Dundeuni-BE), [Dundeuni-FE](https://github.com/Dundeuni/Dundeuni-FE)
-- 진행 중인 작업: [AI 이미지 생성·변조 탐지 모델 비교 및 서비스 적용 가능성 검증](https://github.com/Dundeuni/Dundeuni-AI/issues/1)
 
 ## MVP 범위
 
