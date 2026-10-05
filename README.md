@@ -12,18 +12,18 @@ AI 생성·변조 분석과 이미지 내용의 사기 위험 판단은 별도 �
 ## 기본 구조
 
 ```text
-src/                    AI 분석 기능 코드
-├── common/             공통 결과 형식, 오류 처리
-├── config/             모델 경로와 실행 환경 설정
+src/                        AI 분석 기능 코드
+├── common/                 공통 결과 형식, 오류 처리
+├── config/                 모델 경로와 실행 환경 설정
 └── domains/
-    └── image-analysis/ AI 생성 탐지, 변조 탐지, 판정 처리
-scripts/                데이터 준비, 모델 추론, 평가 실행
-requirements/           모델별 Python 설치 환경
-tests/                  입력 처리, 판정 기준, 평가 계산 검증
-reports/                테스트 결과, 오류 분석, 모델 선정 근거
-handoff/                실험 재현 안내와 고정 입력 목록
-docs/api/               BE와 합의할 AI 요청·응답 문서
-.github/                이슈, PR 템플릿과 라벨 정의
+    └── image-analysis/     AI 생성 탐지, 변조 탐지, 판정 처리
+scripts/                    데이터 준비, 모델 추론, 평가 실행
+requirements/               모델별 Python 설치 환경
+tests/                      입력 처리, 판정 기준, 평가 계산 검증
+reports/                    테스트 결과, 오류 분석, 모델 선정 근거
+handoff/                    실험 재현 안내와 고정 입력 목록
+docs/api/                   BE와 합의할 AI 요청·응답 문서
+.github/                    이슈, PR 템플릿과 라벨 정의
 ```
 
 ## 기술 스택
