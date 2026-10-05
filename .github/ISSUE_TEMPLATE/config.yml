@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: AI 실험 설계·평가 가이드
+    url: https://github.com/Dundeuni/Dundeuni-AI/blob/dev/docs/EXPERIMENT_GUIDE.md
+    about: 모델 비교·검증 작업의 계획과 결과 기록 기준을 확인합니다.
+  - name: 든든이 BE API 문서
+    url: https://github.com/Dundeuni/Dundeuni-BE/tree/main/docs/api
+    about: AI 요청·응답 계약을 변경할 때 BE의 API 문서를 함께 확인합니다.
