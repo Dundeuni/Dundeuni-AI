@@ -1,0 +1,26 @@
+{
+  "bfree": {
+    "weights_path": "third_party\\B-Free\\code\\weights\\BFREE_dino2reg4\\model_epoch_best.pth",
+    "weights_sha256": "5948ca78f4d94e820c250d24cdf155035b4a85960443800bfe6bb7f06bffe947",
+    "selection_status": "selection_failed",
+    "source_revision": "c6a9f898782fb466b29af01f21960b67415afb0e"
+  },
+  "trufor": {
+    "weights_path": "third_party\\TruFor\\TruFor_train_test\\pretrained_models\\weights\\trufor.pth.tar",
+    "weights_sha256": "ac1d90e329a72e0d66e8665e123a19e94bfae3209c3ef8a4f9ca3b91578c7844",
+    "selection_status": "selection_failed",
+    "source_revision": "ae54475df6f41a491d7615100feb19263dec13f7"
+  },
+  "mesorch": {
+    "weights_path": "third_party\\Mesorch\\weights\\mesorch-98.pth",
+    "weights_sha256": "6d8fcd7ce7616d819bec6a9ed461b27187101e67247f8b2d2483fdc1f25f685a",
+    "selection_status": "selection_failed",
+    "source_revision": "33454cb6d595267033ce1109b62ad373110678db"
+  },
+  "mesorch_p": {
+    "weights_path": "third_party\\Mesorch\\weights\\mesorch_p-118.pth",
+    "weights_sha256": "efa61592f2c783698a8760c2d3e48dc58c1b4890c50dbcdc166b24425a197674",
+    "selection_status": "selection_failed",
+    "source_revision": "33454cb6d595267033ce1109b62ad373110678db"
+  }
+}
