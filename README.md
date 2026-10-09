@@ -44,8 +44,6 @@ git clone https://github.com/Dundeuni/Dundeuni-AI.git
 cd Dundeuni-AI
 ```
 
-- [팀원용 실험 재현 가이드](handoff/TEAM_REPRODUCIBILITY_20261004.md): 환경·고정 입력·가중치 확보와 실행 명령
-- [v0.1 B-Free 결과](reports/BFREE_ORIGINAL_RESULTS_20261002.md) / [v0.1 TruFor 결과](reports/ORIGINAL_BASELINE_RESULTS_20261001.md) / [v0.2 결과](reports/FOLLOWUP_BASELINE_RESULTS_20261004.md)
 - 모델 실행에는 해당 모델의 공식 코드·가중치와 호환되는 Python 환경이 필요합니다.
 - 실험에는 고정된 평가 이미지·정답·분할 목록이 추가로 필요합니다.
 - 이미지·가중치·가상환경·대용량 추론 결과는 Git에서 제외합니다.
