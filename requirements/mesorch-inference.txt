@@ -1,7 +1,0 @@
--r bfree-windows.txt
-scipy==1.13.1
-rich==13.9.4
-opencv-python-headless==4.8.1.78
-albumentations==1.3.0
-scikit-image==0.22.0
-# Install IMDLBenCo==0.1.45 separately with --no-deps; see guide.

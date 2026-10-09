@@ -1,9 +1,0 @@
-{
-  "path": "third_party\\Mesorch\\weights\\mesorch-98.pth",
-  "bytes": 1023886070,
-  "sha256": "6d8fcd7ce7616d819bec6a9ed461b27187101e67247f8b2d2483fdc1f25f685a",
-  "reused": false,
-  "model": "mesorch",
-  "official_file_id": "1PJxKteinMyaAYokKy0JhuzBnBc6bGsau",
-  "source": "Official Mesorch README public Google Drive folder"
-}

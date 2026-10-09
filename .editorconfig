@@ -25,16 +25,3 @@ insert_final_newline = unset
 trim_trailing_whitespace = unset
 indent_style = unset
 indent_size = unset
-
-# Frozen experiment code and reference bytes must not be normalized on save.
-[{scripts,tests,requirements}/**]
-charset = unset
-end_of_line = unset
-insert_final_newline = unset
-trim_trailing_whitespace = unset
-
-[handoff/team-reproduction-reference-20261004/**]
-charset = unset
-end_of_line = unset
-insert_final_newline = unset
-trim_trailing_whitespace = unset
