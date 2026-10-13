@@ -54,6 +54,9 @@ cd Dundeuni-AI
 
 BE·FE와 같은 방식으로 이슈를 생성하고 작업 브랜치와 PR을 통해 변경 사항을 공유합니다.
 
+- API 문서는 [docs/api](./docs/api/README.md)에서 관리한다.
+- CuRe·TruFor의 요청·응답 계약은 [이미지 분석 API v0.2](./docs/api/image-analysis-v0.2.md)를 참조한다.
+
 ```text
 main: 검토된 배포·데모 기준
 dev: 개발 통합
