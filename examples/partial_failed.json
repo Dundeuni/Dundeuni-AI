@@ -1,0 +1,71 @@
+{
+  "contractVersion": "1.0",
+  "requestId": "89891067-5bea-4b69-b830-1b9a47389506",
+  "analysisId": "8c1b24c0-3186-4ee5-a679-74acb055b001",
+  "elementId": "a65d2da5-8ec3-4f89-b066-0f24ce940001",
+  "sourceType": "SCREEN_CROP",
+  "requestedModels": [
+    "generation",
+    "manipulation"
+  ],
+  "status": "PARTIAL_FAILED",
+  "analysisImage": {
+    "width": 64,
+    "height": 48,
+    "inputSha256": "adbc60ee889e2ec8359cb958f4197e0baa795826b0e4e9b99d688c20dcdcd90e",
+    "normalizationVersion": "MOCK-normalization-v1-exif-rgb-white-alpha"
+  },
+  "generation": {
+    "status": "SUCCEEDED",
+    "modelName": "B-Free",
+    "modelVersion": "MOCK-generation-constant-v1-2.197224577",
+    "policyVersion": "MOCK-policy-v2-219e2af5869acddb",
+    "rawScore": {
+      "logit": 2.197224577
+    },
+    "displayScore": 90,
+    "decision": "AI_GENERATED_SUSPECTED",
+    "decisionLabel": "AI 생성 의심",
+    "reasons": [
+      "고정 mock 점수가 잠정 의심 기준보다 높습니다."
+    ],
+    "limitations": [
+      "MOCK 응답입니다. 실제 모델 추론이나 이미지 판정 결과가 아닙니다.",
+      "표시 점수는 보정 확률이나 사기 확률이 아닙니다."
+    ],
+    "localization": null,
+    "errorCode": null,
+    "error": null
+  },
+  "manipulation": {
+    "status": "FAILED",
+    "modelName": "TruFor",
+    "modelVersion": "MOCK-manipulation-constant-v1-0.8",
+    "policyVersion": "MOCK-policy-v2-219e2af5869acddb",
+    "rawScore": null,
+    "displayScore": null,
+    "decision": null,
+    "decisionLabel": null,
+    "reasons": [],
+    "limitations": [],
+    "localization": null,
+    "errorCode": "MODEL_TIMEOUT",
+    "error": {
+      "code": "MODEL_TIMEOUT",
+      "message": "모델의 실행 제한 시간을 초과했습니다.",
+      "retryable": true
+    }
+  },
+  "overallResult": {
+    "decision": "GENERATION_OR_MANIPULATION_SUSPECTED",
+    "decisionLabel": "생성·변조 의심",
+    "policyVersion": "image-overall-v1",
+    "suspectedKinds": [
+      "generation"
+    ],
+    "uncertainKinds": [
+      "manipulation"
+    ]
+  },
+  "completedAt": "2026-10-13T07:11:52.942Z"
+}

@@ -1,0 +1,21 @@
+{
+  "method": "POST",
+  "path": "/internal/v1/image-analyses",
+  "contentType": "multipart/form-data (boundary는 클라이언트 생성)",
+  "headers": {
+    "Authorization": "Bearer MOCK_ONLY_NOT_A_SECRET",
+    "X-Request-ID": "e2a3371d-6dd9-47d4-9611-6468e3c47631"
+  },
+  "textFields": {
+    "analysisId": "8c1b24c0-3186-4ee5-a679-74acb055b001",
+    "elementId": "a65d2da5-8ec3-4f89-b066-0f24ce940001",
+    "sourceType": "SCREEN_CROP",
+    "models": "ALL",
+    "deadlineAt": "2026-10-13T07:12:22.877Z"
+  },
+  "filePart": {
+    "field": "file",
+    "mimeType": "image/png",
+    "note": "64x48 합성 회색 이미지의 바이너리 파일 part"
+  }
+}
