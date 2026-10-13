@@ -54,6 +54,10 @@ cd Dundeuni-AI
 
 BE·FE와 같은 방식으로 이슈를 생성하고 작업 브랜치와 PR을 통해 변경 사항을 공유합니다.
 
+- GitHub 운영·협업 규칙: [GIT_CONVENTION.md](./GIT_CONVENTION.md)
+- Python 코드 작성 규칙: [CODE_CONVENTION.md](./CODE_CONVENTION.md)
+- 이슈·PR 라벨 가이드: [LABELS_GUIDE.md](./.github/LABELS_GUIDE.md)
+
 ```text
 main: 검토된 배포·데모 기준
 dev: 개발 통합
