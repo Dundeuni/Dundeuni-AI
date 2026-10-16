@@ -1,0 +1,66 @@
+{
+  "contractVersion": "1.0",
+  "requestId": "1c49938a-2317-46db-9b9c-d69a0c613d34",
+  "analysisId": "8c1b24c0-3186-4ee5-a679-74acb055b001",
+  "elementId": "a65d2da5-8ec3-4f89-b066-0f24ce940001",
+  "sourceType": "SCREEN_CROP",
+  "requestedModels": [
+    "manipulation"
+  ],
+  "status": "COMPLETED",
+  "analysisImage": {
+    "width": 64,
+    "height": 48,
+    "inputSha256": "adbc60ee889e2ec8359cb958f4197e0baa795826b0e4e9b99d688c20dcdcd90e",
+    "normalizationVersion": "MOCK-normalization-v1-exif-rgb-white-alpha"
+  },
+  "generation": null,
+  "manipulation": {
+    "status": "SUCCEEDED",
+    "modelName": "TruFor",
+    "modelVersion": "MOCK-manipulation-constant-v1-0.8",
+    "policyVersion": "MOCK-policy-v2-219e2af5869acddb",
+    "rawScore": {
+      "score": 0.8
+    },
+    "displayScore": 80,
+    "decision": "MANIPULATION_SUSPECTED",
+    "decisionLabel": "변조 의심",
+    "reasons": [
+      "고정 mock 점수가 잠정 의심 기준보다 높습니다."
+    ],
+    "limitations": [
+      "MOCK 응답입니다. 실제 모델 추론이나 이미지 판정 결과가 아닙니다.",
+      "표시 점수는 보정 확률이나 사기 확률이 아닙니다."
+    ],
+    "localization": {
+      "format": "PNG_BASE64",
+      "kind": "MANIPULATION_HEATMAP",
+      "mimeType": "image/png",
+      "data": "iVBORw0KGgoAAAANSUhEUgAAAEAAAAAwCAAAAACEICPDAAAAM0lEQVR4nO3QoQEAAAzCsI7/T9tREzsB23oimKUr5R4BBBDwgy+URQABBBDwgy+URQABOAtYASwN4h15AAAAAElFTkSuQmCC",
+      "imageSize": {
+        "width": 64,
+        "height": 48
+      },
+      "mapSize": {
+        "width": 64,
+        "height": 48
+      },
+      "coordinateSpace": "ANALYSIS_IMAGE"
+    },
+    "errorCode": null,
+    "error": null
+  },
+  "overallResult": {
+    "decision": "GENERATION_OR_MANIPULATION_SUSPECTED",
+    "decisionLabel": "생성·변조 의심",
+    "policyVersion": "image-overall-v1",
+    "suspectedKinds": [
+      "manipulation"
+    ],
+    "uncertainKinds": [
+      "generation"
+    ]
+  },
+  "completedAt": "2026-10-13T07:11:52.955Z"
+}

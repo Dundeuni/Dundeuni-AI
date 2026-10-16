@@ -6,6 +6,7 @@ venv/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.pip-cache/
 
 # Credentials and local settings
 .env
@@ -13,6 +14,7 @@ venv/
 !.env.example
 *.pem
 *.key
+*.local.json
 .codex/
 .vscode/
 .idea/
@@ -35,6 +37,10 @@ datasets/
 runs/
 results/
 outputs/
+validation/
+backups/
+validation-results.json
+cli-cleanup-receipt.json
 *.npz
 *.npy
 *.log

@@ -1,0 +1,10 @@
+{
+  "mode": "CURE_TRUFOR",
+  "hold_enabled": true,
+  "generation_hold_low": 0.000004,
+  "generation_hold_high": 0.02,
+  "manipulation_hold_low": 0.12,
+  "manipulation_hold_high": 0.70,
+  "model_timeout_seconds": 120,
+  "response_reserve_seconds": 1
+}
