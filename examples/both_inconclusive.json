@@ -1,0 +1,85 @@
+{
+  "contractVersion": "1.0",
+  "requestId": "f4cf456e-44a7-4666-916e-55c566bba0f5",
+  "analysisId": "8c1b24c0-3186-4ee5-a679-74acb055b001",
+  "elementId": "a65d2da5-8ec3-4f89-b066-0f24ce940001",
+  "sourceType": "SCREEN_CROP",
+  "requestedModels": [
+    "generation",
+    "manipulation"
+  ],
+  "status": "COMPLETED",
+  "analysisImage": {
+    "width": 64,
+    "height": 48,
+    "inputSha256": "adbc60ee889e2ec8359cb958f4197e0baa795826b0e4e9b99d688c20dcdcd90e",
+    "normalizationVersion": "MOCK-normalization-v1-exif-rgb-white-alpha"
+  },
+  "generation": {
+    "status": "SUCCEEDED",
+    "modelName": "B-Free",
+    "modelVersion": "MOCK-generation-constant-v1-0",
+    "policyVersion": "MOCK-policy-v2-219e2af5869acddb",
+    "rawScore": {
+      "logit": 0.0
+    },
+    "displayScore": null,
+    "decision": "INCONCLUSIVE",
+    "decisionLabel": "판단 불가",
+    "reasons": [],
+    "limitations": [
+      "MOCK 응답입니다. 실제 모델 추론이나 이미지 판정 결과가 아닙니다.",
+      "표시 점수는 보정 확률이나 사기 확률이 아닙니다.",
+      "모델 점수가 임시 판단 불가 구간에 포함되어 판별을 보류합니다."
+    ],
+    "localization": null,
+    "errorCode": null,
+    "error": null
+  },
+  "manipulation": {
+    "status": "SUCCEEDED",
+    "modelName": "TruFor",
+    "modelVersion": "MOCK-manipulation-constant-v1-0.5",
+    "policyVersion": "MOCK-policy-v2-219e2af5869acddb",
+    "rawScore": {
+      "score": 0.5
+    },
+    "displayScore": null,
+    "decision": "INCONCLUSIVE",
+    "decisionLabel": "판단 불가",
+    "reasons": [],
+    "limitations": [
+      "MOCK 응답입니다. 실제 모델 추론이나 이미지 판정 결과가 아닙니다.",
+      "표시 점수는 보정 확률이나 사기 확률이 아닙니다.",
+      "모델 점수가 임시 판단 불가 구간에 포함되어 판별을 보류합니다."
+    ],
+    "localization": {
+      "format": "PNG_BASE64",
+      "kind": "MANIPULATION_HEATMAP",
+      "mimeType": "image/png",
+      "data": "iVBORw0KGgoAAAANSUhEUgAAAEAAAAAwCAAAAACEICPDAAAAMklEQVR4nO3QoQEAAAjDsLLLOR3BCbOtX8Rm6Uq5RwABBPzgC2URQAABBPzgC2URQAAObSgA4PLWoj0AAAAASUVORK5CYII=",
+      "imageSize": {
+        "width": 64,
+        "height": 48
+      },
+      "mapSize": {
+        "width": 64,
+        "height": 48
+      },
+      "coordinateSpace": "ANALYSIS_IMAGE"
+    },
+    "errorCode": null,
+    "error": null
+  },
+  "overallResult": {
+    "decision": "INCONCLUSIVE",
+    "decisionLabel": "판단 불가",
+    "policyVersion": "image-overall-v1",
+    "suspectedKinds": [],
+    "uncertainKinds": [
+      "generation",
+      "manipulation"
+    ]
+  },
+  "completedAt": "2026-10-13T07:11:52.929Z"
+}

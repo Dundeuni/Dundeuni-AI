@@ -1,0 +1,84 @@
+{
+  "contractVersion": "1.0",
+  "requestId": "d7ff9013-86d5-4e4a-94e2-a773150e3827",
+  "analysisId": "8c1b24c0-3186-4ee5-a679-74acb055b001",
+  "elementId": "a65d2da5-8ec3-4f89-b066-0f24ce940001",
+  "sourceType": "SCREEN_CROP",
+  "requestedModels": [
+    "generation",
+    "manipulation"
+  ],
+  "status": "COMPLETED",
+  "analysisImage": {
+    "width": 64,
+    "height": 48,
+    "inputSha256": "adbc60ee889e2ec8359cb958f4197e0baa795826b0e4e9b99d688c20dcdcd90e",
+    "normalizationVersion": "MOCK-normalization-v1-exif-rgb-white-alpha"
+  },
+  "generation": {
+    "status": "SUCCEEDED",
+    "modelName": "B-Free",
+    "modelVersion": "MOCK-generation-constant-v1--10",
+    "policyVersion": "MOCK-policy-v2-219e2af5869acddb",
+    "rawScore": {
+      "logit": -10.0
+    },
+    "displayScore": 0,
+    "decision": "NO_CLEAR_GENERATION_SIGNAL",
+    "decisionLabel": "뚜렷한 AI 생성 신호 없음",
+    "reasons": [
+      "고정 mock 점수가 잠정 신호 없음 기준보다 낮습니다."
+    ],
+    "limitations": [
+      "MOCK 응답입니다. 실제 모델 추론이나 이미지 판정 결과가 아닙니다.",
+      "표시 점수는 보정 확률이나 사기 확률이 아닙니다."
+    ],
+    "localization": null,
+    "errorCode": null,
+    "error": null
+  },
+  "manipulation": {
+    "status": "SUCCEEDED",
+    "modelName": "TruFor",
+    "modelVersion": "MOCK-manipulation-constant-v1-0.1",
+    "policyVersion": "MOCK-policy-v2-219e2af5869acddb",
+    "rawScore": {
+      "score": 0.1
+    },
+    "displayScore": 10,
+    "decision": "NO_CLEAR_MANIPULATION_SIGNAL",
+    "decisionLabel": "뚜렷한 변조 신호 없음",
+    "reasons": [
+      "고정 mock 점수가 잠정 신호 없음 기준보다 낮습니다."
+    ],
+    "limitations": [
+      "MOCK 응답입니다. 실제 모델 추론이나 이미지 판정 결과가 아닙니다.",
+      "표시 점수는 보정 확률이나 사기 확률이 아닙니다."
+    ],
+    "localization": {
+      "format": "PNG_BASE64",
+      "kind": "MANIPULATION_HEATMAP",
+      "mimeType": "image/png",
+      "data": "iVBORw0KGgoAAAANSUhEUgAAAEAAAAAwCAAAAACEICPDAAAAM0lEQVR4nO3QoQEAAAzCsI4z9v+hEzsB23oimKUr5R4BBBDwgy+URQABBBDwgy+URQABOJIjAHrqsxH6AAAAAElFTkSuQmCC",
+      "imageSize": {
+        "width": 64,
+        "height": 48
+      },
+      "mapSize": {
+        "width": 64,
+        "height": 48
+      },
+      "coordinateSpace": "ANALYSIS_IMAGE"
+    },
+    "errorCode": null,
+    "error": null
+  },
+  "overallResult": {
+    "decision": "NO_CLEAR_SIGNAL",
+    "decisionLabel": "뚜렷한 신호 없음",
+    "policyVersion": "image-overall-v1",
+    "suspectedKinds": [],
+    "uncertainKinds": []
+  },
+  "completedAt": "2026-10-13T07:11:52.936Z"
+}
