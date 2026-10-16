@@ -193,6 +193,9 @@ $env:PYTHONPATH = 'src'
 
 BE·FE와 같은 방식으로 이슈를 생성하고 작업 브랜치와 PR을 통해 변경 사항을 공유합니다.
 
+- GitHub 운영·협업 규칙: [GIT_CONVENTION.md](./GIT_CONVENTION.md)
+- Python 코드 작성 규칙: [CODE_CONVENTION.md](./CODE_CONVENTION.md)
+- 이슈·PR 라벨 가이드: [LABELS_GUIDE.md](./.github/LABELS_GUIDE.md)
 - API 문서는 [docs/api](./docs/api/README.md)에서 관리한다.
 - CuRe·TruFor의 요청·응답 계약은 [이미지 분석 API v0.2](./docs/api/image-analysis-v0.2.md)를 참조한다.
 
