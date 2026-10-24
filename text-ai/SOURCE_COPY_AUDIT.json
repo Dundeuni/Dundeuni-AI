@@ -1,0 +1,205 @@
+{
+  "created_utc": "2026-10-24T16:00:39.393336+00:00",
+  "copied_files": [
+    {
+      "path": "ai_text/__init__.py",
+      "source_reference": "original_project/ai_text/__init__.py",
+      "sha256": "a6b4e59e57bed48ffc2a5043574abb3d72a5bb085c3dfd236cf18a9288897faa",
+      "bytes": 44
+    },
+    {
+      "path": "ai_text/api.py",
+      "source_reference": "original_project/ai_text/api.py",
+      "sha256": "abe9d266d087ebf167037205111e0aa724cfdf7252adb32572a23587edf7211b",
+      "bytes": 9638
+    },
+    {
+      "path": "ai_text/api_service.py",
+      "source_reference": "original_project/ai_text/api_service.py",
+      "sha256": "1ae2ac68b51fdb16a7f8f7ade77c35e9708112d5665a91476fa3002d4fd59b18",
+      "bytes": 8811
+    },
+    {
+      "path": "ai_text/api_ocr_worker.py",
+      "source_reference": "original_project/ai_text/api_ocr_worker.py",
+      "sha256": "11e1f6ee7928dbec5b8b741524af98594f8ff9da0c6a2b32121023244b5b3129",
+      "bytes": 1086
+    },
+    {
+      "path": "ai_text/action_encoder.py",
+      "source_reference": "original_project/ai_text/action_encoder.py",
+      "sha256": "69229d023d338ce87dc1825df1f019da987a0043bcb85438d443c059c3ace420",
+      "bytes": 7187
+    },
+    {
+      "path": "ai_text/message_context.py",
+      "source_reference": "original_project/ai_text/message_context.py",
+      "sha256": "50d41fde1199cae1df5ed322b7a6d0c50b6d04ddee08035749211f79afcb102e",
+      "bytes": 3091
+    },
+    {
+      "path": "ai_text/body_policy_v2.py",
+      "source_reference": "original_project/ai_text/body_policy_v2.py",
+      "sha256": "a4f101a470f980c1b0c3b59851a56358519e14638c618a6f3120e5344152934a",
+      "bytes": 509
+    },
+    {
+      "path": "ai_text/encoder_classifier.py",
+      "source_reference": "original_project/ai_text/encoder_classifier.py",
+      "sha256": "dc3c1d0617c5010df236c75315e9143780054496224d8514966af4108244e9cd",
+      "bytes": 5002
+    },
+    {
+      "path": "ai_text/message_body_v2.py",
+      "source_reference": "original_project/ai_text/message_body_v2.py",
+      "sha256": "f4219a0343db757e9b311bb412775597813baec12a4e832f7384b932faf8cc8b",
+      "bytes": 9540
+    },
+    {
+      "path": "ai_text/message_body.py",
+      "source_reference": "original_project/ai_text/message_body.py",
+      "sha256": "88c2f92cafb364afff35024a1372af536694f4aee2e69e3fcb5124ee8dc68f54",
+      "bytes": 8790
+    },
+    {
+      "path": "ai_text/pipeline.py",
+      "source_reference": "original_project/ai_text/pipeline.py",
+      "sha256": "728c05d3bd48b903acb8a62b84512b71bf7bf4dfb1270a7dfd9be4252ceacc47",
+      "bytes": 7519
+    },
+    {
+      "path": "ai_text/rules.py",
+      "source_reference": "original_project/ai_text/rules.py",
+      "sha256": "992ae2cf82e9842ef3e5e6b02c43b7452196b51865bf8c62176db53d3bc81d4a",
+      "bytes": 2611
+    },
+    {
+      "path": "ai_text/url_reputation.py",
+      "source_reference": "original_project/ai_text/url_reputation.py",
+      "sha256": "c67fca0c6a7c35e72c94c36d61ea38c3e1d189bf4e1e396024c8ed1bd4c15214",
+      "bytes": 14713
+    },
+    {
+      "path": "v2_core.py",
+      "source_reference": "original_project/v2_core.py",
+      "sha256": "3d8ae3baa35c263a8f9af743c73bb5052f7eb7d0f0c966c4937f2f9000496210",
+      "bytes": 2809
+    },
+    {
+      "path": "run_api.ps1",
+      "source_reference": "original_project/run_api.ps1",
+      "sha256": "a3eb4d34d187d7af182904b890b21b30649bfe1e5c9c0b4bb7dca8a82279ed41",
+      "bytes": 592
+    },
+    {
+      "path": "smoke_text_api.py",
+      "source_reference": "original_project/smoke_text_api.py",
+      "sha256": "546b1ee80f06979f8191846cb950cdf1c3e1979f6113bbd1c46771625f796d92",
+      "bytes": 9730
+    },
+    {
+      "path": "requirements-api.txt",
+      "source_reference": "original_project/requirements-api.txt",
+      "sha256": "278a146c7bdcf4f704227a648d5ac5204839a5fbb939c938accb75c3574c3767",
+      "bytes": 191
+    },
+    {
+      "path": "tests/test_text_api.py",
+      "source_reference": "original_project/tests/test_text_api.py",
+      "sha256": "ed0802c7a229c1087374ad46b3cf3a942bc22706625e7f4aa9fcff13936099f1",
+      "bytes": 7143
+    },
+    {
+      "path": "models/ax_text_actions-20261016/action_metadata.json",
+      "source_reference": "original_project/models/ax_text_actions-20261016/action_metadata.json",
+      "sha256": "10487bcb699223979f3844f6a21124917d8e5be64311b3f742a5a945c51268e7",
+      "bytes": 1090
+    },
+    {
+      "path": "models/ax_text_actions-20261016/added_tokens.json",
+      "source_reference": "original_project/models/ax_text_actions-20261016/added_tokens.json",
+      "sha256": "b82966bd0af2d1f2564915a82c81b9d6ce7376dca0351484aed49b6b740a7149",
+      "bytes": 24
+    },
+    {
+      "path": "models/ax_text_actions-20261016/config.json",
+      "source_reference": "original_project/models/ax_text_actions-20261016/config.json",
+      "sha256": "153aacfd27a83759e64e1b4e304ce8bd996518e5ca14bde6a5573095ed63f0ac",
+      "bytes": 1243
+    },
+    {
+      "path": "models/ax_text_actions-20261016/special_tokens_map.json",
+      "source_reference": "original_project/models/ax_text_actions-20261016/special_tokens_map.json",
+      "sha256": "a03d6c27a4414c509dc80443052842b73a0ec9f58e799f11ce8b2dbf074e9040",
+      "bytes": 1020
+    },
+    {
+      "path": "models/ax_text_actions-20261016/tokenizer.json",
+      "source_reference": "original_project/models/ax_text_actions-20261016/tokenizer.json",
+      "sha256": "362c6dda386f82c22887db954e733fef455c0be536e4af0d6910b884760fcd5b",
+      "bytes": 1087283
+    },
+    {
+      "path": "models/ax_text_actions-20261016/tokenizer_config.json",
+      "source_reference": "original_project/models/ax_text_actions-20261016/tokenizer_config.json",
+      "sha256": "da9b691efee1079a9b4f26d7da920adb9b11bb10aaf7cb5e7b947e2d5c3a8664",
+      "bytes": 7380
+    },
+    {
+      "path": "models/ax_text_actions-20261016/vocab.txt",
+      "source_reference": "original_project/models/ax_text_actions-20261016/vocab.txt",
+      "sha256": "7bc1893aa4a63f4ca0001dcb8cd7eb9bb11b731875329bd457d447028dbd79d1",
+      "bytes": 289725
+    },
+    {
+      "path": "licenses/A.X-Encoder-base.ORIGINAL_README.md",
+      "source_reference": "original_project/cache/huggingface/hub/models--skt--A.X-Encoder-base/snapshots/9708f9c404ace91efd25c06fac2d73413616f4ef/README.md",
+      "sha256": "c72335649e10a6efdec5904814c430e6e9d646b02ede6ba356097ef0229b53b1",
+      "bytes": 5012
+    },
+    {
+      "path": "licenses/A.X-BASE-LICENSE.txt",
+      "source_reference": "prepared_notices/A.X-BASE-LICENSE.txt",
+      "sha256": "9cf7ec77b0404b2a305a158cd614ef4ab24e3b71d85f3089ac295029ef90072d",
+      "bytes": 12525
+    },
+    {
+      "path": "licenses/PaddleOCR-LICENSE.txt",
+      "source_reference": "prepared_notices/PaddleOCR-LICENSE.txt",
+      "sha256": "3840c5c0c61c294264d2dd77b8777be6ddd90121ef4e0e64abcd22edea581d6e",
+      "bytes": 11376
+    },
+    {
+      "path": "models/ax_text_actions-20261016/LICENSE.txt",
+      "source_reference": "prepared_notices/A.X-BASE-LICENSE.txt",
+      "sha256": "9cf7ec77b0404b2a305a158cd614ef4ab24e3b71d85f3089ac295029ef90072d",
+      "bytes": 12525
+    }
+  ],
+  "copied_sha256_meaning": "SHA-256 immediately after source copy, before explicitly listed portability adjustments",
+  "packaged_code_adjustments": [
+    {
+      "path": "ai_text/action_encoder.py",
+      "change": "On CPU use nullcontext instead of constructing CUDA autocast; cast ActionModel to float32 in CPU memory to avoid encoder/head dtype mismatch. CUDA inference and on-disk weights unchanged.",
+      "original_sha256": "69229d023d338ce87dc1825df1f019da987a0043bcb85438d443c059c3ace420",
+      "packaged_sha256": "f09ec1e9f385f448192540a9e6bf71766ad6527ecc816987f609da7a9aa03441"
+    },
+    {
+      "path": "ai_text/encoder_classifier.py",
+      "change": "On CPU use nullcontext instead of constructing CUDA autocast; cast ActionModel to float32 in CPU memory to avoid encoder/head dtype mismatch. CUDA inference and on-disk weights unchanged.",
+      "original_sha256": "dc3c1d0617c5010df236c75315e9143780054496224d8514966af4108244e9cd",
+      "packaged_sha256": "56f4229d8904bb87a97ce70f0b6175fc9baccc1a625a05b63584c19915d8e92f"
+    }
+  ],
+  "source_files_changed": false,
+  "weights_changed": false,
+  "training_run": false,
+  "git_mutations_run": false,
+  "source_copy_hashes_verified": true,
+  "branch_layout_note": "Only files present in the feature payload are listed. Prior PB23 report moved to the later documentation payload.",
+  "delivery_revision": {
+    "model_binaries": "outside_repository",
+    "notices_directory": "licenses",
+    "runtime_ai_modules_unchanged": true
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "model_name": "skt/A.X-Encoder-base",
+  "model_version": "ax_text_actions-20261016",
+  "delivery_mode": "separate_private_asset_folder_not_Git_or_LFS",
+  "files": [
+    {
+      "path": "action_metadata.json",
+      "bytes": 1090,
+      "sha256": "10487bcb699223979f3844f6a21124917d8e5be64311b3f742a5a945c51268e7"
+    },
+    {
+      "path": "added_tokens.json",
+      "bytes": 24,
+      "sha256": "b82966bd0af2d1f2564915a82c81b9d6ce7376dca0351484aed49b6b740a7149"
+    },
+    {
+      "path": "config.json",
+      "bytes": 1243,
+      "sha256": "153aacfd27a83759e64e1b4e304ce8bd996518e5ca14bde6a5573095ed63f0ac"
+    },
+    {
+      "path": "model.safetensors",
+      "bytes": 299871272,
+      "sha256": "9aedad1ee1d7b1f77e928360cea2cc067312c31da62d27bedaff3fff20f6f8e4"
+    },
+    {
+      "path": "special_tokens_map.json",
+      "bytes": 1020,
+      "sha256": "a03d6c27a4414c509dc80443052842b73a0ec9f58e799f11ce8b2dbf074e9040"
+    },
+    {
+      "path": "tokenizer.json",
+      "bytes": 1087283,
+      "sha256": "362c6dda386f82c22887db954e733fef455c0be536e4af0d6910b884760fcd5b"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "bytes": 7380,
+      "sha256": "da9b691efee1079a9b4f26d7da920adb9b11bb10aaf7cb5e7b947e2d5c3a8664"
+    },
+    {
+      "path": "vocab.txt",
+      "bytes": 289725,
+      "sha256": "7bc1893aa4a63f4ca0001dcb8cd7eb9bb11b731875329bd457d447028dbd79d1"
+    }
+  ],
+  "weights_sha256": "9aedad1ee1d7b1f77e928360cea2cc067312c31da62d27bedaff3fff20f6f8e4"
+}

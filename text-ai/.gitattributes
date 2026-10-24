@@ -1,0 +1,3 @@
+# Preserve model metadata and attribution bytes for SHA-256 verification.
+models/ax_text_actions-20261016/** -text
+licenses/** -text

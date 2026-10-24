@@ -1,0 +1,71 @@
+# Windows 설치·실행
+
+아래 명령은 사용자가 직접 실행합니다. 준비본 제작 중 새 가상환경 설치나 서버 실행은 하지 않았습니다. Python 3.12가 필요하며, 패키지의 기존 환경을 재사용한 점검과 새 PC 설치 검증은 구분합니다.
+
+## 1. 폴더 열기
+
+VS Code에서 준비본의 `text-ai` 폴더를 열고 **터미널 → 새 터미널**을 선택합니다. GitHub에 올린 뒤에는 내려받은 저장소의 `text-ai` 폴더를 사용합니다. 이하 명령의 현재 위치는 이 폴더입니다.
+
+## 2. API·분류기 환경 만들기
+
+```powershell
+py -3.12 -m venv .venv-v2
+.\.venv-v2\Scripts\python.exe -m pip install --upgrade pip
+.\.venv-v2\Scripts\python.exe -m pip install -r requirements-dev.txt
+```
+
+원래 환경은 PyTorch `2.9.1+cu128`이었습니다. 위 설치 목록은 `2.9.1` 버전을 고정하지만 GPU 드라이버·플랫폼에 맞는 PyTorch 빌드는 별도로 선택해야 할 수 있습니다. CPU용으로 설치하려면 requirements 설치 전에 PyTorch 공식 CPU 인덱스의 `torch==2.9.1`을 설치합니다. 새 PC에서의 전체 의존성 설치는 아직 실행하지 않았습니다.
+
+## 3. OCR 환경 만들기
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements-ocr.txt
+```
+
+기존 구현은 Windows의 `.venv\Scripts\python.exe`를 OCR 프로세스로 실행합니다. `.venv-v2`와 `.venv`를 따로 만드는 이유입니다. OCR은 CPU를 사용하며 첫 요청에서 공식 PaddleOCR 모델을 내려받을 수 있습니다. 첫 요청 시간과 반복 요청 시간을 구분해서 확인해야 합니다.
+
+## 4. 별도 모델 연결·API 경계 확인
+
+```powershell
+.\.venv-v2\Scripts\python.exe check_package.py --code-only
+$env:AI_TEXT_MODEL_DIR = 'C:\work\AI-text-sprint2\03_model_assets\ax_text_actions-20261016'
+.\.venv-v2\Scripts\python.exe check_package.py --model-dir $env:AI_TEXT_MODEL_DIR
+.\.venv-v2\Scripts\python.exe -m pytest tests/test_text_api.py -q
+```
+
+가중치는 Git에 없습니다. [별도 모델 설치](WEIGHTS_SETUP.md)에 따라 학습된 모델 폴더를 받은 뒤 위 예시의 AI_TEXT_MODEL_DIR 경로를 실제 받은 위치로 바꿉니다. 모델 경로 설정은 서버를 실행할 터미널에도 유지해야 합니다. API 경계 테스트는 분류기/OCR 대역을 쓰므로 모델 정확도나 실제 OCR 성능을 측정하지 않습니다.
+
+## 5. 서버 실행
+
+```powershell
+$env:AI_SERVICE_TOKEN = [guid]::NewGuid().ToString("N")
+$env:AI_URL_REPUTATION_ENABLED = '0'
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_api.ps1
+```
+
+토큰은 직접 안전하게 보관하고 BE 담당자에게는 비공개 방법으로 전달합니다. GitHub 이슈·README·커밋에는 넣지 않습니다. `.env.example`은 항목 안내용이며 이 구현은 `.env` 파일을 자동으로 읽지 않습니다. 서버가 실행 중인 터미널은 열어 둡니다. 주소는 `http://127.0.0.1:8000/docs`입니다.
+
+## 6. 실제 HTTP 호출 확인
+
+다른 터미널에서 같은 폴더로 이동하고 서버와 같은 토큰을 설정한 뒤 실행합니다.
+
+```powershell
+$env:AI_SERVICE_TOKEN = '서버에서 설정한 토큰을 이 컴퓨터에서만 입력'
+.\.venv-v2\Scripts\python.exe smoke_text_api.py
+```
+
+이미지 확인을 추가하려면 위 명령에 `--image '검사할 실제 PNG 또는 JPEG의 전체 경로'`를 덧붙입니다. 결과는 `results/api-baseline-20261016/http-smoke.json`에 저장되며 Git에서 제외합니다. 이 스크립트는 AI API에 직접 요청합니다. 실제 BE를 거친 연동은 별도 확인합니다.
+
+## 7. 환경변수
+
+| 항목 | 의미 |
+|---|---|
+| AI_SERVICE_TOKEN | 필수 서비스 인증 토큰 |
+| AI_TEXT_MODEL_DIR | 별도로 받은 학습 모델 폴더의 전체 경로. Git에는 가중치가 없으므로 실행 전 설정 |
+| AI_OCR_TIMEOUT_SECONDS | OCR 제한 시간. 기본 90초, 1~600초 |
+| AI_URL_REPUTATION_ENABLED | 기본 0. 이번 전달본에서도 비활성 유지 |
+| AI_WEBRISK_API_KEY | 조회를 별도 활성화할 때만 필요한 키. 실제 키 미포함 |
+
+외부 주소 공개와 ngrok 실행도 이 준비 작업에서는 수행하지 않았습니다.

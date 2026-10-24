@@ -1,0 +1,106 @@
+{
+  "created_utc": "2026-10-24T16:03:14.777698+00:00",
+  "purpose": "upload preparation, not release-performance evaluation",
+  "api_boundary_tests": {
+    "passed": 21,
+    "failed": 0,
+    "test_doubles_used": true,
+    "warning": "Starlette reports deprecation of its httpx test-client integration; tests currently pass."
+  },
+  "model_smoke": {
+    "device": "cpu",
+    "case_count": 3,
+    "passed": true,
+    "live_model_used": true,
+    "CPU_selection_forced_in_diagnostic_process": true,
+    "accuracy_evaluated": false
+  },
+  "weights_sha256": "9aedad1ee1d7b1f77e928360cea2cc067312c31da62d27bedaff3fff20f6f8e4",
+  "weights_match_original": true,
+  "original_project_files_unchanged": true,
+  "packaged_code_adjustments": [
+    {
+      "path": "ai_text/action_encoder.py",
+      "change": "On CPU use nullcontext instead of constructing CUDA autocast; cast ActionModel to float32 in CPU memory to avoid encoder/head dtype mismatch. CUDA inference and on-disk weights unchanged.",
+      "original_sha256": "69229d023d338ce87dc1825df1f019da987a0043bcb85438d443c059c3ace420",
+      "packaged_sha256": "f09ec1e9f385f448192540a9e6bf71766ad6527ecc816987f609da7a9aa03441"
+    },
+    {
+      "path": "ai_text/encoder_classifier.py",
+      "change": "On CPU use nullcontext instead of constructing CUDA autocast; cast ActionModel to float32 in CPU memory to avoid encoder/head dtype mismatch. CUDA inference and on-disk weights unchanged.",
+      "original_sha256": "dc3c1d0617c5010df236c75315e9143780054496224d8514966af4108244e9cd",
+      "packaged_sha256": "56f4229d8904bb87a97ce70f0b6175fc9baccc1a625a05b63584c19915d8e92f"
+    }
+  ],
+  "python_syntax_passed": true,
+  "PowerShell_launcher_syntax_passed": true,
+  "authored_markdown_local_links_exist": true,
+  "relative_local_imports_checked": true,
+  "transitive_root_dependency_v2_core_included": true,
+  "actual_service_token_included": false,
+  "test_only_token_in_test_code": true,
+  "raw_images_or_datasets_included": false,
+  "git_initialized": false,
+  "git_staged": false,
+  "git_committed": false,
+  "git_pushed": false,
+  "GitHub_issue_or_PR_created": false,
+  "git_lfs_attributes_file_prepared": false,
+  "git_lfs_install_run": false,
+  "server_started": false,
+  "BE_called": false,
+  "new_environment_install_tested": false,
+  "OCR_executed": false,
+  "notes": [
+    "Validation reused the existing interpreter; teammates must create .venv-v2 and .venv from the documented requirements.",
+    "The packaged CPU path avoids CUDA autocast and makes ActionModel float32 in CPU memory. On-disk model weights are unchanged.",
+    "No new research candidate or retraining is included. The original API and retained research model have different weights.",
+    "Initial restricted test runs did not complete; final boundary tests passed in the permitted execution context."
+  ],
+  "documentation_updates": [
+    {
+      "date": "2026-10-25",
+      "files": [
+        "docs/ISSUE_DRAFT.md",
+        "docs/ISSUE_API_DOCS_DRAFT.md"
+      ],
+      "basis": "User-pasted teammate issue format and local implementation only; no attached external URLs opened",
+      "runtime_code_or_weights_changed": false,
+      "new_runtime_tests_run": false
+    }
+  ],
+  "branch_layout": {
+    "prepared_on": "2026-10-25",
+    "payload": "feature",
+    "runtime_code_and_weights_unchanged_from_previous_preparation": true,
+    "runtime_tests_reused_not_rerun": true,
+    "formal_docs_in_separate_payload": true
+  },
+  "weight_delivery_mode": "external_assets_not_Git_or_LFS",
+  "binary_weights_in_code_payload": false,
+  "notice_directory": "licenses",
+  "delivery_revision_note": "Packaging/docs/check helper changed; AI inference modules, model bytes and API contract unchanged. Previous runtime test results are historical, not rerun.",
+  "separate_asset_delivery_checks": [
+    {
+      "case": "code_only",
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "passed": true,
+      "message": "PASS: repository files and Python syntax checked. Model weights were NOT checked; they are delivered separately."
+    },
+    {
+      "case": "external_assets",
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "passed": true,
+      "message": "PASS: separately supplied model files match MODEL_ASSETS.json. No accuracy, OCR, or BE test was run."
+    },
+    {
+      "case": "missing_weights",
+      "expected_exit_code": 1,
+      "actual_exit_code": 1,
+      "passed": true,
+      "message": "FAILED: model asset check\nmodel.safetensors: missing\nWeights are not stored in Git. Obtain the exact trained model assets separately and set AI_TEXT_MODEL_DIR, or use --model-dir."
+    }
+  ]
+}

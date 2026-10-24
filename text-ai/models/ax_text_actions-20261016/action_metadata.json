@@ -1,0 +1,32 @@
+{
+  "model": "skt/A.X-Encoder-base",
+  "actions": [
+    "money_or_voucher",
+    "sensitive_information",
+    "app_installation",
+    "remote_permission_or_id",
+    "link_or_callback",
+    "financial_document_or_account"
+  ],
+  "auxiliary_weight": 0.35,
+  "selected_epoch": 3,
+  "threshold": 0.5,
+  "low": 0.3,
+  "input_version": "text-spans-context-v1",
+  "no_runtime_rule_overrides": true,
+  "robustness_finetune": {
+    "seed": 20261016,
+    "base_model": "ax_text_actions-20261015",
+    "epochs": 4,
+    "lr": 8e-06,
+    "original_train": 1529,
+    "original_validation": 392,
+    "additional_authored_train": 240,
+    "additional_authored_validation": 56,
+    "threshold": 0.5,
+    "low": 0.3,
+    "selection": "original validation balanced accuracy loss <= .02 versus baseline; minimize mean(original error, authored boundary error); no image/probe scores in selection",
+    "test_data_used_for_training": false,
+    "synthetic_disclaimer": "Authored development data; templates/phrases differ across splits, not independent real-world evaluation."
+  }
+}
