@@ -12,9 +12,21 @@
 
 두 POST는 `Authorization: Bearer <서비스 토큰>`을 사용합니다. 토큰은 비공개 환경 설정으로 전달하고 문서·저장소·FE에 실제 값을 넣지 않습니다.
 
-선택 헤더 `X-Request-ID`는 UUID4입니다. 생략하면 서버가 생성합니다. 정상 응답과 정의된 서비스·검증 오류에서는 유효한 값을 응답 본문 `requestId`와 응답 헤더에 보존합니다. 예상 밖 내부 예외의 오류 응답에서는 헤더 보존을 보장하지 않습니다. 잘못된 값은 `422 INVALID_REQUEST_ID`와 새 `requestId`를 반환하며, 이 조기 오류 응답에는 `X-Request-ID` 헤더를 설정하지 않습니다.
+선택 헤더 `X-Request-ID`는 UUID4입니다. 생략하거나 빈 문자열이면 서버가 생성합니다. 정상 분석 응답과 정의된 서비스·검증 오류에서는 유효한 값을 응답 본문 `requestId`와 응답 헤더에 보존합니다. 상태 확인의 성공 응답에는 추적 헤더만 포함됩니다. 예상 밖 내부 예외의 오류 응답에서는 헤더 보존을 보장하지 않습니다. 비어 있지 않은 잘못된 값은 `422 INVALID_REQUEST_ID`와 새 `requestId`를 반환하며, 이 조기 오류 응답에는 `X-Request-ID` 헤더를 설정하지 않습니다.
 
 `GET /healthz`의 HTTP 200 응답 필드는 `status`(`ready`), `modelVersion`, `device`, `ocrWorkerAvailable`입니다. `ready`는 분류기 로드·준비 완료를 뜻합니다. `ocrWorkerAvailable`은 OCR Python·worker 파일의 존재만 확인하며 PaddleOCR 실행 성공을 보장하지 않습니다.
+
+## 실행 장치 설정
+
+AI 서버는 `AI_TEXT_DEVICE`로 텍스트 분류기의 실행 장치를 선택합니다. BF16 지원은 에뮬레이션을 제외한 네이티브 지원을 뜻합니다. 설정값과 `/healthz`에 반환하는 실제 `device`를 구분합니다.
+
+| 설정값 | 선택 규칙 | health의 `device` |
+|---|---|---|
+| `auto`(기본) | CUDA가 없으면 CPU, CUDA와 BF16 지원을 모두 확인하면 CUDA BF16 | `cpu` 또는 `cuda` |
+| `cpu` | CUDA 유무와 관계없이 CPU를 명시적으로 선택 | `cpu` |
+| `cuda_bf16` | CUDA와 BF16 지원이 모두 필요 | `cuda` |
+
+CUDA는 있지만 BF16을 지원하지 않으면 `auto`와 `cuda_bf16` 모두 모델 초기화 전에 이유를 알리고 기동을 중단합니다. CPU나 FP16으로 자동 전환하지 않습니다. 이 장비에서 CPU를 사용하려면 `AI_TEXT_DEVICE=cpu`를 명시합니다. CUDA가 없는 장비의 `cuda_bf16` 및 허용값 이외의 설정도 기동 오류입니다. 기동 실패는 분석 API의 정상 응답이나 `defer`로 반환하는 상황이 아닙니다.
 
 ## 직접 텍스트 요청
 
@@ -197,7 +209,7 @@ AI 서비스가 정의한 오류 본문은 다음 형식입니다. 예시 ID는 
 |---|---|---|
 | 401 | `UNAUTHORIZED` | 토큰 누락·불일치. `WWW-Authenticate: Bearer` 포함 |
 | 422 | `INVALID_REQUEST` | JSON·form 필드/UUID/길이 등의 요청 검증 실패 |
-| 422 | `INVALID_REQUEST_ID` | X-Request-ID가 올바른 UUID4가 아님 |
+| 422 | `INVALID_REQUEST_ID` | 비어 있지 않은 X-Request-ID가 올바른 UUID4가 아님 |
 | 422 | `INVALID_TEXT` | 서비스 계층의 텍스트 방어 검증. HTTP 빈 입력·길이 오류는 보통 INVALID_REQUEST |
 | 422 | `EMPTY_IMAGE`, `INVALID_IMAGE`, `IMAGE_DIMENSIONS`, `OCR_TEXT_TOO_LONG` | 빈 파일·손상·해상도·OCR 텍스트 길이 오류 |
 | 413 | `REQUEST_TOO_LARGE`, `IMAGE_TOO_LARGE` | 전체 본문 11 MiB 또는 파일 10 MiB 초과 |
@@ -212,15 +224,16 @@ AI 서비스가 정의한 오류 본문은 다음 형식입니다. 예시 ID는 
 
 OCR 프로세스의 기본 제한 시간은 90초이며 `AI_OCR_TIMEOUT_SECONDS`로 1~600초를 설정합니다. 이는 전체 HTTP/BE 왕복 제한 시간이 아닙니다. `processingMs`는 분류와 선택적 URL 조회를 포함하며, 이미지 요청에서는 검증·잠금 획득 이후 임시 파일 준비와 OCR부터 측정합니다.
 
-## 구현·OpenAPI 차이와 검토 범위
+## OpenAPI 대응과 검토 범위
 
-정적 코드와 함께 저장된 OpenAPI를 대조한 결과이며 새 HTTP 호출 결과가 아닙니다.
+기능 브랜치의 API 응답 모델·라우트 메타데이터와 생성 OpenAPI를 함께 보완했습니다. 문서 브랜치에는 설명 문서만 반영하며, 아래 계약은 기능 변경과 합친 구조의 `openapi.json`을 기준으로 확인합니다.
 
-| 항목 | 저장된 OpenAPI | 실제 로컬 구현·후속 처리 |
+| 경로 | 선언한 응답 상태 | 스키마·헤더 |
 |---|---|---|
-| 422 오류 본문 | 기본 `HTTPValidationError`의 detail 형식 | 정의한 검증 오류는 error.code·error.message·requestId 형식. 스키마 보완 필요 |
-| 오류 상태 코드 | POST에 200·422 중심으로 기재 | 위 표의 401·413·415·502·503·504 등 보완 필요 |
-| 추적·오류 헤더 | X-Request-ID·Retry-After·WWW-Authenticate 설명 누락 | 조건과 전달 규칙을 이 문서에 정의. OpenAPI 보완 필요 |
-| health 응답 | 구체적 필드 스키마 없음 | status·modelVersion·device·ocrWorkerAvailable 문서화. OpenAPI 보완 필요 |
+| `GET /healthz` | 200, 422, 503 | 200에 상태 확인의 네 필드, 오류에 공통 오류 모델 |
+| `POST /internal/v1/text-analyses` | 200, 401, 413, 422, 503 | 분석 성공 모델과 공통 오류 모델 |
+| `POST /internal/v1/text-analyses/image` | 200, 401, 413, 415, 422, 502, 503, 504 | 분석 성공 모델과 공통 오류 모델 |
 
-입력·성공 응답 스키마는 저장된 OpenAPI와 비교하되 위 누락을 숨기지 않습니다. 서버가 생성하는 OpenAPI를 보완하려면 API 코드의 문서 메타데이터 수정이 필요할 수 있으므로 후속 작업으로 구분합니다. 이 문서 변경에서 원본 openapi.json·API 코드·가중치·임계값은 변경하지 않았습니다. 응답 점수를 이미지 생성·변조용 aiGenerationScore에 넣지 않습니다. FE·BE의 공개 필드 매핑·저장 정책·실제 통합 확인은 별도입니다.
+정의한 422 오류는 기본 `HTTPValidationError.detail` 대신 실제 `error.code`·`error.message`·`requestId` 구조를 참조합니다. OpenAPI에는 선택 요청 헤더 `X-Request-ID`와 응답 헤더의 조건도 설명합니다. `WWW-Authenticate: Bearer`는 인증 실패, `Retry-After: 2`는 `ANALYZER_BUSY`에 해당합니다. 503 전체에 재시도 헤더가 있다는 뜻은 아닙니다. 잘못된 요청 ID와 예상 밖 내부 예외의 추적 헤더 예외도 위 전달 규칙을 따릅니다.
+
+이 문서의 예시는 계약 설명용입니다. 실제 GPU·OCR·외부 URL 조회·BE·DB·FE 연동과 모델 성능의 검증 결과로 해석하지 않습니다. 과거 PB-23 기록은 재측정 결과로 바꾸지 않습니다. 응답 점수를 이미지 생성·변조용 aiGenerationScore에 넣지 않습니다. FE·BE의 공개 필드 매핑·저장 정책·실제 통합 확인은 별도입니다.
