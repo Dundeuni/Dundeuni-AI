@@ -32,10 +32,24 @@ py -3.12 -m venv .venv
 .\.venv-v2\Scripts\python.exe check_package.py --code-only
 $env:AI_TEXT_MODEL_DIR = 'C:\work\AI-text-sprint2\03_model_assets\ax_text_actions-20261016'
 .\.venv-v2\Scripts\python.exe check_package.py --model-dir $env:AI_TEXT_MODEL_DIR
-.\.venv-v2\Scripts\python.exe -m pytest tests/test_text_api.py -q
+.\.venv-v2\Scripts\python.exe ..\scripts\verify_text.py --python .\.venv-v2\Scripts\python.exe
 ```
 
-가중치는 Git에 없습니다. [별도 모델 설치](WEIGHTS_SETUP.md)에 따라 학습된 모델 폴더를 받은 뒤 위 예시의 AI_TEXT_MODEL_DIR 경로를 실제 받은 위치로 바꿉니다. 모델 경로 설정은 서버를 실행할 터미널에도 유지해야 합니다. API 경계 테스트는 분류기/OCR 대역을 쓰므로 모델 정확도나 실제 OCR 성능을 측정하지 않습니다.
+가중치는 Git에 없습니다. [별도 모델 설치](WEIGHTS_SETUP.md)에 따라 학습된 모델 폴더를 받은 뒤 위 예시의 AI_TEXT_MODEL_DIR 경로를 실제 받은 위치로 바꿉니다. 모델 경로 설정은 서버를 실행할 터미널에도 유지해야 합니다. 검증 진입점은 text-ai에서 `pytest tests -q`와 `check_package.py --code-only`를 실행합니다. 별도 모델 파일 없이 대역 API·작은 임시 모델·장치 탐지 대역으로 검사하며, 실제 A.X 정확도·OCR·GPU·BE 검증은 실행하지 않습니다. 결과는 Git 제외 경로 `results/text-verification/latest.json`에 저장합니다. 기존 루트 이미지 검증은 Python 3.9에서 별도로 실행합니다.
+
+## 4-1. 추론 장치 선택
+
+`AI_TEXT_DEVICE`의 허용값은 `auto`(기본), `cpu`, `cuda_bf16`입니다. `.env.example`은 안내용이므로 실제 환경변수를 지정합니다.
+
+```powershell
+$env:AI_TEXT_DEVICE = 'cpu'
+```
+
+- `cpu`: CUDA가 있는 PC에서도 CPU를 명시적으로 사용합니다. 모델 생성 전에 설정을 FP32로 지정하고 FP32 파라미터에 가중치를 strict=True로 읽습니다.
+- `cuda_bf16`: 현재 CUDA 장치가 사용 가능하고 native BF16을 지원해야 합니다. 미지원이면 모델 초기화 전에 원인을 안내하고 중단합니다.
+- `auto`: CUDA가 없으면 CPU를 선택합니다. CUDA가 있으면 native BF16 지원을 요구하며, 미지원 시 CPU나 FP16으로 조용히 전환하지 않습니다. CPU를 쓰려면 위처럼 명시합니다.
+
+`/healthz`의 device는 실제 선택 장치인 `cpu` 또는 `cuda`입니다. `cuda_bf16`은 설정값이며 health 응답의 새 enum이 아닙니다. 검증 진입점은 CPU 설정으로 실행하지만 장치 정책 테스트는 탐지 함수를 대역으로 바꿔 CUDA 지원·미지원 조건을 검사합니다. 실제 GPU 검증과 구분합니다.
 
 ## 5. 서버 실행
 
@@ -64,6 +78,7 @@ $env:AI_SERVICE_TOKEN = '서버에서 설정한 토큰을 이 컴퓨터에서만
 |---|---|
 | AI_SERVICE_TOKEN | 필수 서비스 인증 토큰 |
 | AI_TEXT_MODEL_DIR | 별도로 받은 학습 모델 폴더의 전체 경로. Git에는 가중치가 없으므로 실행 전 설정 |
+| AI_TEXT_DEVICE | auto(기본), cpu, cuda_bf16. CUDA 사용 시 native BF16 미지원이면 초기화 전 중단 |
 | AI_OCR_TIMEOUT_SECONDS | OCR 제한 시간. 기본 90초, 1~600초 |
 | AI_URL_REPUTATION_ENABLED | 기본 0. 이번 전달본에서도 비활성 유지 |
 | AI_WEBRISK_API_KEY | 조회를 별도 활성화할 때만 필요한 키. 실제 키 미포함 |

@@ -10,12 +10,82 @@
       "get": {
         "summary": "기동 및 분류기 준비 상태",
         "operationId": "health_healthz_get",
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional UUID v4. The server generates one when omitted or empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID with a fresh requestId and no X-Request-ID response header.",
+              "format": "uuid4",
+              "title": "X-Request-Id"
+            },
+            "description": "Optional UUID v4. The server generates one when omitted or empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID with a fresh requestId and no X-Request-ID response header."
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Classifier ready; reports the selected device.",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "INVALID_REQUEST_ID: invalid UUID v4 header.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "ANALYSIS_FAILED: unexpected internal error.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
               }
             }
           }
@@ -26,86 +96,363 @@
       "post": {
         "summary": "문자 본문 분석 (JSON)",
         "operationId": "analyze_text_internal_v1_text_analyses_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional UUID v4. The server generates one when omitted or empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID with a fresh requestId and no X-Request-ID response header.",
+              "format": "uuid4",
+              "title": "X-Request-Id"
+            },
+            "description": "Optional UUID v4. The server generates one when omitted or empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID with a fresh requestId and no X-Request-ID response header."
+          }
+        ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TextInput"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Completed analysis. A defer decision also returns HTTP 200 with status COMPLETED.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TextRiskResponse"
                 }
               }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
             }
           },
-          "422": {
-            "description": "Validation Error",
+          "401": {
+            "description": "UNAUTHORIZED: missing or invalid Bearer service credentials.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              },
+              "WWW-Authenticate": {
+                "description": "Always returned for 401 UNAUTHORIZED.",
+                "schema": {
+                  "type": "string",
+                  "const": "Bearer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "REQUEST_TOO_LARGE: request body exceeds 11 MiB.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "INVALID_REQUEST for invalid fields or formats; INVALID_REQUEST_ID for a non-UUID-v4 X-Request-ID header. INVALID_TEXT for invalid text.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "ANALYZER_BUSY when another analysis is running; ANALYSIS_FAILED for an unexpected internal error.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              },
+              "Retry-After": {
+                "description": "Returned with value 2 only for ANALYZER_BUSY; absent for OCR_UNAVAILABLE and unexpected ANALYSIS_FAILED errors.",
+                "schema": {
+                  "type": "string",
+                  "const": "2"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     },
     "/internal/v1/text-analyses/image": {
       "post": {
         "summary": "이미지 OCR 후 문자 사기 위험 분석 (multipart)",
         "operationId": "analyze_image_internal_v1_text_analyses_image_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional UUID v4. The server generates one when omitted or empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID with a fresh requestId and no X-Request-ID response header.",
+              "format": "uuid4",
+              "title": "X-Request-Id"
+            },
+            "description": "Optional UUID v4. The server generates one when omitted or empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID with a fresh requestId and no X-Request-ID response header."
+          }
+        ],
         "requestBody": {
+          "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
                 "$ref": "#/components/schemas/Body_analyze_image_internal_v1_text_analyses_image_post"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Completed analysis. A defer decision also returns HTTP 200 with status COMPLETED.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TextRiskResponse"
                 }
               }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
             }
           },
-          "422": {
-            "description": "Validation Error",
+          "401": {
+            "description": "UNAUTHORIZED: missing or invalid Bearer service credentials.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              },
+              "WWW-Authenticate": {
+                "description": "Always returned for 401 UNAUTHORIZED.",
+                "schema": {
+                  "type": "string",
+                  "const": "Bearer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "REQUEST_TOO_LARGE for a request body over 11 MiB; IMAGE_TOO_LARGE for an image file over 10 MiB.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "INVALID_REQUEST for invalid fields or formats; INVALID_REQUEST_ID for a non-UUID-v4 X-Request-ID header. EMPTY_IMAGE, IMAGE_DIMENSIONS, INVALID_IMAGE, or OCR_TEXT_TOO_LONG for invalid image/OCR input.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "OCR_UNAVAILABLE when the OCR worker is not prepared; ANALYZER_BUSY when another analysis is running; ANALYSIS_FAILED for an unexpected internal error.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              },
+              "Retry-After": {
+                "description": "Returned with value 2 only for ANALYZER_BUSY; absent for OCR_UNAVAILABLE and unexpected ANALYSIS_FAILED errors.",
+                "schema": {
+                  "type": "string",
+                  "const": "2"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "UNSUPPORTED_IMAGE, IMAGE_TYPE_MISMATCH, or ANIMATED_IMAGE for unsupported MIME types, mismatched formats, or multiple frames.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "OCR_FAILED: OCR worker or its result failed.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "OCR_TIMEOUT: OCR worker exceeded its time limit.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     }
   },
@@ -158,18 +505,71 @@
         ],
         "title": "Body_analyze_image_internal_v1_text_analyses_image_post"
       },
-      "HTTPValidationError": {
+      "ErrorDetail": {
         "properties": {
-          "detail": {
-            "items": {
-              "$ref": "#/components/schemas/ValidationError"
-            },
-            "type": "array",
-            "title": "Detail"
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
           }
         },
         "type": "object",
-        "title": "HTTPValidationError"
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorDetail"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorDetail"
+          },
+          "requestId": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Requestid",
+            "description": "Validated or generated request UUID v4. INVALID_REQUEST_ID uses a new UUID v4 because the supplied header was rejected."
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "requestId"
+        ],
+        "title": "ErrorResponse"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ready",
+            "title": "Status"
+          },
+          "modelVersion": {
+            "type": "string",
+            "title": "Modelversion"
+          },
+          "device": {
+            "type": "string",
+            "title": "Device"
+          },
+          "ocrWorkerAvailable": {
+            "type": "boolean",
+            "title": "Ocrworkeravailable"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "modelVersion",
+          "device",
+          "ocrWorkerAvailable"
+        ],
+        "title": "HealthResponse"
       },
       "Quality": {
         "properties": {
@@ -589,46 +989,6 @@
           "results"
         ],
         "title": "UrlReputation"
-      },
-      "ValidationError": {
-        "properties": {
-          "loc": {
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "type": "array",
-            "title": "Location"
-          },
-          "msg": {
-            "type": "string",
-            "title": "Message"
-          },
-          "type": {
-            "type": "string",
-            "title": "Error Type"
-          },
-          "input": {
-            "title": "Input"
-          },
-          "ctx": {
-            "type": "object",
-            "title": "Context"
-          }
-        },
-        "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
-        "title": "ValidationError"
       }
     },
     "securitySchemes": {

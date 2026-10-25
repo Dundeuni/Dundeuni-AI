@@ -23,7 +23,7 @@
 
 선택 필드는 `analysisId`·`elementId` UUID입니다. 이미지 요청은 multipart의 `file`에 PNG/JPEG를 넣습니다. 선택 `sourceType`은 IMAGE 또는 SCREEN_CROP입니다. 기본 한도는 텍스트 4,000자, 이미지 10 MiB이며 전체 입력·응답 스키마는 [OpenAPI](docs/openapi.json)에 있습니다. 위 문장은 호출 형식 예시이며 미리 정답을 보장하는 예제가 아닙니다.
 
-오류나 `defer`를 정상으로 바꾸지 않습니다. 이미지 OCR이 사용되면 `quality.ocrUsed`가 true이며 `quality.needsReview`·`reasonCodes`를 함께 전달합니다. `evidence`는 현재 빈 배열입니다. URL 위험 목록 조회는 기본 비활성이고 사용자 URL을 방문하거나 단축 URL을 확장하지 않습니다.
+오류나 `defer`를 정상으로 바꾸지 않습니다. 이미지 OCR이 사용되면 `quality.ocrUsed`가 true이며 `quality.needsReview`·`reasonCodes`를 함께 전달합니다. `evidence`는 기본 설정에서 빈 배열이며 선택적 URL 목록의 악성 일치 시 조회 근거를 포함합니다. URL 위험 목록 조회는 기본 비활성이고 사용자 URL을 방문하거나 단축 URL을 확장하지 않습니다.
 
 ## 코드·기본 모델
 
@@ -35,13 +35,25 @@
 - v2_core.py: 기존 모듈의 공통 의존 파일
 - [기본 모델](models/ax_text_actions-20261016/README.md): ax_text_actions-20261016 모델 정보·토크나이저·설정 (가중치는 별도 전달)
 
-기존 BE API의 기본 모델이며, 연구 비교 기준인 single-screen-20261017 모델과 구분합니다. CPU 실행 호환 조정은 앞선 준비본의 상태 그대로 유지했습니다. 디스크 가중치·임계값·요청/응답 정책을 이번 분리 작업에서 변경하지 않았습니다.
+기존 BE API의 기본 모델이며, 연구 비교 기준인 single-screen-20261017 모델과 구분합니다. CPU 로더는 모델 생성 전에 FP32 설정을 적용하고 strict=True로 가중치를 읽어 로드 도중 BF16 반올림을 피합니다. 디스크 가중치·토크나이저·전처리·임계값·위험 집계·정상 응답 정책은 유지합니다.
+
+`AI_TEXT_DEVICE`는 `auto`(기본), `cpu`, `cuda_bf16`을 지원합니다. auto는 CUDA가 없으면 CPU를 선택하고, CUDA가 있으면 native BF16 지원을 확인합니다. 미지원 CUDA에서는 초기화 전에 오류로 중단하며 CPU/FP16으로 전환하지 않습니다. CPU를 쓰려면 `AI_TEXT_DEVICE=cpu`를 지정합니다. health의 실제 장치 표시는 기존 `cpu`/`cuda`입니다.
 
 ## 검증 기록
 
 [패키지 검증](PACKAGE_VALIDATION.json), [API 경계 테스트](docs/API_TEST_RESULTS.xml), [CPU 동작 기록](docs/MODEL_SMOKE_VALIDATION.json)을 포함합니다. 앞선 준비본에서 API 경계 테스트 21개와 CPU 텍스트 입력 3건을 확인했습니다. 이번 작업은 파일 분리이므로 모델·API 테스트를 새로 측정한 것으로 표기하지 않습니다. 경계 테스트는 대역을 사용하며 CPU 입력 확인도 정확도 평가가 아닙니다.
 
 새 환경 설치·실제 OCR/HTTP/BE 재검증·GPU 재검증·출시 성능 승인은 별도입니다. 학습·평가 원문·이미지·가상환경·캐시·실제 서비스 토큰은 동봉하지 않았습니다.
+
+## 수정 후 검증 진입점
+
+text-ai 폴더에서 Python 3.12의 별도 환경으로 실행합니다. 실제 가중치·OCR·서비스 토큰은 필요 없습니다.
+
+```powershell
+.\.venv-v2\Scripts\python.exe ..\scripts\verify_text.py --python .\.venv-v2\Scripts\python.exe
+```
+
+`pytest tests -q`로 CPU 로더·장치 탐지·API/OpenAPI 회귀 테스트를 포함한 전체 텍스트 테스트를 실행하고 `check_package.py --code-only`로 파일 무결성을 확인합니다. 작은 임시 모델의 수치·대역 응답 확인이며 실제 GPU·모델 성능 평가와 구분합니다. 기존 검증 기록은 과거 자료로 보존하고 이번 실행은 `results/text-verification/latest.json`에 별도로 기록합니다.
 
 ## 가중치와 고지
 

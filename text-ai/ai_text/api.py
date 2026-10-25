@@ -6,7 +6,7 @@ import os
 from typing import Annotated, Literal
 from uuid import UUID, uuid4
 
-from fastapi import Depends, FastAPI, File, Form, Request, UploadFile
+from fastapi import Depends, FastAPI, File, Form, Header, Request, UploadFile
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -94,6 +94,81 @@ class TextRiskResponse(BaseModel):
     processingMs: float = Field(ge=0, allow_inf_nan=False)
 
 
+class ErrorDetail(BaseModel):
+    code: str
+    message: str
+
+
+class ErrorResponse(BaseModel):
+    error: ErrorDetail
+    requestId: UUID4 = Field(
+        description=(
+            "Validated or generated request UUID v4. INVALID_REQUEST_ID uses a "
+            "new UUID v4 because the supplied header was rejected."
+        )
+    )
+
+
+class HealthResponse(BaseModel):
+    status: Literal["ready"]
+    modelVersion: str
+    device: str
+    ocrWorkerAvailable: bool
+
+
+def _request_id_metadata(
+    _x_request_id: Annotated[
+        str | None,
+        Header(
+            alias="X-Request-ID",
+            description=(
+                "Optional UUID v4. The server generates one when omitted or "
+                "empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID "
+                "with a fresh requestId and no X-Request-ID response header."
+            ),
+            json_schema_extra={"format": "uuid4"},
+        ),
+    ] = None,
+) -> None:
+    """Document the header; existing middleware remains its sole validator."""
+    return None
+
+
+def _request_id_response_header() -> dict:
+    return {
+        "description": (
+            "Echoes the validated UUID v4 or the generated UUID v4 after request "
+            "context completes. Absent for INVALID_REQUEST_ID and not guaranteed "
+            "for unexpected internal errors."
+        ),
+        "schema": {"type": "string", "format": "uuid4"},
+    }
+
+
+def _error_response(
+    description: str, *, authenticate: bool = False, busy: bool = False
+) -> dict:
+    headers = {"X-Request-ID": _request_id_response_header()}
+    if authenticate:
+        headers["WWW-Authenticate"] = {
+            "description": "Always returned for 401 UNAUTHORIZED.",
+            "schema": {"type": "string", "const": "Bearer"},
+        }
+    if busy:
+        headers["Retry-After"] = {
+            "description": (
+                "Returned with value 2 only for ANALYZER_BUSY; absent for "
+                "OCR_UNAVAILABLE and unexpected ANALYSIS_FAILED errors."
+            ),
+            "schema": {"type": "string", "const": "2"},
+        }
+    return {
+        "model": ErrorResponse,
+        "description": description,
+        "headers": headers,
+    }
+
+
 class RequestBodyLimit:
     """Bound multipart/JSON before parsing; this baseline buffers <=11 MiB."""
     def __init__(self, app, limit=11 * 1024 * 1024):
@@ -137,9 +212,65 @@ def create_app(service_factory=None, token=None):
             del app.state.service
             app.state.secret = ''
 
-    app = FastAPI(title='A.X 문자 사기 위험 분석 API', version='1.0.0', lifespan=lifespan,
-                  description='문자 사기 분석 전용. CuRe/TruFor 이미지 생성·변조 API와 별도입니다.')
+    app = FastAPI(
+        title="A.X 문자 사기 위험 분석 API", version="1.0.0", lifespan=lifespan,
+        dependencies=[Depends(_request_id_metadata)],
+        description="문자 사기 분석 전용. CuRe/TruFor 이미지 생성·변조 API와 별도입니다.",
+    )
     app.add_middleware(RequestBodyLimit)
+
+    validation_error = _error_response(
+        "INVALID_REQUEST for invalid fields or formats; INVALID_REQUEST_ID for "
+        "a non-UUID-v4 X-Request-ID header."
+    )
+    success_response = {
+        200: {
+            "description": (
+                "Completed analysis. A defer decision also returns HTTP 200 "
+                "with status COMPLETED."
+            ),
+            "headers": {"X-Request-ID": _request_id_response_header()},
+        }
+    }
+    text_responses = {
+        **success_response,
+        401: _error_response(
+            "UNAUTHORIZED: missing or invalid Bearer service credentials.",
+            authenticate=True,
+        ),
+        413: _error_response("REQUEST_TOO_LARGE: request body exceeds 11 MiB."),
+        422: _error_response(
+            validation_error["description"] + " INVALID_TEXT for invalid text."
+        ),
+        503: _error_response(
+            "ANALYZER_BUSY when another analysis is running; ANALYSIS_FAILED "
+            "for an unexpected internal error.",
+            busy=True,
+        ),
+    }
+    image_responses = {
+        **text_responses,
+        413: _error_response(
+            "REQUEST_TOO_LARGE for a request body over 11 MiB; IMAGE_TOO_LARGE "
+            "for an image file over 10 MiB."
+        ),
+        415: _error_response(
+            "UNSUPPORTED_IMAGE, IMAGE_TYPE_MISMATCH, or ANIMATED_IMAGE for "
+            "unsupported MIME types, mismatched formats, or multiple frames."
+        ),
+        422: _error_response(
+            validation_error["description"] + " EMPTY_IMAGE, IMAGE_DIMENSIONS, "
+            "INVALID_IMAGE, or OCR_TEXT_TOO_LONG for invalid image/OCR input."
+        ),
+        502: _error_response("OCR_FAILED: OCR worker or its result failed."),
+        503: _error_response(
+            "OCR_UNAVAILABLE when the OCR worker is not prepared; ANALYZER_BUSY "
+            "when another analysis is running; ANALYSIS_FAILED for an "
+            "unexpected internal error.",
+            busy=True,
+        ),
+        504: _error_response("OCR_TIMEOUT: OCR worker exceeded its time limit."),
+    }
 
     @app.middleware('http')
     async def request_context(request, call_next):
@@ -188,20 +319,35 @@ def create_app(service_factory=None, token=None):
                 'sourceType': source_type, 'status': 'COMPLETED'}
 
     @app.get('/health', include_in_schema=False)
-    @app.get('/healthz', summary='기동 및 분류기 준비 상태')
+    @app.get(
+        "/healthz", response_model=HealthResponse, summary="기동 및 분류기 준비 상태",
+        responses={
+            200: {
+                "description": "Classifier ready; reports the selected device.",
+                "headers": {"X-Request-ID": _request_id_response_header()},
+            },
+            422: _error_response("INVALID_REQUEST_ID: invalid UUID v4 header."),
+            503: _error_response("ANALYSIS_FAILED: unexpected internal error."),
+        },
+    )
     def health(request: Request):
         service = request.app.state.service
         return {'status': 'ready', 'modelVersion': service.model_version, 'device': service.device,
                 'ocrWorkerAvailable': service.ocr_available}
 
-    @app.post(API_PATH, response_model=TextRiskResponse, dependencies=[Depends(authorize)],
-              summary='문자 본문 분석 (JSON)')
+    @app.post(
+        API_PATH, response_model=TextRiskResponse, dependencies=[Depends(authorize)],
+        responses=text_responses, summary="문자 본문 분석 (JSON)",
+    )
     async def analyze_text(request: Request, body: TextInput):
         result = await run_in_threadpool(request.app.state.service.analyze_text, body.text)
         return envelope(request, result, 'TEXT', body.analysisId, body.elementId)
 
-    @app.post(API_PATH + '/image', response_model=TextRiskResponse, dependencies=[Depends(authorize)],
-              summary='이미지 OCR 후 문자 사기 위험 분석 (multipart)')
+    @app.post(
+        API_PATH + "/image", response_model=TextRiskResponse,
+        dependencies=[Depends(authorize)], responses=image_responses,
+        summary="이미지 OCR 후 문자 사기 위험 분석 (multipart)",
+    )
     async def analyze_image(request: Request, file: Annotated[UploadFile, File()],
                             analysisId: Annotated[UUID | None, Form()] = None,
                             elementId: Annotated[UUID | None, Form()] = None,

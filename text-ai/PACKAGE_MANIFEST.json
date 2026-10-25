@@ -19,8 +19,8 @@
     },
     {
       "path": ".env.example",
-      "bytes": 373,
-      "sha256": "fc030915a8105a7a1351def4aad1a531519cccabd4b20e474337f7c0ec9b326f",
+      "bytes": 548,
+      "sha256": "45e6986786015fd74b29c3f3c07cf25300bc0a22bfb7207aa9c9ae1e6bf6e686",
       "hash_mode": "lf"
     },
     {
@@ -36,6 +36,42 @@
       "hash_mode": "lf"
     },
     {
+      "path": "MODEL_ASSETS.json",
+      "bytes": 1482,
+      "sha256": "7df68ab2e1ace5356efca7a7449810f9f658d90056f9230a9592aada2b9f9cb1",
+      "hash_mode": "lf"
+    },
+    {
+      "path": "NOTICE_PROVENANCE.json",
+      "bytes": 786,
+      "sha256": "41c28d8121ec2d158ac0d7bbf0d8c1e318cdfd55a23a39e121eef581d3b943a2",
+      "hash_mode": "lf"
+    },
+    {
+      "path": "PACKAGE_VALIDATION.json",
+      "bytes": 5643,
+      "sha256": "b93f7e6faf44d9b9d02c715b1cdee5500ffcaca1e51d61e57c72641d3a0d594f",
+      "hash_mode": "lf"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6250,
+      "sha256": "9cc4f1d4172cca4f73c01905f3465371d82824b3e1b7eff5af99fa2701043b9c",
+      "hash_mode": "lf"
+    },
+    {
+      "path": "SOURCE_COPY_AUDIT.json",
+      "bytes": 8842,
+      "sha256": "f32e1df18c734850e176f719075a866e80184fc9913c042a84db37ae505c770d",
+      "hash_mode": "lf"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 1620,
+      "sha256": "40353c2f10e6b4ca6a005606f37bafaac257af13b36f0b578cc1e655a2f4bf69",
+      "hash_mode": "lf"
+    },
+    {
       "path": "ai_text/__init__.py",
       "bytes": 44,
       "sha256": "a6b4e59e57bed48ffc2a5043574abb3d72a5bb085c3dfd236cf18a9288897faa",
@@ -43,14 +79,14 @@
     },
     {
       "path": "ai_text/action_encoder.py",
-      "bytes": 7176,
-      "sha256": "f904a8782ee43478bd119de674c7b2e468b31db065f45709b85189acbf38e9e3",
+      "bytes": 7738,
+      "sha256": "578d9393d2dd48d85bd2cc9bf94cf6d96255151ca2d3c453301343008a0db141",
       "hash_mode": "lf"
     },
     {
       "path": "ai_text/api.py",
-      "bytes": 9637,
-      "sha256": "3d271ce32055775d692c6f910a5e20856a49aa5097ef2898a56551584b5d43a4",
+      "bytes": 14533,
+      "sha256": "2ab3c3c4c4d6f7f2dc874043c9cb878946cacb901eba9018e29cfd5cb57292e7",
       "hash_mode": "lf"
     },
     {
@@ -69,6 +105,12 @@
       "path": "ai_text/body_policy_v2.py",
       "bytes": 509,
       "sha256": "a4f101a470f980c1b0c3b59851a56358519e14638c618a6f3120e5344152934a",
+      "hash_mode": "lf"
+    },
+    {
+      "path": "ai_text/device_policy.py",
+      "bytes": 1456,
+      "sha256": "fc0f544fb76e073ca449922df462aaf9c62fc6194061bab6a72246dc9275dc94",
       "hash_mode": "lf"
     },
     {
@@ -127,8 +169,8 @@
     },
     {
       "path": "docs/INSTALL_WINDOWS.md",
-      "bytes": 4308,
-      "sha256": "513de894c3e1adcf42fd97e6058a5866fd3d64ec130a50bbb81f68f67655dbec",
+      "bytes": 5952,
+      "sha256": "eb0dba108f5d5294f3f807dde80069ddfc9984a0e895791e3e380f312f14a89a",
       "hash_mode": "lf"
     },
     {
@@ -138,15 +180,15 @@
       "hash_mode": "lf"
     },
     {
-      "path": "docs/openapi.json",
-      "bytes": 15893,
-      "sha256": "4607f7b3b5305991502aa44b24ee3a496a08c12c13066f4748916ba22d35582d",
-      "hash_mode": "lf"
-    },
-    {
       "path": "docs/WEIGHTS_SETUP.md",
       "bytes": 2679,
       "sha256": "9d90b2bb795aee71e0d26ff0089e37a18f8e04a4cabc9422765b1466065ba847",
+      "hash_mode": "lf"
+    },
+    {
+      "path": "docs/openapi.json",
+      "bytes": 30823,
+      "sha256": "6a8884922299a5cfa7dfe2df480bc97af4fde9229b02c335ecf075479552952e",
       "hash_mode": "lf"
     },
     {
@@ -168,9 +210,15 @@
       "hash_mode": "raw"
     },
     {
-      "path": "MODEL_ASSETS.json",
-      "bytes": 1482,
-      "sha256": "7df68ab2e1ace5356efca7a7449810f9f658d90056f9230a9592aada2b9f9cb1",
+      "path": "models/ax_text_actions-20261016/LICENSE.txt",
+      "bytes": 12525,
+      "sha256": "9cf7ec77b0404b2a305a158cd614ef4ab24e3b71d85f3089ac295029ef90072d",
+      "hash_mode": "raw"
+    },
+    {
+      "path": "models/ax_text_actions-20261016/README.md",
+      "bytes": 2079,
+      "sha256": "8ceed5dc46f5c8f879a4c3e186534765b5a58f71afb0c1c26e73597006dedbf5",
       "hash_mode": "lf"
     },
     {
@@ -190,18 +238,6 @@
       "bytes": 1243,
       "sha256": "153aacfd27a83759e64e1b4e304ce8bd996518e5ca14bde6a5573095ed63f0ac",
       "hash_mode": "raw"
-    },
-    {
-      "path": "models/ax_text_actions-20261016/LICENSE.txt",
-      "bytes": 12525,
-      "sha256": "9cf7ec77b0404b2a305a158cd614ef4ab24e3b71d85f3089ac295029ef90072d",
-      "hash_mode": "raw"
-    },
-    {
-      "path": "models/ax_text_actions-20261016/README.md",
-      "bytes": 2079,
-      "sha256": "8ceed5dc46f5c8f879a4c3e186534765b5a58f71afb0c1c26e73597006dedbf5",
-      "hash_mode": "lf"
     },
     {
       "path": "models/ax_text_actions-20261016/special_tokens_map.json",
@@ -226,24 +262,6 @@
       "bytes": 289725,
       "sha256": "7bc1893aa4a63f4ca0001dcb8cd7eb9bb11b731875329bd457d447028dbd79d1",
       "hash_mode": "raw"
-    },
-    {
-      "path": "NOTICE_PROVENANCE.json",
-      "bytes": 786,
-      "sha256": "41c28d8121ec2d158ac0d7bbf0d8c1e318cdfd55a23a39e121eef581d3b943a2",
-      "hash_mode": "lf"
-    },
-    {
-      "path": "PACKAGE_VALIDATION.json",
-      "bytes": 5643,
-      "sha256": "b93f7e6faf44d9b9d02c715b1cdee5500ffcaca1e51d61e57c72641d3a0d594f",
-      "hash_mode": "lf"
-    },
-    {
-      "path": "README.md",
-      "bytes": 4953,
-      "sha256": "1b54dc329b58a9e9881ea9cd42a65cb7927e08276958d67719d939ed00b702e6",
-      "hash_mode": "lf"
     },
     {
       "path": "requirements-api.txt",
@@ -276,15 +294,33 @@
       "hash_mode": "lf"
     },
     {
+      "path": "scripts/reproduce_cpu_loader.py",
+      "bytes": 3245,
+      "sha256": "e9d15b049e176512c04a55bcec625d634ed57740ed56fb3378f4565cb0a87932",
+      "hash_mode": "lf"
+    },
+    {
       "path": "smoke_text_api.py",
       "bytes": 9730,
       "sha256": "546b1ee80f06979f8191846cb950cdf1c3e1979f6113bbd1c46771625f796d92",
       "hash_mode": "lf"
     },
     {
-      "path": "SOURCE_COPY_AUDIT.json",
-      "bytes": 8842,
-      "sha256": "f32e1df18c734850e176f719075a866e80184fc9913c042a84db37ae505c770d",
+      "path": "tests/test_device_policy.py",
+      "bytes": 4535,
+      "sha256": "56a7a1aadb86729cc4d39c0c19f453610feec34e7bfdd60d7f7fd972789a72ec",
+      "hash_mode": "lf"
+    },
+    {
+      "path": "tests/test_model_loading.py",
+      "bytes": 4482,
+      "sha256": "fe16dcd488a68b3c7064b064f60d70eae0cd215d0c11b0a408cd161ed11ce46a",
+      "hash_mode": "lf"
+    },
+    {
+      "path": "tests/test_openapi_contract.py",
+      "bytes": 8746,
+      "sha256": "33a3ad589844d45191550753bb0ca09779122d6e043392e87975cac16de37393",
       "hash_mode": "lf"
     },
     {
@@ -297,12 +333,6 @@
       "path": "tests/test_text_api.py",
       "bytes": 7143,
       "sha256": "ed0802c7a229c1087374ad46b3cf3a942bc22706625e7f4aa9fcff13936099f1",
-      "hash_mode": "lf"
-    },
-    {
-      "path": "THIRD_PARTY_NOTICES.md",
-      "bytes": 1620,
-      "sha256": "40353c2f10e6b4ca6a005606f37bafaac257af13b36f0b578cc1e655a2f4bf69",
       "hash_mode": "lf"
     },
     {

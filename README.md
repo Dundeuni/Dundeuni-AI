@@ -189,6 +189,18 @@ $env:PYTHONPATH = 'src'
 - [API 상세 설명](https://app.notion.com/p/3f77b8236c5a80a9bbecdecc062a7d18)
 - [BE 수정·협의 사항](https://app.notion.com/p/d587b8236c5a83a98ab001cef3e95392)
 
+## 텍스트 API 검증 — Python 3.12 별도 환경
+
+텍스트 API는 [text-ai 실행 안내](text-ai/docs/INSTALL_WINDOWS.md)를 따릅니다. 기존 Python 3.9 이미지 서비스의 `scripts/verify.py`와 루트 testpaths는 유지하며, 텍스트 테스트를 해당 환경에 합치지 않습니다.
+
+저장소 루트에서 text-ai용 Python 3.12 실행 파일을 명시합니다.
+
+```powershell
+& '.\text-ai\.venv-v2\Scripts\python.exe' scripts/verify_text.py --python '.\text-ai\.venv-v2\Scripts\python.exe'
+```
+
+`scripts/verify_text.py`는 지정된 실행 파일의 Python 3.12 여부를 확인하고 text-ai 작업 폴더에서 `pytest tests -q`와 `check_package.py --code-only`를 실행합니다. 기존 Python 환경에 설치·변경하지 않습니다. 대역 API·작은 CPU 모델·장치 탐지 대역만 사용하고 실제 A.X 가중치·OCR·외부 URL·GPU 추론·BE 호출을 실행하지 않습니다. 새 결과는 Git 제외 경로 `text-ai/results/text-verification/latest.json`에 저장합니다. 새 회귀 테스트를 포함한 전체 텍스트 검증이므로 기존 이미지 검증 결과와 따로 보고합니다.
+
 ## 협업
 
 BE·FE와 같은 방식으로 이슈를 생성하고 작업 브랜치와 PR을 통해 변경 사항을 공유합니다.

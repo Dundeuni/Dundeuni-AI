@@ -9,6 +9,7 @@ import torch
 from torch import nn
 from safetensors.torch import load_file,save_file
 from transformers import AutoConfig,AutoModel,AutoTokenizer
+from .device_policy import select_device
 from .message_context import ACTION_NAMES,message_spans,normalize,format_input
 
 class ActionModel(nn.Module):
@@ -41,12 +42,22 @@ class ActionModel(nn.Module):
         (folder/'action_metadata.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2),encoding='utf8')
 
     @classmethod
-    def load(cls,folder,device):
-        config=AutoConfig.from_pretrained(folder,local_files_only=True,trust_remote_code=False)
-        model=cls(config)
-        model.load_state_dict(load_file(str(Path(folder)/'model.safetensors'),device='cpu'),strict=True)
-        if str(device).startswith('cpu'):
-            model=model.float()
+    def load(cls, folder: str | Path, device: str | torch.device) -> "ActionModel":
+        config = AutoConfig.from_pretrained(
+            folder, local_files_only=True, trust_remote_code=False
+        )
+        cpu_loading = torch.device(device).type == "cpu"
+        if cpu_loading:
+            # Casting after loading cannot recover FP32 values rounded to BF16.
+            config.dtype = torch.float32
+        model = cls(config)
+        if cpu_loading:
+            # Heads also need FP32 before loading, even with a custom default dtype.
+            model.float()
+        model.load_state_dict(
+            load_file(str(Path(folder) / "model.safetensors"), device="cpu"),
+            strict=True,
+        )
         return model.to(device).eval()
 
 def sentence_neighborhoods(text):
@@ -95,11 +106,14 @@ def decide_action(result,body=None,low=.3,high=.5):
 
 
 class ActionEncoder:
-    def __init__(self,folder):
-        self.folder=Path(folder)
-        self.device='cuda' if torch.cuda.is_available() else 'cpu'
-        self.model=ActionModel.load(folder,self.device)
-        self.tokenizer=AutoTokenizer.from_pretrained(folder,local_files_only=True,trust_remote_code=False)
+    def __init__(self, folder: str | Path, device: str | None = None) -> None:
+        self.folder = Path(folder)
+        # Resolve/validate before allocating the classifier or loading a tokenizer.
+        self.device = select_device(device)
+        self.model = ActionModel.load(folder, self.device)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            folder, local_files_only=True, trust_remote_code=False
+        )
 
     def analyze_text(self,text,threshold=.5,low=.3):
         text=normalize(text)
