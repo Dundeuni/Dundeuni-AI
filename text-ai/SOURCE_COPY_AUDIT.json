@@ -201,5 +201,6 @@
     "model_binaries": "outside_repository",
     "notices_directory": "licenses",
     "runtime_ai_modules_unchanged": true
-  }
+  },
+  "historical_hash_note": "Copy-time and packaged adjustment hashes describe the original preparation snapshot before Git newline conversion. Current integrity uses PACKAGE_MANIFEST.json schema 2 and its explicit raw/lf hash modes."
 }

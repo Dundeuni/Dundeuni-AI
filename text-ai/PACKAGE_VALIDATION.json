@@ -102,5 +102,26 @@
       "passed": true,
       "message": "FAILED: model asset check\nmodel.safetensors: missing\nWeights are not stored in Git. Obtain the exact trained model assets separately and set AI_TEXT_MODEL_DIR, or use --model-dir."
     }
-  ]
+  ],
+  "historical_record_scope": "Original preparation flags, API boundary tests and CPU model checks describe their creation-time execution, not the user's current GitHub workflow.",
+  "prepush_integrity_revision": {
+    "checked_utc": "2026-10-25T00:52:54.929024+00:00",
+    "related_feature_issue": 14,
+    "package_checker_unit_tests_run": 15,
+    "package_checker_unit_tests_passed": 14,
+    "package_checker_unit_tests_skipped": 1,
+    "external_model_files_rehashed": true,
+    "inference_python_AST_unchanged": true,
+    "raw_upstream_and_model_files_preserved": 11,
+    "authored_text_convention": "UTF-8 without BOM, LF, final newline",
+    "manifest_schema": 2,
+    "hash_modes": {
+      "lf": "UTF-8; CRLF to LF only",
+      "raw": "exact file bytes"
+    },
+    "historical_API_and_CPU_inference_checks_rerun": false,
+    "new_training_OCR_GPU_HTTP_or_BE_calls": false,
+    "model_weights_or_API_contract_changed": false,
+    "git_mutations_performed_by_this_revision": false
+  }
 }

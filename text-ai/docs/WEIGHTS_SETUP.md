@@ -16,7 +16,7 @@ VS Code에서 저장소의 text-ai 폴더를 열고 기존 설치 설명대로 �
 .\.venv-v2\Scripts\python.exe check_package.py --code-only
 ```
 
-코드 존재·Python 구문만 검사하며 모델 파일·성능·OCR·BE 검증은 아닙니다.
+코드 존재·Python 구문과 PACKAGE_MANIFEST.json의 크기·SHA-256을 검사합니다. 직접 작성한 텍스트는 CRLF를 LF로 정규화하고, 원본 모델 설정·고지는 바이트 그대로 비교합니다. 모델 가중치·성능·OCR·BE 검증은 아닙니다.
 
 ## 모델 연결·검증
 

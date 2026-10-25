@@ -48,3 +48,7 @@
 팀 저장소 정책에 따라 약 300MB의 model.safetensors는 Git에 포함하지 않습니다. 코드·모델 설정·토크나이저와 MODEL_ASSETS.json의 고정 해시만 관리합니다. [가중치 별도 설치](docs/WEIGHTS_SETUP.md)에 따라 학습된 모델 폴더를 별도로 받고 AI_TEXT_MODEL_DIR로 지정합니다. Git LFS 업로드는 사용하지 않습니다. GitHub에서 코드만 내려받으면 실제 모델 추론은 아직 실행할 수 없습니다.
 
 [제3자 고지](THIRD_PARTY_NOTICES.md)와 기반 모델 라이선스를 licenses 폴더에 함께 제공합니다. 기반 모델 조건은 학습 자료·제3자 이미지 이용 권한이나 팀 코드 전체의 라이선스를 확정하는 의미가 아닙니다.
+
+## 파일 무결성 기준
+
+check_package.py --code-only는 파일 존재·Python 구문과 현재 패키지의 해시를 검사합니다. PACKAGE_MANIFEST.json의 lf 항목은 CRLF만 LF로 바꾼 정규 바이트를, raw 항목은 모델 설정·원본 고지의 실제 바이트를 비교합니다. 마지막 줄바꿈·공백·Unicode 문자는 임의로 제거하지 않습니다. manifest 자신은 자기 해시 대상에서 제외합니다. SOURCE_COPY_AUDIT.json과 과거 실행 기록의 복사 해시는 그 시점의 이력을 뜻하며 현재 파일의 해시와 구분합니다.

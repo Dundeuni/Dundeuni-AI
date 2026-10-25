@@ -1,3 +1,7 @@
-# Preserve model metadata and attribution bytes for SHA-256 verification.
-models/ax_text_actions-20261016/** -text
-licenses/** -text
+# Project-authored text follows CODE_CONVENTION.md.
+* text=auto eol=lf
+# Frozen model metadata and upstream notices retain exact bytes.
+models/ax_text_actions-20261016/** -text -eol
+licenses/** -text -eol
+# This model card is authored project documentation.
+models/ax_text_actions-20261016/README.md text eol=lf
