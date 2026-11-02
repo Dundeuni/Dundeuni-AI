@@ -1,0 +1,76 @@
+{
+  "synthetic": true,
+  "purpose": "POLICY_REVIEW_ONLY_NOT_PROVIDER_DATA",
+  "cases": [
+    {
+      "id": "risk_evidence",
+      "lookup": "completed",
+      "evidence": "risk_candidate",
+      "expectedVerdict": null,
+      "reviewRequirement": "APPROVED_MAPPING_REQUIRED"
+    },
+    {
+      "id": "suspicious_evidence",
+      "lookup": "completed",
+      "evidence": "suspicion_candidate",
+      "expectedVerdict": null,
+      "reviewRequirement": "APPROVED_MAPPING_REQUIRED"
+    },
+    {
+      "id": "no_data",
+      "lookup": "completed",
+      "evidence": "absent",
+      "expectedVerdict": null,
+      "reviewRequirement": "NO_DATA_IS_NOT_SAFE"
+    },
+    {
+      "id": "zero_reports",
+      "lookup": "completed",
+      "evidence": "zero_reports_condition_only",
+      "expectedVerdict": null,
+      "reviewRequirement": "ZERO_REPORTS_IS_NOT_SAFE"
+    },
+    {
+      "id": "insufficient",
+      "lookup": "completed",
+      "evidence": "insufficient",
+      "expectedVerdict": null,
+      "reviewRequirement": "PRESERVE_UNCERTAINTY"
+    },
+    {
+      "id": "conflicting",
+      "lookup": "completed",
+      "evidence": "conflicting",
+      "expectedVerdict": null,
+      "reviewRequirement": "CONFLICT_POLICY_REQUIRED"
+    },
+    {
+      "id": "lookup_failure",
+      "lookup": "failed",
+      "evidence": "unavailable",
+      "expectedVerdict": null,
+      "reviewRequirement": "FAILURE_IS_NOT_NO_DATA"
+    },
+    {
+      "id": "timeout",
+      "lookup": "timeout",
+      "evidence": "unavailable",
+      "expectedVerdict": null,
+      "reviewRequirement": "TIMEOUT_IS_NOT_NO_DATA"
+    },
+    {
+      "id": "malformed",
+      "lookup": "invalid_response",
+      "evidence": "unusable",
+      "expectedVerdict": null,
+      "reviewRequirement": "DO_NOT_DEFAULT_INVALID_RESPONSE"
+    },
+    {
+      "id": "policy_pending",
+      "lookup": "completed",
+      "evidence": "unmapped",
+      "expectedVerdict": null,
+      "reviewRequirement": "DO_NOT_INVENT_POLICY"
+    }
+  ]
+}
