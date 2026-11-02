@@ -1,7 +1,8 @@
 # PB-04 전화번호 위험 판정·결과 검증 명세 초안
 
 작성일: 2026-11-03 (KST). 범위: AI 파트의 정책 명세와 합성 테스트 사례.
-전화번호 조회 API·정책 실행기는 구현하지 않았다. 최종 서비스 정책이나 wire 계약의
+전화번호 조회 API·서비스 정책 실행기는 구현하지 않았다. 별도 합성 조건 평가 실험
+모듈만 제공한다. 최종 서비스 정책이나 wire 계약의
 승인 문서가 아니며, 실행 위치(AI/BE)와 담당 경계는 협의 대상이다.
 
 ## 1. 기존 구조와 적용 경계
@@ -105,9 +106,44 @@ fixture는 실제 Provider 응답이나 제품 JSON이 아닌 추상 시나리�
 제품 API의 null 규칙을 정의하지 않는다. reviewRequirement는 검토 의무이며 판정값이 아니다.
 
 자동 검사는 시나리오 누락, 합성 표시, 임의 기대 판정·점수·신고 필드 혼입을 검출한다.
-정책 실행기를 호출하지 않으므로 실제 위험 판정이나 결과 JSON 검증의 동작 테스트는 아니다.
+기존 test_pb04_policy_cases.py는 정책 실행기를 호출하지 않는 사례 일관성 검사다.
+아래 별도 실험 테스트도 실제 위험 정확도나 서비스 JSON 계약을 검증하지 않는다.
 계약 확정 후 null/누락/잘못된 타입/NaN/무한대/음수/상태 모순을 포함한 실제
 validator 테스트로 확장해야 한다. 현재 검사 통과를 전화번호 기능 완료로 보고하지 않는다.
+
+### 독립 실험 모듈
+
+src/phone_policy_experiment.py의 evaluate_synthetic_scenario는 네트워크·DB·이미지
+코드에 의존하지 않는 순수 함수다. tests/test_phone_policy_experiment.py에서 기존
+10개 fixture의 lookup/evidence만 추출해 synthetic=true와 함께 전달한다.
+fixture의 expectedVerdict=null은 그대로 유지하며 서비스 판정값으로 사용하지 않는다.
+
+실험 입력은 synthetic, lookup, evidence 3개 필드만 허용한다. 모두 필수이며 null과
+누락을 거부한다. synthetic은 정확히 boolean true여야 하며 나머지는 지정된 문자열
+조건이어야 한다. 알려지지 않은 필드·값·상태 조합, 번호·점수·신고 필드는 거부한다.
+이 표시는 추상 조건만 받기 위한 제약이며 실제 데이터의 출처를 인증하는 장치는 아니다.
+
+| 조건 | 실험 processing_status | 실험 verdict | 실험 reason |
+| --- | --- | --- | --- |
+| completed + absent | COMPLETED | INCONCLUSIVE | NO_DATA |
+| completed + insufficient 또는 zero_reports_condition_only | COMPLETED | INCONCLUSIVE | INSUFFICIENT_EVIDENCE |
+| completed + conflicting | COMPLETED | INCONCLUSIVE | CONFLICTING_EVIDENCE |
+| completed + risk_candidate/suspicion_candidate/unmapped | COMPLETED | INCONCLUSIVE | POLICY_UNCONFIRMED |
+| failed + unavailable | FAILED | null | LOOKUP_FAILED |
+| timeout + unavailable | FAILED | null | LOOKUP_TIMEOUT |
+| invalid_response + unusable | FAILED | null | INVALID_RESPONSE |
+
+모든 결과의 policy_status는 UNCONFIRMED다. 위험·주의·안전은 반환하지 않는다.
+이는 정책 미확정 상황의 실험 동작이며 최종 단계 매핑을 승인한 것이 아니다.
+lookup/evidence를 결과에 보존하며 점수·신고 데이터는 만들지 않는다.
+잘못된 함수 입력은 ValueError로 거부한다. 유효한 입력이 외부 응답 형식 실패라는
+시나리오를 나타내면 FAILED/INVALID_RESPONSE를 반환한다. 실제 응답 파서는 아니다.
+에러에는 입력 원문을 포함하지 않는다.
+
+결과는 불변 dataclass이며 공개 HTTP/JSON 계약이 아니다. INCONCLUSIVE와 실패의 null,
+필드명·상태명은 이 실험에만 적용한다. 기존 이미지 API에는 아무 변경도 하지 않는다.
+실험 검사는 정상 조건 처리·자료 없음·부족·충돌·정책 미확정·기술 실패 및 입력 검증을
+확인하며 실제 신고 데이터의 유효성, 위험도 정확도, 서비스 연동을 검증하지 않는다.
 
 ## 7. 역할과 남은 작업
 
