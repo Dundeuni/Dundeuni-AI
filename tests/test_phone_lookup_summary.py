@@ -38,7 +38,7 @@ def test_schema_fixture_and_fact_projection_have_no_invented_details():
     assert FIXTURE["purpose"] == "SCHEMA_TEST_ONLY_NOT_A_LIVE_LOOKUP"
     result = summarize()
     assert result.status == "COMPLETED"
-    assert result.verdict == "INCONCLUSIVE"
+    assert result.verdict == "DANGER"
     assert result.reason == "REPORT_INFORMATION_FOUND"
     assert "피해사례 등록" in result.summary
     assert result.sources[0].documentation_url == DOCUMENTATION
@@ -62,9 +62,11 @@ def test_no_information_is_not_safe_or_zero_reports():
     content = deepcopy(FIXTURE["decrypted_content"])
     content["caution"] = "N"
     result = summarize(content=content)
-    assert result.summary == "확인된 신고 정보 없음"
+    assert result.summary == "조회 범위 내 피해사례 등록 정보 없음"
     assert result.reason == "NO_CONFIRMED_REPORT_INFORMATION"
-    assert result.status == "COMPLETED" and result.verdict == "INCONCLUSIVE"
+    assert result.status == "COMPLETED" and result.verdict == "NORMAL"
+    assert "안전한 번호라는 의미는 아닙니다" in result.guidance
+    assert "조회 기간·수집 범위" in result.limitations[0]
 
 
 @pytest.mark.parametrize(
@@ -236,4 +238,78 @@ def test_comparison_rejects_missing_source_and_does_not_fuse_test_data():
     assert (
         compare_thecheat_results(replace(result, sources=(source,)), result)
         == "INSUFFICIENT_EVIDENCE"
+    )
+
+
+@pytest.mark.parametrize("caution,verdict", [("Y", "DANGER"), ("N", "NORMAL")])
+def test_valid_production_mapping_at_equal_period_boundary(caution, verdict):
+    content = deepcopy(FIXTURE["decrypted_content"])
+    content["caution"] = caution
+    content["date_start"] = content["date_end"]
+    result = summarize(content=content)
+    assert (result.status, result.verdict) == ("COMPLETED", verdict)
+    assert result.sources[0].mode == "production"
+    assert result.sources[0].period_start == result.sources[0].period_end
+
+
+@pytest.mark.parametrize("caution", ["Y", "N"])
+@pytest.mark.parametrize(
+    "marker,mode",
+    [("success (test)", "production"), ("success", "test"), ("success (test)", "test")],
+)
+def test_valid_enum_in_test_database_never_maps_to_risk_or_normal(
+    caution, marker, mode
+):
+    content = deepcopy(FIXTURE["decrypted_content"])
+    content["caution"] = caution
+    envelope = deepcopy(FIXTURE["envelope"])
+    envelope["result_msg"] = marker
+    result = summarize(envelope=envelope, content=content, mode=mode)
+    assert (result.status, result.verdict, result.reason) == (
+        "COMPLETED",
+        "INCONCLUSIVE",
+        "TEST_DATA",
+    )
+    assert result.facts == ()
+
+
+@pytest.mark.parametrize("caution", ["Y", "N"])
+@pytest.mark.parametrize(
+    "case,reason",
+    [
+        ("failed", "LOOKUP_FAILED"),
+        ("timeout", "LOOKUP_TIMEOUT"),
+        ("rejected", "PROVIDER_REJECTED"),
+        ("mismatch", "REQUEST_MISMATCH"),
+        ("invalid_period", "INVALID_RESPONSE"),
+    ],
+)
+def test_valid_enum_cannot_override_failed_validation(caution, case, reason):
+    content = deepcopy(FIXTURE["decrypted_content"])
+    content["caution"] = caution
+    envelope = deepcopy(FIXTURE["envelope"])
+    if case == "rejected":
+        envelope["result_code"] = -1
+    elif case == "mismatch":
+        content["keyword"] = "00000000001"
+    elif case == "invalid_period":
+        content["date_start"] = "20270101000000"
+    result = summarize(
+        envelope=envelope,
+        content=content,
+        transport=case if case in ("failed", "timeout") else "received",
+    )
+    assert (result.status, result.verdict, result.reason) == ("FAILED", None, reason)
+    assert result.facts == ()
+
+
+@pytest.mark.parametrize("value", ["y", " Y", "Y ", " N", "N ", "Ｎ", "Ｙ"])
+def test_near_enum_values_are_not_normalized_into_verdicts(value):
+    content = deepcopy(FIXTURE["decrypted_content"])
+    content["caution"] = value
+    result = summarize(content=content)
+    assert (result.status, result.verdict, result.reason) == (
+        "FAILED",
+        None,
+        "INVALID_RESPONSE",
     )

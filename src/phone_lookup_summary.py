@@ -1,4 +1,4 @@
-"""Fact-only THECHEAT v2 response projection; no HTTP, decryption or risk score.
+"""Validated THECHEAT v2 projection with scoped Y/N verdicts; no risk score.
 
 BE must authenticate/decrypt and bind the response to its request before calling.
 This module checks the binding again, but cannot prove transport authenticity.
@@ -31,7 +31,7 @@ class PhoneLookupSummary:
     """Candidate local projection, not an approved public API contract."""
 
     status: Literal["COMPLETED", "FAILED"]
-    verdict: Optional[Literal["INCONCLUSIVE"]]
+    verdict: Optional[Literal["DANGER", "NORMAL", "INCONCLUSIVE"]]
     reason: str
     summary: str
     facts: tuple[str, ...]
@@ -54,8 +54,9 @@ def summarize_thecheat(
     """Validate official envelope and BE-decrypted content without retaining PII.
 
     Caller mistakes in context raise ValueError. Broken provider data produces
-    FAILED. No data means caution=N in a valid production response, not an empty
-    object, missing field, error or zero score. Test responses never supply facts.
+    FAILED. Only validated production Y/N maps to DANGER/NORMAL. NORMAL means no
+    registered reports in this lookup's scope, never absolute safety. Empty data,
+    missing fields and errors do not imply N. Test responses never supply facts.
     """
     if (
         type(expected_keyword) is not str
@@ -157,7 +158,6 @@ def summarize_thecheat(
         "더치트의 해당 조회 기간·수집 범위에 한정된 결과입니다.",
         "피해사례 등록 여부는 범죄 확정이나 현재 발신자의 신원 확인이 아닙니다.",
         "개별 신고 내용·건수는 이 API 응답으로 확인할 수 없습니다.",
-        "위험 단계 기준은 미확정입니다. "
         "조회 기간의 시간대·자료 최신성은 별도 확인이 필요합니다.",
     )
     if effective_mode == "test":
@@ -174,11 +174,11 @@ def summarize_thecheat(
     fact = (
         "더치트 조회에서 해당 기간의 피해사례 등록 정보가 확인되었습니다."
         if caution == "Y"
-        else "확인된 신고 정보 없음"
+        else "조회 범위 내 피해사례 등록 정보 없음"
     )
     return PhoneLookupSummary(
         "COMPLETED",
-        "INCONCLUSIVE",
+        "DANGER" if caution == "Y" else "NORMAL",
         "REPORT_INFORMATION_FOUND"
         if caution == "Y"
         else "NO_CONFIRMED_REPORT_INFORMATION",
