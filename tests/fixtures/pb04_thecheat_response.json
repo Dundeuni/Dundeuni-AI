@@ -1,0 +1,20 @@
+{
+  "synthetic": true,
+  "purpose": "SCHEMA_TEST_ONLY_NOT_A_LIVE_LOOKUP",
+  "documentation": "https://apidocs.thecheat.co.kr/docs/api-usage/api-search-plain/",
+  "envelope": {
+    "result_code": 1,
+    "result_msg": "success",
+    "content": "SYNTHETIC_ENCRYPTED_CONTENT_PLACEHOLDER_NOT_CIPHERTEXT"
+  },
+  "decrypted_content": {
+    "keyword": "00000000000",
+    "keyword_type": "phone",
+    "bank_code": "",
+    "caution": "Y",
+    "date_start": "20260803000000",
+    "date_end": "20261103000000",
+    "keyword_url": "",
+    "add_info": ""
+  }
+}
