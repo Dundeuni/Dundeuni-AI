@@ -2,14 +2,16 @@
 
 import base64
 import io
+from dataclasses import replace
 
 from conftest import request_parts
 from PIL import Image
 from starlette.testclient import TestClient
 from test_cure_contract import ControlledCuRe
 
-from image_analysis.adapters import MockAdapter
+from image_analysis.adapters import ManipulationOutput, MockAdapter
 from image_analysis.app import ENDPOINT, create_app
+from image_analysis.config import FUSED_THRESHOLD
 from image_analysis.trufor import dual_settings
 
 
@@ -65,3 +67,33 @@ def test_manipulation_only_retry_does_not_recreate_generation(headers):
     assert body["generation"] is None
     assert body["requestedModels"] == ["manipulation"]
     assert body["manipulation"]["localization"] is not None
+
+
+def test_fused_uses_existing_request_and_its_own_decision_boundary(headers):
+    class ControlledFused(MockAdapter):
+        async def infer(self, image):
+            return ManipulationOutput(
+                score=self.value,
+                map=Image.new("F", image.size, 0.8),
+                conf=None,
+                imgsize=(image.height, image.width),
+            )
+
+    for score, expected in (
+        (FUSED_THRESHOLD - 1e-8, "NO_CLEAR_MANIPULATION_SIGNAL"),
+        (FUSED_THRESHOLD, "MANIPULATION_SUSPECTED"),
+    ):
+        fused = ControlledFused("manipulation", value=score)
+        fused.model_name = "FUSED"
+        settings = replace(dual_settings(), mode="CURE_FUSED")
+        app = create_app(
+            settings,
+            {"generation": ControlledCuRe(), "manipulation": fused},
+        )
+        with TestClient(app, client=("127.0.0.1", 50000)) as client:
+            response = client.post(ENDPOINT, files=request_parts(), headers=headers)
+        assert response.status_code == 200
+        result = response.json()["manipulation"]
+        assert result["modelName"] == "FUSED"
+        assert result["decision"] == expected
+        assert result["localization"]["coordinateSpace"] == "ANALYSIS_IMAGE"

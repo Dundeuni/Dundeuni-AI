@@ -14,14 +14,15 @@ from image_analysis.config import Settings
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Local CuRe API or legacy mock")
+    parser = argparse.ArgumentParser(description="Local image analysis API")
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--config", type=Path)
     parser.add_argument(
-        "--mode", choices=("cure", "cure-trufor", "mock"), default="cure"
+        "--mode", choices=("cure", "cure-trufor", "cure-fused", "mock"), default="cure"
     )
     parser.add_argument("--cure-root", type=Path)
     parser.add_argument("--trufor-root", type=Path)
+    parser.add_argument("--fused-weights", type=Path)
     parser.add_argument(
         "--fe-compat", action="store_true", help="Enable local FE test gateway"
     )
@@ -57,6 +58,35 @@ def main() -> None:
                 "manipulation": TruForAdapter(Path(trufor_root)),
             },
             authenticator=ServiceAuthenticator(token) if token else None,
+        )
+    elif args.mode == "cure-fused":
+        from image_analysis.cure import CureAdapter
+        from image_analysis.fused_adapter import FusedAdapter
+
+        token = os.environ.get("DUNDEUNI_AI_SERVICE_TOKEN")
+        cure_root = args.cure_root or os.environ.get("DUNDEUNI_CURE_ROOT")
+        if not token or not cure_root or not args.fused_weights or args.fe_compat:
+            parser.error(
+                "CuRe + FUSED requires the service token, CuRe root and FUSED weights"
+            )
+        settings = replace(
+            settings,
+            mode="CURE_FUSED",
+            generation_only=False,
+            hold_enabled=True,
+            generation_hold_low=Settings().generation_hold_low,
+            generation_hold_high=Settings().generation_hold_high,
+            fe_compatibility=False,
+            model_timeout_seconds=120,
+            response_reserve_seconds=1,
+        )
+        app = create_app(
+            settings,
+            adapters={
+                "generation": CureAdapter(Path(cure_root)),
+                "manipulation": FusedAdapter(args.fused_weights),
+            },
+            authenticator=ServiceAuthenticator(token),
         )
     elif args.mode == "cure":
         from image_analysis.cure import CureAdapter, cure_settings

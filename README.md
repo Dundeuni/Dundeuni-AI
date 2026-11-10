@@ -14,7 +14,7 @@ AI 생성·변조 분석과 이미지 내용의 사기 위험 판단은 별도 �
 현재 구현된 API 구조입니다.
 
 ```text
-src/image_analysis/         입력 검증, CuRe·TruFor 추론, 모델별·대표 판정
+src/image_analysis/         입력 검증, CuRe·FUSED 추론, 모델별·대표 판정
 tests/                      GPU 없이 실행하는 HTTP·판정·오류·설정 테스트
 scripts/                    API 검증, 합성 입력 시연, 응답 예시 생성
 integration/                기존 CuRe 단독 BE Provider 참조 코드·Node 테스트
@@ -48,12 +48,12 @@ docs/api/                   BE와 합의할 AI 요청·응답 문서
 - Python, PyTorch
 - API 서버: FastAPI, Uvicorn
 - NumPy, Pillow, scikit-learn
-- 현재 v0.2 로컬 API 모델: CuRe 생성 탐지 + TruFor ph3 변조·위치 탐지
+- 현재 v0.2 로컬 API 모델: CuRe 생성 탐지 + FUSED 20:80 변조·위치 탐지
 - 추가 비교 후보: B-Free, Mesorch, Mesorch-P
 - NVIDIA CUDA 기반 GPU 추론
 - BE와의 요청·응답 계약을 통한 AI 분석 연동
 
-API 환경과 모델별 GPU 환경은 분리합니다. 현재 구현은 CuRe·TruFor를 연결한
+API 환경과 모델별 GPU 환경은 분리합니다. 현재 구현은 CuRe·FUSED를 연결한
 로컬 API이며, 임시 판정 기준의 최종 서비스 성능과 운영 배포 방식은 확정 전입니다.
 추가 후보는 비교·검증 대상으로 유지합니다.
 
@@ -78,27 +78,25 @@ py -3.9 -m venv .venv
 & '.\.venv\Scripts\python.exe' -m pip install -r requirements-lock.txt
 ```
 
-### 두 모델 API 실행
+### CuRe + FUSED 실행
 
-아래 자산 경로는 각 PC의 기존 모델 코드·가중치·격리 환경이 있는 폴더로 바꿉니다.
-CuRe 자산 폴더에는 `third_party/CuRe`, `weights/CuRe`, `.venv/cure`가 필요하며,
-TruFor 자산 폴더에는 `third_party/TruFor/TruFor_train_test`, `.venv/trufor`가 필요합니다.
-어댑터는 기대한 가중치 SHA-256을 검사합니다. 이 실행 명령은 모델을 다운로드하지 않습니다.
+CuRe 자산 폴더에는 `third_party/CuRe`, `weights/CuRe`, `.venv/cure`가 필요합니다.
+FUSED 가중치 폴더에는 `fused_opensdi.pth`, `fused_sofake.pth`,
+`open_clip_pytorch_model.bin`을 둡니다. 서버는 시작할 때 파일의 SHA-256을 확인합니다.
+FUSED를 실행하는 API 환경에는 CUDA용 PyTorch·torchvision과 timm도 설치합니다.
+시연에서는 Python 3.11, PyTorch 2.10.0+cu126, torchvision 0.25.0+cu126, timm 0.9.16 조합을 확인했습니다.
+BE와 같은 서비스 토큰을 `DUNDEUNI_AI_SERVICE_TOKEN` 환경 변수로 주입합니다.
 
 ```powershell
-$env:DUNDEUNI_CURE_ROOT = 'YOUR_CURE_ASSET_ROOT'
-$env:DUNDEUNI_TRUFOR_ROOT = 'YOUR_TRUFOR_ASSET_ROOT'
 $env:PYTHONPATH = 'src'
-& '.\.venv\Scripts\python.exe' -m image_analysis --mode cure-trufor --config config.signal-pilot.example.json
+python -m image_analysis --mode cure-fused --cure-root 'YOUR_CURE_ASSET_ROOT' --fused-weights 'YOUR_FUSED_WEIGHTS_DIR'
+Invoke-RestMethod http://127.0.0.1:8765/healthz
 ```
 
-서버는 `127.0.0.1:8765`, worker 1개로 실행하며 CuRe → TruFor 순차 추론을 합니다.
-개인 경로 기본값은 없으며 실행 인자 `--cure-root` / `--trufor-root`가 환경변수보다 우선합니다.
-CuRe 단독은 `--mode cure`, 모델 없는 계약 시연은 `--mode mock --config config.example.json`입니다.
-
-BE와 같은 `DUNDEUNI_AI_SERVICE_TOKEN`을 설정하면 서비스 Bearer 토큰을 검사합니다.
-토큰 미설정 시 `MOCK_ONLY_NOT_A_SECRET`이라는 공개 로컬 테스트 인증값을 사용합니다.
-이 기본 인증과 loopback 실행은 운영 인증·HTTPS 구성이 아닙니다. 비밀값은 저장소에 넣지 않습니다.
+`/healthz`에서 `mode=CURE_FUSED`, `ready=true`, `device=cuda`를 확인합니다.
+서버는 `127.0.0.1:8765`에서 worker 1개로 실행합니다.
+CuRe 단독은 `--mode cure`, 모의 서버는 `--mode mock`으로 실행합니다.
+이전 비교 실험은 `--mode cure-trufor`로 재현할 수 있습니다.
 
 ## 이미지 분석 API
 
@@ -107,7 +105,7 @@ BE와 같은 `DUNDEUNI_AI_SERVICE_TOKEN`을 설정하면 서비스 Bearer 토큰
 
 | 요청 항목 | 설명 |
 | --- | --- |
-| Authorization | BE→AI 서비스 Bearer 토큰 또는 미설정 개발 서버의 공개 테스트 인증값 |
+| Authorization | BE→AI 서비스 Bearer 토큰 |
 | X-Request-ID | 호출 시도마다 새 UUID v4 |
 | file | JPEG/PNG 파일 한 장 |
 | analysisId / elementId | BE가 발급한 UUID. 재시도에서 유지 |
@@ -118,7 +116,7 @@ BE와 같은 `DUNDEUNI_AI_SERVICE_TOKEN`을 설정하면 서비스 Bearer 토큰
 개발 입력 제한은 파일 10 MiB, EXIF 정규화 후 각 변 32~8192 px,
 총 16,000,000 px입니다. 최대 입력·부하에 대한 운영 제한은 별도 검증 대상입니다.
 
-`generation`은 CuRe, `manipulation`은 TruFor의 모델별 상태·원점수·표시 점수·판정·
+`generation`은 CuRe, `manipulation`은 FUSED의 모델별 상태·원점수·표시 점수·판정·
 문구·근거·한계·버전·오류를 유지합니다. `manipulation.localization`은 PNG/base64
 의심 강도 지도이며 분석 이미지 기준 크기·좌표계를 제공합니다. 확정 변조 영역은 아닙니다.
 
@@ -127,7 +125,7 @@ BE와 같은 `DUNDEUNI_AI_SERVICE_TOKEN`을 설정하면 서비스 Bearer 토큰
 | 모델 | 뚜렷한 해당 신호 없음 | 판단 불가 | 의심 |
 | --- | --- | --- | --- |
 | CuRe | score < 0.000004 | 0.000004 ≤ score < 0.02 | score ≥ 0.02 |
-| TruFor | score < 0.12 | 0.12 ≤ score < 0.70 | score ≥ 0.70 |
+| FUSED | score < 0.19978919508866966 | — | score ≥ 0.19978919508866966 |
 
 반올림 전 원점수로 판정합니다. 표시 점수는 `floor(score × 100 + 0.5)`이며
 판단 불가·실패일 때 null입니다. 점수는 보정 확률이나 사기 확률이 아닙니다.
@@ -176,7 +174,7 @@ Python 검사는 GPU 없이 실행합니다. Node 테스트는 해당 실행 파
 실제 BE·DB·FE 통합, 운영 부하, 최종 threshold 및 위치 정확도 검증은 남아 있습니다.
 
 [응답 예시](examples/README.md)는 모델 다운로드 없이 mock HTTP 응답으로 생성합니다.
-실제 CuRe·TruFor 추론 점수·위치 지도나 성능 검증 결과로 사용하지 않습니다.
+실제 CuRe·FUSED 추론 점수·위치 지도나 성능 검증 결과로 사용하지 않습니다.
 
 ```powershell
 $env:PYTHONPATH = 'src'
@@ -197,7 +195,7 @@ BE·FE와 같은 방식으로 이슈를 생성하고 작업 브랜치와 PR을 �
 - Python 코드 작성 규칙: [CODE_CONVENTION.md](./CODE_CONVENTION.md)
 - 이슈·PR 라벨 가이드: [LABELS_GUIDE.md](./.github/LABELS_GUIDE.md)
 - API 문서는 [docs/api](./docs/api/README.md)에서 관리한다.
-- CuRe·TruFor의 요청·응답 계약은 [이미지 분석 API v0.2](./docs/api/image-analysis-v0.2.md)를 참조한다.
+- CuRe·FUSED의 요청·응답 계약은 [이미지 분석 API v0.2](./docs/api/image-analysis-v0.2.md)를 참조한다.
 
 ```text
 main: 검토된 배포·데모 기준

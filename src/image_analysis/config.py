@@ -6,6 +6,8 @@ import math
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
+FUSED_THRESHOLD = 0.19978919508866966
+
 
 @dataclass(frozen=True)
 class Settings:
@@ -36,7 +38,7 @@ class Settings:
     fe_compatibility: bool = False
 
     def __post_init__(self) -> None:
-        if self.mode not in ("MOCK", "CURE", "CURE_TRUFOR"):
+        if self.mode not in ("MOCK", "CURE", "CURE_TRUFOR", "CURE_FUSED"):
             raise ValueError("invalid execution mode")
         if (
             type(self.hold_enabled) is not bool

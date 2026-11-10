@@ -7,7 +7,7 @@ import math
 from PIL import Image
 
 from image_analysis.adapters import GenerationOutput, ManipulationOutput, RawOutput
-from image_analysis.config import Settings
+from image_analysis.config import FUSED_THRESHOLD, Settings
 from image_analysis.errors import ModelFailure
 from image_analysis.schemas import (
     Decision,
@@ -43,7 +43,7 @@ def finite_scalar(value: object) -> bool:
     )
 
 
-def validate_map(image: Image.Image, size: tuple[int, int]) -> None:
+def validate_map(image: object, size: tuple[int, int]) -> None:
     if not isinstance(image, Image.Image) or image.mode != "F" or image.size != size:
         raise ModelFailure("MODEL_OUTPUT_INVALID")
     for pixel in image.getdata():
@@ -109,7 +109,8 @@ def make_success(
         if raw.imgsize != (size[1], size[0]):
             raise ModelFailure("MODEL_OUTPUT_INVALID")
         validate_map(raw.map, size)
-        validate_map(raw.conf, size)
+        if raw.conf is not None or model_name != "FUSED":
+            validate_map(raw.conf, size)
         value = raw.score
         raw_score = {"score": raw.score}
     else:
@@ -127,7 +128,7 @@ def make_success(
                 "CuRe의 AI 생성 탐지 결과입니다. "
                 "일반 변조나 의심 위치는 분석하지 않습니다."
                 if kind == "generation"
-                else "TruFor의 편집·합성 의심 신호입니다. "
+                else f"{model_name}의 편집·합성 의심 신호입니다. "
                 "위치 지도는 확정 변조 영역이나 AI 사용의 증거가 아닙니다."
             ),
             "표시 점수는 보정 확률이나 사기 확률이 아닙니다.",
@@ -146,6 +147,8 @@ def make_success(
         result.limitations.append(
             "임시 파일럿 판정 기준이며 최종 서비스 성능이 확정된 것은 아닙니다."
         )
+    if kind == "manipulation" and model_name == "FUSED":
+        hold = False
     if hold:
         result.decision = "INCONCLUSIVE"
         result.limitations.append(
@@ -157,6 +160,8 @@ def make_success(
             if settings.hold_enabled
             else value >= settings.generation_threshold
         )
+        if kind == "manipulation" and model_name == "FUSED":
+            high = value >= FUSED_THRESHOLD
         if kind == "generation":
             result.decision = (
                 "AI_GENERATED_SUSPECTED" if high else "NO_CLEAR_GENERATION_SIGNAL"
@@ -173,7 +178,9 @@ def make_success(
                 else "고정 mock 점수가 잠정 신호 없음 기준보다 낮습니다."
             ]
         else:
-            name = "CuRe 생성 탐지" if kind == "generation" else "TruFor 변조 탐지"
+            name = (
+                "CuRe 생성 탐지" if kind == "generation" else f"{model_name} 변조 탐지"
+            )
             result.reasons = [
                 f"{name} 점수가 임시 의심 기준 이상입니다."
                 if high
