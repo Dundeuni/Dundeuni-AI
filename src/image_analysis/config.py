@@ -36,6 +36,7 @@ class Settings:
     hold_enabled: bool = True
     generation_threshold: float = 0.5
     fe_compatibility: bool = False
+    probe_cure: bool = False
 
     def __post_init__(self) -> None:
         if self.mode not in ("MOCK", "CURE", "CURE_TRUFOR", "CURE_FUSED"):
@@ -44,6 +45,7 @@ class Settings:
             type(self.hold_enabled) is not bool
             or type(self.generation_only) is not bool
             or type(self.fe_compatibility) is not bool
+            or type(self.probe_cure) is not bool
         ):
             raise ValueError("invalid model policy flags")
         if (
@@ -87,6 +89,8 @@ class Settings:
         for kind in ("generation", "manipulation"):
             low = getattr(self, f"{kind}_hold_low")
             high = getattr(self, f"{kind}_hold_high")
+            if self.probe_cure and kind == "generation" and low == high == 0.5:
+                continue
             if not 0 <= low < high <= 1:
                 raise ValueError(f"invalid {kind} signal interval")
         if self.min_side > self.max_side:
@@ -98,7 +102,10 @@ class Settings:
 
     @property
     def policy_version(self) -> str:
-        manifest = json.dumps(asdict(self), sort_keys=True).encode()
+        values = asdict(self)
+        if not self.probe_cure:
+            values.pop("probe_cure")
+        manifest = json.dumps(values, sort_keys=True).encode()
         return self.mode + "-policy-v2-" + hashlib.sha256(manifest).hexdigest()[:16]
 
     @classmethod

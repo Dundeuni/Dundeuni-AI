@@ -21,12 +21,15 @@ def main() -> None:
         "--mode", choices=("cure", "cure-trufor", "cure-fused", "mock"), default="cure"
     )
     parser.add_argument("--cure-root", type=Path)
+    parser.add_argument("--probe-cure-checkpoint", type=Path)
     parser.add_argument("--trufor-root", type=Path)
     parser.add_argument("--fused-weights", type=Path)
     parser.add_argument(
         "--fe-compat", action="store_true", help="Enable local FE test gateway"
     )
     args = parser.parse_args()
+    if args.probe_cure_checkpoint and args.mode == "mock":
+        parser.error("--probe-cure-checkpoint requires a CuRe execution mode")
     settings = Settings.from_file(args.config) if args.config else Settings()
     if args.mode == "cure-trufor":
         from image_analysis.cure import CureAdapter
@@ -47,14 +50,29 @@ def main() -> None:
                     for key, value in json.loads(
                         args.config.read_text(encoding="utf-8")
                     ).items()
-                    if key not in ("mode", "generation_only", "fe_compatibility")
+                    if key
+                    not in ("mode", "generation_only", "fe_compatibility", "probe_cure")
                 },
+            )
+        if args.probe_cure_checkpoint:
+            settings = replace(
+                settings,
+                probe_cure=True,
+                generation_threshold=0.5,
+                generation_hold_low=0.5,
+                generation_hold_high=0.5,
             )
         token = os.environ.get("DUNDEUNI_AI_SERVICE_TOKEN")
         app = create_app(
             settings,
             adapters={
-                "generation": CureAdapter(Path(cure_root)),
+                "generation": (
+                    CureAdapter(
+                        Path(cure_root), probe_checkpoint=args.probe_cure_checkpoint
+                    )
+                    if args.probe_cure_checkpoint
+                    else CureAdapter(Path(cure_root))
+                ),
                 "manipulation": TruForAdapter(Path(trufor_root)),
             },
             authenticator=ServiceAuthenticator(token) if token else None,
@@ -80,10 +98,20 @@ def main() -> None:
             model_timeout_seconds=120,
             response_reserve_seconds=1,
         )
+        if args.probe_cure_checkpoint:
+            settings = replace(
+                settings,
+                probe_cure=True,
+                generation_threshold=0.5,
+                generation_hold_low=0.5,
+                generation_hold_high=0.5,
+            )
         app = create_app(
             settings,
             adapters={
-                "generation": CureAdapter(Path(cure_root)),
+                "generation": CureAdapter(
+                    Path(cure_root), probe_checkpoint=args.probe_cure_checkpoint
+                ),
                 "manipulation": FusedAdapter(args.fused_weights),
             },
             authenticator=ServiceAuthenticator(token),
@@ -96,10 +124,26 @@ def main() -> None:
             parser.error("Set --cure-root or DUNDEUNI_CURE_ROOT")
         settings = cure_settings(settings if args.config else None)
         settings = replace(settings, fe_compatibility=args.fe_compat)
+        if args.probe_cure_checkpoint:
+            settings = replace(
+                settings,
+                probe_cure=True,
+                generation_threshold=0.5,
+                generation_hold_low=0.5,
+                generation_hold_high=0.5,
+            )
         token = os.environ.get("DUNDEUNI_AI_SERVICE_TOKEN")
         app = create_app(
             settings,
-            adapters={"generation": CureAdapter(Path(cure_root))},
+            adapters={
+                "generation": (
+                    CureAdapter(
+                        Path(cure_root), probe_checkpoint=args.probe_cure_checkpoint
+                    )
+                    if args.probe_cure_checkpoint
+                    else CureAdapter(Path(cure_root))
+                )
+            },
             authenticator=ServiceAuthenticator(token) if token else None,
         )
     else:

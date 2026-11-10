@@ -16,6 +16,7 @@ def main() -> None:
     parser.add_argument("--source-format", choices=("PNG", "JPEG"), required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--reference", type=Path)
+    parser.add_argument("--probe-checkpoint", type=Path)
     args = parser.parse_args()
     # These dependencies belong to the isolated CuRe interpreter, not the API venv.
     import albumentations as A  # type: ignore[import-not-found]
@@ -63,10 +64,20 @@ def main() -> None:
     model = load_model(
         checkpoint=args.root / "third_party/CuRe/weights/cure_adapter.pt",
         base_checkpoint=args.root / "weights/CuRe/PE-Core-L14-336.pt",
-        device="cuda",
+        device="cpu" if args.probe_checkpoint else "cuda",
     )
+    if args.probe_checkpoint:
+        checkpoint = torch.load(
+            args.probe_checkpoint, map_location="cpu", weights_only=True, mmap=True
+        )
+        model.load_state_dict(checkpoint["state_dict"], strict=True)
+        del checkpoint
+        model = model.to("cuda").eval()
     torch.cuda.reset_peak_memory_stats()
-    with torch.inference_mode(), torch.amp.autocast("cuda"):
+    with (
+        torch.inference_mode(),
+        torch.amp.autocast("cuda", enabled=args.probe_checkpoint is None),
+    ):
         logits = model(tensor.unsqueeze(0).cuda())
         if logits.shape != (1, 2) or not bool(torch.isfinite(logits).all()):
             raise ValueError("Invalid CuRe logits")

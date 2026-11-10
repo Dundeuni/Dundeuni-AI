@@ -4,7 +4,7 @@
 
 CuRe로 AI 생성 신호를 분석한다. 변조 신호와 의심 위치는 실행 모드에 따라 FUSED 20:80 또는 TruFor ph3로 분석한다.
 
-FUSED를 실행하려면 CUDA용 PyTorch·torchvision과 timm을 설치한 환경에서 `python -m image_analysis --mode cure-fused --cure-root <CuRe 경로> --fused-weights <FUSED 가중치 폴더>`를 사용한다. 서비스 토큰은 `DUNDEUNI_AI_SERVICE_TOKEN` 환경 변수로 전달한다.
+FUSED를 실행하려면 CUDA용 PyTorch·torchvision과 timm을 설치한 환경에서 `python -m image_analysis --mode cure-fused --cure-root <CuRe 경로> --fused-weights <FUSED 가중치 폴더> --probe-cure-checkpoint <PROBE 체크포인트>`를 사용한다. 서비스 토큰은 `DUNDEUNI_AI_SERVICE_TOKEN` 환경 변수로 전달한다.
 모델별 결과를 유지하면서 대표 분류를 반환한다. 이미지 내용의 사기 여부는 분석하지 않는다.
 
 | 항목 | 값 |
@@ -112,11 +112,14 @@ CuRe는 `softmax(logits)[1]`, TruFor는 `sigmoid(det)`를 한 번 적용한 값�
 반올림 전 `rawScore.score`로 판정한다. 점수를 보정 확률·사기 확률로 해석하거나
 생성 점수와 변조 점수를 합산·평균하지 않는다.
 
+PROBE 추가 학습본은 `modelName=CuRe`와 `modelVersion=CuRe-probe-pe-core-l14-336-<해시>`를 반환한다. FUSED의 모델 이름은 `FUSED`이며 버전은 `FUSED-20-80-`으로 시작한다.
+
 ### 모델별 임시 threshold
 
 | 모델 | 뚜렷한 해당 신호 없음 | 판단 불가 | 의심 |
 | --- | --- | --- | --- |
 | CuRe | score < 0.000004 | 0.000004 ≤ score < 0.02 | score ≥ 0.02 |
+| PROBE CuRe | score < 0.5 | — | score ≥ 0.5 |
 | TruFor | score < 0.12 | 0.12 ≤ score < 0.70 | score ≥ 0.70 |
 | FUSED | score < 0.19978919508866966 | — | score ≥ 0.19978919508866966 |
 

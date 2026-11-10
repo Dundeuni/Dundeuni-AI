@@ -78,7 +78,7 @@ py -3.9 -m venv .venv
 & '.\.venv\Scripts\python.exe' -m pip install -r requirements-lock.txt
 ```
 
-### CuRe + FUSED 실행
+### PROBE CuRe + FUSED 실행
 
 CuRe 자산 폴더에는 `third_party/CuRe`, `weights/CuRe`, `.venv/cure`가 필요합니다.
 FUSED 가중치 폴더에는 `fused_opensdi.pth`, `fused_sofake.pth`,
@@ -89,7 +89,7 @@ BE와 같은 서비스 토큰을 `DUNDEUNI_AI_SERVICE_TOKEN` 환경 변수로 �
 
 ```powershell
 $env:PYTHONPATH = 'src'
-python -m image_analysis --mode cure-fused --cure-root 'YOUR_CURE_ASSET_ROOT' --fused-weights 'YOUR_FUSED_WEIGHTS_DIR'
+python -m image_analysis --mode cure-fused --cure-root 'YOUR_CURE_ASSET_ROOT' --fused-weights 'YOUR_FUSED_WEIGHTS_DIR' --probe-cure-checkpoint 'YOUR_PROBE_CHECKPOINT'
 Invoke-RestMethod http://127.0.0.1:8765/healthz
 ```
 
@@ -97,6 +97,22 @@ Invoke-RestMethod http://127.0.0.1:8765/healthz
 서버는 `127.0.0.1:8765`에서 worker 1개로 실행합니다.
 CuRe 단독은 `--mode cure`, 모의 서버는 `--mode mock`으로 실행합니다.
 이전 비교 실험은 `--mode cure-trufor`로 재현할 수 있습니다.
+
+### PROBE 추가 학습 CuRe 실행
+
+생성 탐지에 PROBE 추가 학습본을 사용하려면 기존 CuRe 실행 명령에
+`--probe-cure-checkpoint <encoder_detector.pt 경로>`를 추가합니다.
+이 파일은 SD2.1 PROBE 실험에서 8,192장으로 전체 인코더를 추가 학습한 결과입니다.
+기존 CuRe 자산과 CUDA 환경을 사용하며, 체크포인트는 Git 외부에서 제공하고
+시작 시 SHA-256을 검사합니다. 체크포인트가 없거나 해시가 다르면 시작에 실패합니다.
+
+```powershell
+& '.\.venv\Scripts\python.exe' -m image_analysis --mode cure --cure-root 'YOUR_CURE_ASSET_ROOT' --probe-cure-checkpoint 'YOUR_PROBE_CHECKPOINT'
+```
+
+이 옵션은 `cure-fused`와 `cure-trufor` 모드에서도 사용할 수 있습니다.
+PROBE 옵션을 사용하면 생성 탐지를 FP32로 실행하고 점수 0.5 이상을 AI 생성 의심으로 판정합니다.
+응답은 `modelName=CuRe`, `modelVersion=CuRe-probe-pe-core-l14-336-<해시>`를 반환합니다.
 
 ## 이미지 분석 API
 
@@ -125,6 +141,7 @@ CuRe 단독은 `--mode cure`, 모의 서버는 `--mode mock`으로 실행합니�
 | 모델 | 뚜렷한 해당 신호 없음 | 판단 불가 | 의심 |
 | --- | --- | --- | --- |
 | CuRe | score < 0.000004 | 0.000004 ≤ score < 0.02 | score ≥ 0.02 |
+| PROBE CuRe | score < 0.5 | — | score ≥ 0.5 |
 | FUSED | score < 0.19978919508866966 | — | score ≥ 0.19978919508866966 |
 
 반올림 전 원점수로 판정합니다. 표시 점수는 `floor(score × 100 + 0.5)`이며

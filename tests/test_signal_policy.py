@@ -260,3 +260,32 @@ def test_dual_cli_uses_pilot_defaults_and_custom_config(
     assert settings.manipulation_hold_high == (0.8 if configured else 0.70)
     assert settings.model_timeout_seconds == 120
     assert settings.response_reserve_seconds == 1
+
+
+@pytest.mark.parametrize(
+    "score,decision",
+    [
+        (math.nextafter(0.5, 0), "NO_CLEAR_GENERATION_SIGNAL"),
+        (0.5, "AI_GENERATED_SUSPECTED"),
+    ],
+)
+def test_probe_generation_boundary_over_existing_multipart(headers, score, decision):
+    settings = replace(
+        cure_settings(),
+        probe_cure=True,
+        generation_hold_low=0.5,
+        generation_hold_high=0.5,
+    )
+    with TestClient(
+        create_app(settings, {"generation": ControlledCuRe(score)}),
+        client=("127.0.0.1", 50000),
+    ) as client:
+        response = client.post(
+            ENDPOINT,
+            headers=headers,
+            files=request_parts(fields={"models": "GENERATION"}),
+        )
+    assert response.status_code == 200
+    result = response.json()["generation"]
+    assert result["decision"] == decision
+    assert result["displayScore"] is not None
