@@ -1,0 +1,9 @@
+# API + single encoder. PaddleOCR runs in the separate .venv environment.
+-r requirements-api.txt
+torch==2.9.1
+transformers==4.57.3
+safetensors==0.8.0
+tokenizers==0.22.2
+numpy==2.5.4
+Pillow==12.0.0
+httpx==0.28.1

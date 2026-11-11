@@ -1,0 +1,16 @@
+[
+  {
+    "file": "A.X-BASE-LICENSE.txt",
+    "source_url": "https://huggingface.co/skt/A.X-3.1/resolve/main/LICENSE",
+    "bytes": 12525,
+    "sha256": "9cf7ec77b0404b2a305a158cd614ef4ab24e3b71d85f3089ac295029ef90072d",
+    "resolved_url": "https://huggingface.co/api/resolve-cache/models/skt/A.X-3.1/1d994491339bc7087a7735796bb1dda40c2b0826/LICENSE?%2Fskt%2FA.X-3.1%2Fresolve%2Fmain%2FLICENSE=&etag=%2211404e9a64c96712d7cfc13fcb0f77f1ffa2d02f%22"
+  },
+  {
+    "file": "PaddleOCR-LICENSE.txt",
+    "source_url": "https://raw.githubusercontent.com/PaddlePaddle/PaddleOCR/main/LICENSE",
+    "bytes": 11376,
+    "sha256": "3840c5c0c61c294264d2dd77b8777be6ddd90121ef4e0e64abcd22edea581d6e",
+    "resolved_url": "https://raw.githubusercontent.com/PaddlePaddle/PaddleOCR/main/LICENSE"
+  }
+]

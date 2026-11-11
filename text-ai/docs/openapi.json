@@ -1,0 +1,1001 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "A.X 문자 사기 위험 분석 API",
+    "description": "문자 사기 분석 전용. CuRe/TruFor 이미지 생성·변조 API와 별도입니다.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/healthz": {
+      "get": {
+        "summary": "기동 및 분류기 준비 상태",
+        "operationId": "health_healthz_get",
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional UUID v4. The server generates one when omitted or empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID with a fresh requestId and no X-Request-ID response header.",
+              "format": "uuid4",
+              "title": "X-Request-Id"
+            },
+            "description": "Optional UUID v4. The server generates one when omitted or empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID with a fresh requestId and no X-Request-ID response header."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Classifier ready; reports the selected device.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "INVALID_REQUEST_ID: invalid UUID v4 header.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "ANALYSIS_FAILED: unexpected internal error.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/text-analyses": {
+      "post": {
+        "summary": "문자 본문 분석 (JSON)",
+        "operationId": "analyze_text_internal_v1_text_analyses_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional UUID v4. The server generates one when omitted or empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID with a fresh requestId and no X-Request-ID response header.",
+              "format": "uuid4",
+              "title": "X-Request-Id"
+            },
+            "description": "Optional UUID v4. The server generates one when omitted or empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID with a fresh requestId and no X-Request-ID response header."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Completed analysis. A defer decision also returns HTTP 200 with status COMPLETED.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextRiskResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UNAUTHORIZED: missing or invalid Bearer service credentials.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              },
+              "WWW-Authenticate": {
+                "description": "Always returned for 401 UNAUTHORIZED.",
+                "schema": {
+                  "type": "string",
+                  "const": "Bearer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "REQUEST_TOO_LARGE: request body exceeds 11 MiB.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "INVALID_REQUEST for invalid fields or formats; INVALID_REQUEST_ID for a non-UUID-v4 X-Request-ID header. INVALID_TEXT for invalid text.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "ANALYZER_BUSY when another analysis is running; ANALYSIS_FAILED for an unexpected internal error.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              },
+              "Retry-After": {
+                "description": "Returned with value 2 only for ANALYZER_BUSY; absent for OCR_UNAVAILABLE and unexpected ANALYSIS_FAILED errors.",
+                "schema": {
+                  "type": "string",
+                  "const": "2"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/internal/v1/text-analyses/image": {
+      "post": {
+        "summary": "이미지 OCR 후 문자 사기 위험 분석 (multipart)",
+        "operationId": "analyze_image_internal_v1_text_analyses_image_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional UUID v4. The server generates one when omitted or empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID with a fresh requestId and no X-Request-ID response header.",
+              "format": "uuid4",
+              "title": "X-Request-Id"
+            },
+            "description": "Optional UUID v4. The server generates one when omitted or empty. An invalid nonempty value returns 422 INVALID_REQUEST_ID with a fresh requestId and no X-Request-ID response header."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_analyze_image_internal_v1_text_analyses_image_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Completed analysis. A defer decision also returns HTTP 200 with status COMPLETED.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextRiskResponse"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UNAUTHORIZED: missing or invalid Bearer service credentials.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              },
+              "WWW-Authenticate": {
+                "description": "Always returned for 401 UNAUTHORIZED.",
+                "schema": {
+                  "type": "string",
+                  "const": "Bearer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "REQUEST_TOO_LARGE for a request body over 11 MiB; IMAGE_TOO_LARGE for an image file over 10 MiB.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "INVALID_REQUEST for invalid fields or formats; INVALID_REQUEST_ID for a non-UUID-v4 X-Request-ID header. EMPTY_IMAGE, IMAGE_DIMENSIONS, INVALID_IMAGE, or OCR_TEXT_TOO_LONG for invalid image/OCR input.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "OCR_UNAVAILABLE when the OCR worker is not prepared; ANALYZER_BUSY when another analysis is running; ANALYSIS_FAILED for an unexpected internal error.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              },
+              "Retry-After": {
+                "description": "Returned with value 2 only for ANALYZER_BUSY; absent for OCR_UNAVAILABLE and unexpected ANALYSIS_FAILED errors.",
+                "schema": {
+                  "type": "string",
+                  "const": "2"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "UNSUPPORTED_IMAGE, IMAGE_TYPE_MISMATCH, or ANIMATED_IMAGE for unsupported MIME types, mismatched formats, or multiple frames.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "OCR_FAILED: OCR worker or its result failed.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "OCR_TIMEOUT: OCR worker exceeded its time limit.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Echoes the validated UUID v4 or the generated UUID v4 after request context completes. Absent for INVALID_REQUEST_ID and not guaranteed for unexpected internal errors.",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid4"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_analyze_image_internal_v1_text_analyses_image_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          },
+          "analysisId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Analysisid"
+          },
+          "elementId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elementid"
+          },
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "IMAGE",
+              "SCREEN_CROP"
+            ],
+            "title": "Sourcetype",
+            "default": "IMAGE"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_analyze_image_internal_v1_text_analyses_image_post"
+      },
+      "ErrorDetail": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorDetail"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorDetail"
+          },
+          "requestId": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Requestid",
+            "description": "Validated or generated request UUID v4. INVALID_REQUEST_ID uses a new UUID v4 because the supplied header was rejected."
+          }
+        },
+        "type": "object",
+        "required": [
+          "error",
+          "requestId"
+        ],
+        "title": "ErrorResponse"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "const": "ready",
+            "title": "Status"
+          },
+          "modelVersion": {
+            "type": "string",
+            "title": "Modelversion"
+          },
+          "device": {
+            "type": "string",
+            "title": "Device"
+          },
+          "ocrWorkerAvailable": {
+            "type": "boolean",
+            "title": "Ocrworkeravailable"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "modelVersion",
+          "device",
+          "ocrWorkerAvailable"
+        ],
+        "title": "HealthResponse"
+      },
+      "Quality": {
+        "properties": {
+          "needsReview": {
+            "type": "boolean",
+            "title": "Needsreview"
+          },
+          "reasonCodes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Reasoncodes"
+          },
+          "ocrUsed": {
+            "type": "boolean",
+            "title": "Ocrused"
+          },
+          "poorOcrConfidence": {
+            "type": "boolean",
+            "title": "Poorocrconfidence"
+          },
+          "layoutUncertain": {
+            "type": "boolean",
+            "title": "Layoutuncertain"
+          },
+          "contextDisagreement": {
+            "type": "boolean",
+            "title": "Contextdisagreement"
+          }
+        },
+        "type": "object",
+        "required": [
+          "needsReview",
+          "reasonCodes",
+          "ocrUsed",
+          "poorOcrConfidence",
+          "layoutUncertain",
+          "contextDisagreement"
+        ],
+        "title": "Quality"
+      },
+      "TextInput": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Text"
+          },
+          "analysisId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Analysisid"
+          },
+          "elementId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elementid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "title": "TextInput"
+      },
+      "TextRiskResponse": {
+        "properties": {
+          "contractVersion": {
+            "type": "string",
+            "const": "text-risk-1.0",
+            "title": "Contractversion",
+            "default": "text-risk-1.0"
+          },
+          "requestId": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Requestid"
+          },
+          "analysisId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Analysisid"
+          },
+          "elementId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elementid"
+          },
+          "sourceType": {
+            "type": "string",
+            "enum": [
+              "TEXT",
+              "IMAGE",
+              "SCREEN_CROP"
+            ],
+            "title": "Sourcetype"
+          },
+          "status": {
+            "type": "string",
+            "const": "COMPLETED",
+            "title": "Status",
+            "default": "COMPLETED"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "phishing",
+              "defer"
+            ],
+            "title": "Decision"
+          },
+          "textDecision": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "phishing",
+              "defer"
+            ],
+            "title": "Textdecision"
+          },
+          "decisionSource": {
+            "type": "string",
+            "enum": [
+              "TEXT_CLASSIFIER",
+              "KNOWN_MALICIOUS_URL"
+            ],
+            "title": "Decisionsource"
+          },
+          "urlReputation": {
+            "$ref": "#/components/schemas/UrlReputation"
+          },
+          "riskScore": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Riskscore"
+          },
+          "scoreScale": {
+            "type": "string",
+            "const": "0..1",
+            "title": "Scorescale"
+          },
+          "scoreMeaning": {
+            "type": "string",
+            "const": "UNCALIBRATED_CLASSIFIER_SCORE",
+            "title": "Scoremeaning"
+          },
+          "modelName": {
+            "type": "string",
+            "title": "Modelname"
+          },
+          "modelVersion": {
+            "type": "string",
+            "title": "Modelversion"
+          },
+          "policyVersion": {
+            "type": "string",
+            "title": "Policyversion"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/Quality"
+          },
+          "evidence": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Evidence"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "processingMs": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Processingms"
+          }
+        },
+        "type": "object",
+        "required": [
+          "requestId",
+          "analysisId",
+          "elementId",
+          "sourceType",
+          "decision",
+          "textDecision",
+          "decisionSource",
+          "urlReputation",
+          "riskScore",
+          "scoreScale",
+          "scoreMeaning",
+          "modelName",
+          "modelVersion",
+          "policyVersion",
+          "text",
+          "quality",
+          "evidence",
+          "limitations",
+          "processingMs"
+        ],
+        "title": "TextRiskResponse"
+      },
+      "UrlLookupItem": {
+        "properties": {
+          "originalUrl": {
+            "type": "string",
+            "title": "Originalurl"
+          },
+          "lookupUrl": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lookupurl"
+          },
+          "schemeInferred": {
+            "type": "boolean",
+            "title": "Schemeinferred"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "malicious",
+              "not_found",
+              "unavailable",
+              "disabled",
+              "skipped"
+            ],
+            "title": "Status"
+          },
+          "reasonCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reasoncode"
+          },
+          "threatTypes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "MALWARE",
+                "SOCIAL_ENGINEERING",
+                "UNWANTED_SOFTWARE"
+              ]
+            },
+            "type": "array",
+            "title": "Threattypes"
+          },
+          "cacheHit": {
+            "type": "boolean",
+            "title": "Cachehit"
+          },
+          "lookupCheckedAt": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lookupcheckedat"
+          },
+          "providerExpireTime": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Providerexpiretime"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "originalUrl",
+          "lookupUrl",
+          "schemeInferred",
+          "status",
+          "reasonCode",
+          "threatTypes",
+          "cacheHit"
+        ],
+        "title": "UrlLookupItem"
+      },
+      "UrlReputation": {
+        "properties": {
+          "provider": {
+            "type": "string",
+            "const": "GOOGLE_WEB_RISK_LOOKUP",
+            "title": "Provider"
+          },
+          "policyVersion": {
+            "type": "string",
+            "const": "url-reputation-lookup-v1",
+            "title": "Policyversion"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "no_urls",
+              "disabled",
+              "malicious",
+              "not_found",
+              "incomplete"
+            ],
+            "title": "Status"
+          },
+          "checkedAt": {
+            "type": "string",
+            "title": "Checkedat"
+          },
+          "urlCount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Urlcount"
+          },
+          "submittedCount": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Submittedcount"
+          },
+          "targetVisited": {
+            "type": "boolean",
+            "const": false,
+            "title": "Targetvisited"
+          },
+          "notFoundMeaning": {
+            "type": "string",
+            "const": "NO_KNOWN_THREAT_MATCH_NOT_A_SAFETY_GUARANTEE",
+            "title": "Notfoundmeaning"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/UrlLookupItem"
+            },
+            "type": "array",
+            "title": "Results"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "provider",
+          "policyVersion",
+          "enabled",
+          "status",
+          "checkedAt",
+          "urlCount",
+          "submittedCount",
+          "targetVisited",
+          "notFoundMeaning",
+          "results"
+        ],
+        "title": "UrlReputation"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

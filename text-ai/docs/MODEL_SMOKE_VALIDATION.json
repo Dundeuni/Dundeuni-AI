@@ -1,0 +1,38 @@
+{
+  "type": "LOCAL_COPIED_MODEL_CPU_SMOKE",
+  "device": "cpu",
+  "case_count": 3,
+  "results": [
+    {
+      "case": "ordinary_notice",
+      "decision": "normal",
+      "riskScore": 0.0008133340743370354,
+      "processingMs": 30.84,
+      "needsReview": false
+    },
+    {
+      "case": "credential_request",
+      "decision": "phishing",
+      "riskScore": 0.9970878958702087,
+      "processingMs": 26.71,
+      "needsReview": false
+    },
+    {
+      "case": "punctuation",
+      "decision": "defer",
+      "riskScore": null,
+      "processingMs": 0.06,
+      "needsReview": true
+    }
+  ],
+  "elapsed_seconds": 11.378,
+  "cpu_selection_forced_in_this_diagnostic_process": true,
+  "ocr_executed": false,
+  "actual_http_server_started": false,
+  "actual_BE_called": false,
+  "accuracy_evaluated": false,
+  "expected_labels_used": false,
+  "external_URL_lookup_enabled": false,
+  "existing_server_or_GPU_jobs_interrupted": false,
+  "note": "Uses the existing interpreter, not a freshly installed environment; does not establish release accuracy or OCR/BE integration."
+}
