@@ -23,7 +23,7 @@ class ManipulationOutput:
 
     score: float
     map: Image.Image
-    conf: Image.Image
+    conf: Image.Image | None
     imgsize: tuple[int, int]  # (height, width), AFTER official padding/resize removal
 
 

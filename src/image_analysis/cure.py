@@ -16,6 +16,8 @@ from image_analysis.config import Settings
 from image_analysis.errors import ModelFailure
 from image_analysis.schemas import ModelKind
 
+PROBE_SHA256 = "3dec110cede129b6e66f583b35421ddc55f8a18d89081857ece7ee46dab7bc2b"
+
 EXPECTED_WEIGHTS = {
     "third_party/CuRe/weights/cure_adapter.pt": (
         "17cabb334563c15abc8827db87dc272a4aef10f4279025faee1ef8d32c444ae1"
@@ -67,7 +69,13 @@ class CureAdapter:
     kind: ModelKind = "generation"
     model_name = "CuRe"
 
-    def __init__(self, root: Path | None = None, reference: Path | None = None) -> None:
+    def __init__(
+        self,
+        root: Path | None = None,
+        reference: Path | None = None,
+        *,
+        probe_checkpoint: Path | None = None,
+    ) -> None:
         self.root = resolve_cure_root(root)
         self.python = self.root / ".venv/cure/Scripts/python.exe"
         self.worker = Path(__file__).with_name("cure_worker.py")
@@ -79,6 +87,14 @@ class CureAdapter:
         sources = {name: digest(self.root / name) for name in EXPECTED_WEIGHTS}
         if sources != EXPECTED_WEIGHTS:
             raise ValueError("CuRe weight integrity mismatch")
+        self.probe_checkpoint = probe_checkpoint.resolve() if probe_checkpoint else None
+        if self.probe_checkpoint:
+            if (
+                not self.probe_checkpoint.is_file()
+                or digest(self.probe_checkpoint) != PROBE_SHA256
+            ):
+                raise ValueError("CuRe PROBE checkpoint integrity mismatch")
+            sources["probe_encoder_checkpoint"] = PROBE_SHA256
         for source in sorted((self.root / "third_party/CuRe/cure").glob("*.py")):
             sources[str(source.relative_to(self.root))] = digest(source)
         sources["api_worker"] = digest(self.worker)
@@ -101,8 +117,10 @@ class CureAdapter:
         self.manifest = sources
         binding = json.dumps(sources, sort_keys=True).encode()
         self.model_version = (
-            "CuRe-pe-core-l14-336-" + hashlib.sha256(binding).hexdigest()[:20]
-        )
+            "CuRe-probe-pe-core-l14-336-"
+            if self.probe_checkpoint
+            else "CuRe-pe-core-l14-336-"
+        ) + hashlib.sha256(binding).hexdigest()[:20]
         self.ready = True
 
     async def infer(self, image: Image.Image) -> GenerationOutput:
@@ -131,6 +149,8 @@ class CureAdapter:
                 "--output",
                 str(output_path),
             ]
+            if self.probe_checkpoint:
+                command.extend(["--probe-checkpoint", str(self.probe_checkpoint)])
             if self.reference:
                 command.extend(["--reference", str(self.reference)])
             environment = dict(os.environ)

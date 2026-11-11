@@ -2,7 +2,9 @@
 
 ## 1. 범위와 버전
 
-CuRe로 AI 생성 신호를, TruFor ph3로 변조 신호와 의심 위치를 분석한다.
+CuRe로 AI 생성 신호를 분석한다. 변조 신호와 의심 위치는 실행 모드에 따라 FUSED 20:80 또는 TruFor ph3로 분석한다.
+
+FUSED를 실행하려면 CUDA용 PyTorch·torchvision과 timm을 설치한 환경에서 `python -m image_analysis --mode cure-fused --cure-root <CuRe 경로> --fused-weights <FUSED 가중치 폴더> --probe-cure-checkpoint <PROBE 체크포인트>`를 사용한다. 서비스 토큰은 `DUNDEUNI_AI_SERVICE_TOKEN` 환경 변수로 전달한다.
 모델별 결과를 유지하면서 대표 분류를 반환한다. 이미지 내용의 사기 여부는 분석하지 않는다.
 
 | 항목 | 값 |
@@ -11,7 +13,7 @@ CuRe로 AI 생성 신호를, TruFor ph3로 변조 신호와 의심 위치를 분
 | 내부 응답 `contractVersion` | `1.0` |
 | 기준 구현 | [`d6b591b`](https://github.com/Dundeuni/Dundeuni-AI/commit/d6b591bea2c1d88b269556fcb4861722994a3538), 기능 PR #11 |
 | 대표 판정 버전 | `image-overall-v1` |
-| 실행 모드 | `CURE_TRUFOR` |
+| 실행 모드 | `CURE_FUSED` (시연), `CURE_TRUFOR` (비교 실험) |
 
 문서 버전과 wire 계약 버전은 구분한다. 이 명세는 기준 구현을 설명하며,
 PR 병합·BE 공개 응답 연결·서비스 정책 승인을 완료한 것으로 표시하지 않는다.
@@ -84,7 +86,7 @@ BE의 `isSuccess/code/message/result` wrapper와 구분한다.
 | `completedAt` | string | 응답 작성 시각을 UTC `Z` 형식으로 반환한다. |
 
 `analysisImage.normalizationVersion`은
-`CURE_TRUFOR-normalization-v1-exif-rgb-white-alpha`를 반환한다.
+`CURE_FUSED-normalization-v1-exif-rgb-white-alpha`를 반환한다. TruFor 모드는 `CURE_TRUFOR` 접두사를 사용한다.
 응답 헤더에 `X-Request-ID`, `X-AI-Mode`, `Cache-Control: no-store`를 포함한다.
 
 ### 모델별 객체
@@ -97,30 +99,34 @@ BE의 `isSuccess/code/message/result` wrapper와 구분한다.
 | `displayScore` | integer 또는 null | 판정 가능 시 0~100 정수를 반환한다. 판단 불가·실패 시 null로 반환한다. |
 | `decision / decisionLabel` | enum / string 또는 null | 모델별 판정과 한국어 문구를 반환한다. 실패 시 둘 다 null로 반환한다. |
 | `reasons / limitations` | string[] | 점수 기반 근거와 해석 한계를 반환한다. 손가락·그림자 이상 등 추론하지 않은 근거를 생성하지 않는다. |
-| `localization` | object 또는 null | TruFor 의심 위치 지도를 반환한다. CuRe는 항상 null로 반환한다. |
+| `localization` | object 또는 null | FUSED 또는 TruFor의 의심 위치 지도를 반환한다. CuRe는 항상 null로 반환한다. |
 | `errorCode / error` | string / object 또는 null | 성공 시 null로 반환한다. 실패 시 `errorCode=error.code`를 유지한다. |
 
 `error`에는 `code/message/retryable`을 포함한다.
-`policyVersion`은 설정 전체를 해시하여 `CURE_TRUFOR-policy-v2-<16자리 해시>`로 생성한다.
+`policyVersion`은 설정 전체를 해시하여 `<실행 모드>-policy-v2-<16자리 해시>`로 생성한다.
 예시의 버전 문자열을 고정 운영값으로 복사하지 않는다.
 
 ## 4. 점수와 판정
 
-CuRe는 `softmax(logits)[1]`, TruFor는 `sigmoid(det)`를 한 번 적용한 값을 사용한다.
+CuRe는 `softmax(logits)[1]`, TruFor는 `sigmoid(det)`를 한 번 적용한 값을 사용한다. FUSED는 OpenSDID와 So-Fake의 점수 및 위치 지도를 각각 20:80으로 합산한다.
 반올림 전 `rawScore.score`로 판정한다. 점수를 보정 확률·사기 확률로 해석하거나
-두 모델 점수를 합산·평균하지 않는다.
+생성 점수와 변조 점수를 합산·평균하지 않는다.
+
+PROBE 추가 학습본은 `modelName=CuRe`와 `modelVersion=CuRe-probe-pe-core-l14-336-<해시>`를 반환한다. FUSED의 모델 이름은 `FUSED`이며 버전은 `FUSED-20-80-`으로 시작한다.
 
 ### 모델별 임시 threshold
 
 | 모델 | 뚜렷한 해당 신호 없음 | 판단 불가 | 의심 |
 | --- | --- | --- | --- |
 | CuRe | score < 0.000004 | 0.000004 ≤ score < 0.02 | score ≥ 0.02 |
+| PROBE CuRe | score < 0.5 | — | score ≥ 0.5 |
 | TruFor | score < 0.12 | 0.12 ≤ score < 0.70 | score ≥ 0.70 |
+| FUSED | score < 0.19978919508866966 | — | score ≥ 0.19978919508866966 |
 
 | 모델 | 의심 decision / 문구 | 신호 없음 decision / 문구 |
 | --- | --- | --- |
 | CuRe | `AI_GENERATED_SUSPECTED` / AI 생성 의심 | `NO_CLEAR_GENERATION_SIGNAL` / 뚜렷한 AI 생성 신호 없음 |
-| TruFor | `MANIPULATION_SUSPECTED` / 변조 의심 | `NO_CLEAR_MANIPULATION_SIGNAL` / 뚜렷한 변조 신호 없음 |
+| FUSED / TruFor | `MANIPULATION_SUSPECTED` / 변조 의심 | `NO_CLEAR_MANIPULATION_SIGNAL` / 뚜렷한 변조 신호 없음 |
 
 판단 불가는 `INCONCLUSIVE / 판단 불가`로 반환하고,
 `status=SUCCEEDED`, `rawScore` 유지, `displayScore=null`, `reasons=[]`로 처리한다.
