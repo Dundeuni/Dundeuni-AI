@@ -55,8 +55,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6250,
-      "sha256": "9cc4f1d4172cca4f73c01905f3465371d82824b3e1b7eff5af99fa2701043b9c",
+      "bytes": 6400,
+      "sha256": "93124a11eded34e7277e271e65b1ad5dfa73e8a6c3fab5108baf1115c9fd3628",
       "hash_mode": "lf"
     },
     {
@@ -120,6 +120,12 @@
       "hash_mode": "lf"
     },
     {
+      "path": "ai_text/hyperclovax_api.py",
+      "bytes": 4299,
+      "sha256": "f1896396c608bacfa79d7a7c62ae149dcf15c0b3cf97867d0a6b3fa4545061c6",
+      "hash_mode": "lf"
+    },
+    {
       "path": "ai_text/message_body.py",
       "bytes": 8790,
       "sha256": "88c2f92cafb364afff35024a1372af536694f4aee2e69e3fcb5124ee8dc68f54",
@@ -165,6 +171,12 @@
       "path": "docs/API_TEST_RESULTS.xml",
       "bytes": 2544,
       "sha256": "13fbf0376f50b19fef0213d6538a11fdbd30d317b6cffeba6bb0bd6dedce8251",
+      "hash_mode": "lf"
+    },
+    {
+      "path": "docs/HYPERCLOVAX_SETUP.md",
+      "bytes": 2558,
+      "sha256": "ab489b2aba06f43eab771946b7131a221f6761fd00e35f1d6c361e64b3c8c117",
       "hash_mode": "lf"
     },
     {

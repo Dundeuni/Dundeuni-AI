@@ -15,6 +15,8 @@
 
 [Windows 설치·실행](docs/INSTALL_WINDOWS.md)에 따라 Python 3.12 기반 `.venv-v2`와 OCR용 `.venv`를 설치합니다. `.env.example`은 항목 안내용이며 자동으로 읽히지 않습니다. 실행 중인 서버의 `/docs`에서 직접 확인할 수 있습니다.
 
+직접 입력·붙여넣기 분석에 ECoG HyperCLOVAX를 연결하려면 [HyperCLOVAX 실행 방법](docs/HYPERCLOVAX_SETUP.md)을 참고합니다.
+
 직접 텍스트는 `Content-Type: application/json`, `Authorization: Bearer <서비스 토큰>`과 함께 다음 본문을 보냅니다.
 
 ```json
